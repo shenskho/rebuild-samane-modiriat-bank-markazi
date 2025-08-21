@@ -1,0 +1,44 @@
+/*rtl:begin:ignore*/
+.dx-treelist {
+  .dx-treelist-nodata {
+    html[lang='en'] & {
+      font-family: 'Vazirmatn-RD-UI' !important;
+    }
+    html[lang='fa'] & {
+      font-family: 'Vazirmatn-RD-UI-FD' !important;
+    }
+  }
+
+  .dx-treelist-rowsview .dx-treelist-expanded span,
+  .dx-treelist-rowsview .dx-treelist-collapsed span {
+    font-family: DXIcons !important;
+  }
+
+  .dx-treelist-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td,
+  .dx-treelist-rowsview .dx-selection.dx-row:not(.dx-row-focused) > tr > td,
+  .dx-treelist-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > td,
+  .dx-treelist-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > tr > td {
+    background-color: rgba(var(--bs-primary-rgb), 0.04);
+  }
+
+  .operationColumn .btn {
+    &.small {
+      width: 70px;
+    }
+    &.wide {
+      width: 150px;
+    }
+    &.dx-state-disabled {
+      color: var(--bs-btn-disabled-color);
+      opacity: var(--bs-btn-disabled-opacity);
+      // cursor: not-allowed;
+      // pointer-events: none;
+    }
+
+    width: 100px;
+    line-height: 1.25;
+    text-decoration: none;
+    margin: 2px;
+  }
+}
+/*rtl:end:ignore*/

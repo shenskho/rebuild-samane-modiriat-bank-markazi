@@ -1,0 +1,51 @@
+.first-route-selected {
+  color: #e55604cf;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.route-caption {
+  font-weight: bold;
+  color: #797979;
+  cursor: pointer;
+}
+.route-caption:hover {
+  font-weight: bold;
+  color: #e55604cf;
+  cursor: pointer;
+}
+
+
+.route-base-color {
+  color: #a8a8a8;
+  margin-top: 2rem;
+}
+
+.modal-content{
+  margin-top: 35vh;
+}
+.base-data-container{
+  height: 68vh;
+  display: flex;
+  align-items: center;
+}
+@media (min-width: 993px) {
+
+  .base-menu-container{
+    height: 50vh;
+  display: flex;
+  align-items: center;
+}
+}
+
+.btn-base-data-add{
+  background-color: #e55604 !important;
+  color: white;
+}
+
+.dx-datagrid-headers{
+  background-color: #04364a;
+color: white;
+
+text-align: center !important;
+}

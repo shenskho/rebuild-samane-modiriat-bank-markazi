@@ -1,0 +1,49 @@
+.chatPopUpBtn {
+  position: fixed;
+  left: 40px;
+  bottom: 35px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.category-grid__title {
+  color: #10163a;
+  font-weight: bold;
+  font-size: 18px;
+}
+.category-grid__box {
+  text-align: center;
+  padding: 20px !important;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  // height: 250px !important;
+}
+.category-grid__box:hover {
+box-shadow:  0 0 5px #04364a;
+}
+.category-grid__icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #04364a;
+}
+.content-wrapper {
+  padding-left: 20px;
+}
+.h6,
+.h6,
+h5,
+.h5,
+h4,
+.h4,
+h3,
+.h3,
+h2,
+.h2,
+h1,
+.h1 {
+  color: #252525;
+}
+
+

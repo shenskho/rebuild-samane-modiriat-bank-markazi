@@ -1,0 +1,23 @@
+/*rtl:begin:ignore*/
+.dx-treeview {
+  .dx-empty-message {
+    text-align: center;
+    padding: 50px;
+  }
+  .dx-treeview-node-container {
+    padding-right: 0;
+
+    .dx-treeview-node {
+      .dx-treeview-toggle-item-visibility {
+        &::before {
+          // content: '\f016';
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  // .dx-treeview-item-without-checkbox.dx-state-selected > .dx-treeview-item {
+  //   background-color: inherit !important;
+  // }
+}
+/*rtl:end:ignore*/

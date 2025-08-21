@@ -1,0 +1,145 @@
+{
+  "name": "vuexy-react-admin-dashboard",
+  "version": "9.0.0",
+  "private": true,
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prettify": "prettier --write src/**/*.{js,jsx,css,scss}",
+    "lint": "eslint src/**/*.{js,jsx}",
+    "lint:fix": "eslint src/**/*.{js,jsx} --fix"
+  },
+  "dependencies": {
+    "@casl/ability": "^6.3.3",
+    "@casl/react": "^3.1.0",
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@hookform/resolvers": "^2.9.11",
+    "@popperjs/core": "^2.11.6",
+    "@react-pdf/renderer": "^3.3.8",
+    "@reduxjs/toolkit": "^1.9.3",
+    "animate.css": "4.1.1",
+    "apexcharts": "^3.41.0",
+    "axios": "^1.3.4",
+    "bootstrap": "^5.2.3",
+    "bs-stepper": "1.7.0",
+    "buffer": "^6.0.3",
+    "chart.js": "^4.5.0",
+    "classnames": "^2.3.2",
+    "date-fns-jalali": "^2.29.3-0",
+    "devextreme": "^22.2.4",
+    "devextreme-react": "^22.2.4",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
+    "i18next": "^22.4.11",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "i18next-http-backend": "^2.1.1",
+    "jsonwebtoken": "8.5.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
+    "mapir-react-component": "^2.0.7",
+    "match-sorter": "^6.3.1",
+    "nouislider": "^15.7.0",
+    "nprogress": "^0.2.0",
+    "postcss": "7.0.33",
+    "postcss-custom-properties": "^12.1.11",
+    "postcss-import": "12.0.0",
+    "postcss-rtl": "^1.5.0",
+    "prismjs": "^1.29.0",
+    "process": "^0.11.10",
+    "prop-types": "^15.8.1",
+    "quill": "^2.0.2",
+    "rc-input-number": "^7.4.2",
+    "react": "^18.2.0",
+    "react-apexcharts": "^1.4.0",
+    "react-countdown": "^2.3.5",
+    "react-country-flag": "^3.0.2",
+    "react-dom": "^18.2.0",
+    "react-draft-wysiwyg": "^1.15.0",
+    "react-dropzone": "^14.2.3",
+    "react-feather": "~2.0.10",
+    "react-hook-form": "^7.43.5",
+    "react-hot-toast": "^2.4.0",
+    "react-i18next": "^12.2.0",
+    "react-icons": "^5.5.0",
+    "react-multi-date-picker": "^3.3.4",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-quill": "^2.0.0",
+    "react-rating": "2.0.5",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.9.0",
+    "react-select": "^5.7.3",
+    "react-table": "^7.8.0",
+    "react-timepicker": "^2.0.2",
+    "react-tooltip": "^5.29.1",
+    "react-type-animation": "^3.2.0",
+    "reactjs-flip-card": "^2.0.3",
+    "reactstrap": "^9.1.6",
+    "redux": "^4.2.1",
+    "redux-debounced": "0.5.0",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "sweetalert2": "^11.7.3",
+    "sweetalert2-react-content": "^5.0.7",
+    "use-bn-idle": "^1.0.11",
+    "use-react-router-breadcrumbs": "^4.0.1",
+    "yup": "^1.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/preset-react": "^7.18.6",
+    "@types/sortablejs": "^1.15.0",
+    "@vitejs/plugin-react": "2.2.0",
+    "eslint": "^8.36.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.4",
+    "sass": "^1.59.2",
+    "sass-loader": "^13.2.0",
+    "vite": "^3.2.4"
+  },
+  "resolutions": {
+    "sass-loader/webpack": "^5.0.0",
+    "recharts/prop-types": "^15.6.0",
+    "styled-components/react-is": "^16.8.0",
+    "react-hot-toast/goober/csstype": "^3.0.10",
+    "html-to-draftjs/immutable": "^4.0.0",
+    "postcss-custom-properties/postcss": "^8.2",
+    "@esbuild-plugins/node-globals-polyfill/esbuild": "^0.15.15"
+  },
+  "overrides": {
+    "sass-loader": {
+      "webpack": "^5.0.0"
+    },
+    "recharts": {
+      "prop-types": "^15.6.0"
+    },
+    "styled-components": {
+      "react-is": "^16.8.0"
+    },
+    "react-hot-toast": {
+      "goober": {
+        "csstype": "^3.0.10"
+      }
+    },
+    "html-to-draftjs": {
+      "immutable": "^4.0.0"
+    },
+    "postcss-custom-properties": {
+      "postcss": "^8.2"
+    },
+    "@esbuild-plugins/node-globals-polyfill": {
+      "esbuild": "^0.15.15"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
+}

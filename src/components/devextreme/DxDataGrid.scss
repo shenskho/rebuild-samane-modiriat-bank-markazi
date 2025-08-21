@@ -1,0 +1,39 @@
+/*rtl:begin:ignore*/
+.dx-datagrid {
+  .dx-editor-with-menu .dx-texteditor .dx-texteditor-input {
+    padding-left: 0 !important;
+  }
+
+  .dx-adaptive-item-text,
+  .dx-field-item-label-location-top {
+    padding: 0;
+  }
+
+  .operationColumn .btn {
+    &.small {
+      width: 70px;
+    }
+    &.wide {
+      width: 150px;
+    }
+    &.dx-state-disabled {
+      color: var(--bs-btn-disabled-color);
+      opacity: var(--bs-btn-disabled-opacity);
+      // cursor: not-allowed;
+      // pointer-events: none;
+    }
+
+    width: 100px;
+    line-height: 1.25;
+    text-decoration: none;
+    margin: 2px;
+  }
+}
+/*rtl:end:ignore*/
+.export-buttons{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.ml-1{
+  margin-left: 1rem !important;
+}

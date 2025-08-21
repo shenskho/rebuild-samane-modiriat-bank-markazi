@@ -1,0 +1,151 @@
+.tree-item {
+  cursor: pointer;
+  position: relative; /* Add position relative to parent */
+  margin-bottom: 5px; /* Add space between items */
+}
+
+.tree-item.has-children .tree-arrow {
+  display: inline-block;
+  transform: rotate(0deg);
+  margin-right: 5px;
+  transition: 300ms;
+}
+
+.tree-item.has-children .tree-arrow.expanded {
+  transform: rotate(-90deg);
+    transition: 300ms;
+}
+
+/* ul {
+  list-style-type: none; 
+  border: 1px solid #a1a1a1;
+  border-radius: 5px;
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 10px;
+
+} */
+
+.ul-custom {
+  list-style-type: none; /* Remove bullets or circles */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  margin-left: 20px;
+
+}
+
+.li-custom {
+  margin-top: 10px;
+
+
+  padding: 5px;
+  margin-right: 20px;
+}
+
+.tree-title-items:hover {
+  color: rgb(24, 30, 59);
+  font-size: 15px;
+  background-color: rgba(0, 81, 255, 0.055);
+  padding: 7px;
+  border-radius: 3px;
+}
+
+.tree-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10px; /* Adjust position to connect with parent */
+
+  height: 100%; /* Stretch line to full height */
+}
+
+.tree-item ul-custom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -5px; /* Adjust position to connect with parent */
+  border-top: 1px solid #000; /* Adjust line color */
+  width: 5px; /* Adjust line length */
+}
+
+.item-child-dash {
+  font-size: large;
+}
+.tree-container{
+   box-shadow: 0px 0px 5px #c5c5c5;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #a1a1a10a;
+    margin-top: 50px;
+}
+.button-tree-remove{
+ height: 20px ;
+ width: 20px;
+ background-color:#DD5746;
+ padding: 2px;
+border-radius: 5px;
+box-shadow: 0px 0px 3px #DD5746;
+color: rgb(255, 255, 255);
+}
+.button-tree-remove:hover{
+  width: 30px;
+  height: 30px;
+}
+.button-tree-eye{
+  height: 20px ;
+  width: 20px;
+  background-color:#4649dd;
+  padding: 2px;
+ border-radius: 5px;
+ box-shadow: 0px 0px 3px #ffffff;
+ color: rgb(255, 255, 255);
+ }
+ .button-tree-eye:hover{
+   width: 30px;
+   height: 30px;
+ }
+
+ /* .button-tree-edit{
+  height: 20px ;
+  width: 20px;
+  background-color:#4aa8f9;
+  padding: 2px;
+ border-radius: 5px;
+ box-shadow: 0px 0px 3px #ffffff;
+ color: rgb(255, 255, 255);
+ }
+ .button-tree-edit:hover{
+   width: 30px;
+   height: 30px;
+ } */
+
+
+ 
+
+
+.button-tree-add{
+  height: 20px ;
+  width: 20px;
+  background-color:#4793AF;
+  padding: 2px;
+ border-radius: 5px;
+ box-shadow: 0px 0px 3px #4793AF;
+ color: rgb(255, 255, 255);
+ }
+ .button-tree-add:hover{
+   width: 30px;
+   height: 30px;
+ }
+ .button-tree-edit{
+  height: 20px ;
+  width: 20px;
+  background-color:#4382ee;
+  padding: 2px;
+ border-radius: 5px;
+ box-shadow: 0px 0px 3px #4382ee;
+ color: rgb(255, 255, 255);
+ }
+ .button-tree-edit:hover{
+   width: 30px;
+   height: 30px;
+ }

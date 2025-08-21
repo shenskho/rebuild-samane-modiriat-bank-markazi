@@ -1,0 +1,287 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Version: 2.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+/*==============================================================================================*/
+/* import variables */
+@import '../scss/variables/baseData.scss';
+@import '../scss/variables/Dashboard.scss';
+@import '../../@core/scss/base/bootstrap-extended/include';
+@import '../../@core/scss/base/components/include';
+@import '../scss/variables/main.scss';
+
+// /*==============================================================================================*/
+// /* vazirmatn font */
+@import '../fonts/vazirmatn/UI/Vazirmatn-RD-UI-font-face.css';
+@import '../fonts/vazirmatn/UI-Farsi-Digits/Vazirmatn-RD-UI-FD-font-face.css';
+
+
+:not(i, [class^='dx-']) {
+  html[lang='en'] & {
+    font-family: 'Vazirmatn-RD-UI' !important;
+  }
+  html[lang='fa'] & {
+    font-family: 'Vazirmatn-RD-UI-FD' !important;
+  }
+}
+/*==============================================================================================*/
+/* devextream */
+@import '../css/dx.material.blue.light.css';
+
+.dx-submenu,
+.dx-datagrid-nodata,
+.dx-datagrid-group-panel,
+.dx-datagrid-pager,
+.dx-treeview-select-all-item,
+.dx-texteditor-input,
+.dx-placeholder,
+.dx-field-item-label-text,
+.dx-field-item-content,
+.dx-empty-message {
+  html[lang='en'] & {
+    font-family: 'Vazirmatn-RD-UI' !important;
+  }
+  html[lang='fa'] & {
+    font-family: 'Vazirmatn-RD-UI-FD' !important;
+  }
+}
+/*==============================================================================================*/
+/*rtl:begin:ignore*/
+.ltr {
+  direction: ltr;
+}
+.rtl {
+  direction: rtl;
+}
+/*rtl:end:ignore*/
+.text-justify {
+  text-align: justify;
+}
+/*==============================================================================================*/
+/* spinner */
+/*rtl:begin:ignore*/
+.fallback-spinner {
+  .loading {
+    .effect-1,
+    .effect-2,
+    .effect-3 {
+      border-right: 3px solid $theme-dark-card-bg !important; // change spinner color
+    }
+  }
+}
+/*rtl:end:ignore*/
+/*==============================================================================================*/
+#nprogress .bar {
+  background: $primary !important;
+  height: 5px !important;
+}
+/*==============================================================================================*/
+/* change navbar brand color */
+.main-menu {
+  .navbar-header {
+    .navbar-brand {
+      .brand-text {
+        color: $white;
+      }
+    }
+  }
+  /* add background-color to active nav item */
+  &.menu-dark {
+    .navigation {
+      > li a.active,
+      > li ul a.active {
+        background: linear-gradient(118deg, #04364a, #04364a) !important;
+      }
+    }
+  }
+}
+/* change first navbar items margin-top */
+/* change navbar items color */
+/* remove active nav item shadow */
+.semi-dark-layout {
+  .main-menu-content {
+    .navigation-main {
+      .nav-item {
+        &:first-child {
+          // margin-top: 1.5rem;
+        }
+
+        a {
+          color: $white !important;
+
+          &.active {
+            box-shadow: none !important;
+            background-color: $white !important;
+          }
+        }
+      }
+    }
+  }
+}
+/* change navbar items chevron color */
+.vertical-layout .main-menu .navigation li.has-sub > a:after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-right'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+/*==============================================================================================*/
+/* remove auth pages background image */
+.auth-wrapper {
+  &.auth-basic {
+    .auth-inner {
+      &:before,
+      &:after {
+        background-image: none !important;
+      }
+    }
+  }
+}
+/*==============================================================================================*/
+/* fix react-select dropdown menu z-index bugg */
+.react-select .select__menu {
+  z-index: 9999;
+}
+.h-390 {
+  height: 125px !important;
+  min-height: 125px !important;
+}
+.panel-box {
+  box-shadow: 0px 0px 3px rgb(142, 172, 253);
+  border-radius: 5px;
+  background-color: #f0f4ff56;
+  padding: 15px;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-line-clamp: 3; /* Adjust the value based on the desired number of rows */
+  -webkit-box-orient: vertical;
+}
+
+.text-gray {
+  color: #8d8d8d; /* Hexadecimal color code for gray */
+  /* or */
+  color: #8d8d8d; /* RGB value for gray */
+}
+.h-200 {
+  height: 200px !important;
+}
+.category-Item:hover {
+  cursor: pointer;
+  background-color: #4cc9f0 !important ;
+  box-shadow: 0px 0px 5px #707070 !important;
+}
+
+.panel-box-description {
+  box-shadow: 0px 0px 3px rgb(142, 172, 253);
+  border-radius: 5px;
+  background-color: #f0f4ff56;
+  padding: 15px;
+  cursor: pointer;
+  min-height: 205px !important;
+  overflow: hidden;
+  -webkit-line-clamp: 3; /* Adjust the value based on the desired number of rows */
+  -webkit-box-orient: vertical;
+}
+.notif-modal-body {
+  border: 1px #e0e0e0 solid;
+  border-radius: 3px;
+  padding: 15px;
+}
+.modal-header {
+  background-color: #04364a !important;
+}
+.modal-title {
+  color: white !important;
+}
+.btn-close {
+  background-color: #eeeeee !important;
+}
+.user-detail-container {
+  background-color: #04364a !important;
+}
+.user-detail-title {
+  color: white !important;
+}
+.suggetsionBox {
+  box-shadow: 0px 0px 3px #777777;
+  border-radius: 4px;
+  margin-top: 20px;
+  background-color: #fff;
+}
+.suggetsionBox :hover {
+  background-color: #9ee6fc;
+}
+.roleContainer{
+  background-color: #eeeeee;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: default;
+  padding-left: 2px;
+  padding-right: 2px;
+
+}
+.panel-title{
+  color: white;
+}
+.panel-card{
+cursor: pointer;
+}
+.panel-card :hover {
+  background-color: #336c7e;
+}
+
+
+.footer{
+  background-color: #e0e0e0;
+  margin: 0 !important;
+}
+
+.mr-1{
+  margin-right: 1rem !important;
+}
+
+.mr-2{
+  margin-right: 2rem !important;
+}
+
+.mr-3{
+  margin-right: 3rem !important;
+}
+.mr-4{
+  margin-right: 4rem !important;
+}
+.mr-5{
+  margin-right: 5rem !important;
+}
+
+.ml-1{
+  margin-left: 1rem !important;
+}
+
+.ml-2{
+  margin-left: 2rem !important;
+}
+
+.ml-3{
+  margin-left: 3rem !important;
+}
+.ml-4{
+  margin-left: 4rem !important;
+}
+.ml-5{
+  margin-left: 5rem !important;
+}
+.text-right{
+  text-align: left;
+}
+.wrapper {
+  background-color: #eef3f2 !important;
+}
+
+
+
