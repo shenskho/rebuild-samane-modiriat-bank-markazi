@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetScoreRatio } from '@store/slices/variableData'
+import { GetExamAgency } from '@store/slices/variableData'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal'
@@ -31,7 +31,7 @@ export default function index() {
     SetUserItem(data)
     SetIsDeleteModal(!IsDeleteModal)
   }
-  const rowsWithIndex = store.ScoreRatio.items?.map((item, i) => ({
+  const rowsWithIndex = store.ExamAgency.items?.map((item, i) => ({
   ...item,
   index: i + 1 // ردیف از ۱ شروع بشه
 }))
@@ -39,8 +39,7 @@ export default function index() {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
       { dataField: 'title' , caption: 'عنوان ' },
-      { dataField: 'examRatio' , caption: 'امتیاز آزمون ' },
-      { dataField: 'complementEvaluationRatio' , caption: 'امتیاز ظرفیت تکمیلی ' },
+    
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -71,7 +70,7 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetScoreRatio())
+    dispatch(GetExamAgency())
   }, [])
   return (
     <Row>
@@ -79,7 +78,7 @@ export default function index() {
         <p className='route-base-color'>
           <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
           <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/ScoreRatio")}>نسبت امتیاز </span>
+          <span className='route-caption' onClick={()=> navigate("/ExamAgency")}>مجری آزمون  </span>
         </p>
       </Col>
 

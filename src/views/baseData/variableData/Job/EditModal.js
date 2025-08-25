@@ -6,8 +6,6 @@ import { useDispatch } from 'react-redux'
 import { title } from 'process'
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const [titleName, setTitleName] = useState('')
-  const [examRatio, SetExamRatio] = useState(null)
-  const [complementEvaluationRatio, SetComplementEvaluationRatio] = useState(null)
   const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
 
@@ -24,32 +22,13 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
       setTitleName(e.target.value)
     }
   }
-  const CheckExamRatio = (e) => {
-    if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      SetExamRatio('')
-    } else {
-      SetInvalid(false),
-       SetExamRatio(e.target.value)
-    }
-  }
-  const ComplementEvaluationRatio = (e) => {
-    if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      SetComplementEvaluationRatio('')
-    } else {
-      SetInvalid(false), SetComplementEvaluationRatio(e.target.value)
-    }
-  }
 
   const AddCategory = () => {
     if (titleName !== '') {
       dispatch(
         updateScoreRatio({
           'id': item.id,
-          'title': titleName,
-          'examRatio': examRatio,
-          'complementEvaluationRatio': complementEvaluationRatio
+          'title': titleName
         })
       ).then((response) => {
         dispatch(GetScoreRatio())
@@ -71,10 +50,6 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
       <ModalBody>
         <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
         <Input value={titleName} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheskInput(e)} />
-        <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
-        <Input value={examRatio} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheckExamRatio(e)} />
-        <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
-        <Input value={complementEvaluationRatio} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => ComplementEvaluationRatio(e)} />
       </ModalBody>
 
       <ModalFooter>

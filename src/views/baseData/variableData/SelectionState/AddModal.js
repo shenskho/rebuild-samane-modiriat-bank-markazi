@@ -6,8 +6,7 @@ import { useDispatch } from 'react-redux'
 import { number } from 'prop-types'
 export default function modal({ IsAddModal, SetIsAddModal }) {
   const [TitleName, SetTitleName] = useState('')
-  const [examRatio, SetExamRatio] = useState(null)
-  const [complementEvaluationRatio, SetComplementEvaluationRatio] = useState(null)
+ 
   const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
   const toggle = (row) => {
@@ -17,35 +16,22 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
     if (e.target.value.trim() === '') {
       SetInvalid(true)
       SetTitleName('')
+
+      SetComplementEvaluationRatio('')
     } else {
       SetInvalid(false)
       SetTitleName(e.target.value)
+
+      SetComplementEvaluationRatio(e.target.value)
     }
   }
-  const CheckExamRatio = (e) => {
-    if (e.target.value.trim() === null) {
-      SetInvalid(true)
-      SetExamRatio(null)
-    } else {
-      SetInvalid(false),
-       SetExamRatio(e.target.value)
-    }
-  }
-  const ComplementEvaluationRatio = (e) => {
-    if (e.target.value.trim() === null) {
-      SetInvalid(true)
-      SetComplementEvaluationRatio(null)
-    } else {
-      SetInvalid(false), SetComplementEvaluationRatio(e.target.value)
-    }
-  }
+
   const AddCategory = () => {
-    if (TitleName,examRatio,complementEvaluationRatio !== '' || null) {
+    if (TitleName !== '') {
       dispatch(
         CreateScoreRatio({
           'title': TitleName,
-          'examRatio': examRatio,
-          'complementEvaluationRatio': complementEvaluationRatio
+       
         })
       ).then((response) => {
         dispatch(GetScoreRatio())
@@ -64,16 +50,7 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
         <Label>نسبت امتیاز</Label>
         <Input invalid={Invalid} placeholder=' عنوان' onChange={(e) => CheskInput(e)} />
       </ModalBody>
-      <ModalBody>
-        <Label>امتیاز آزمون</Label>
-
-        <Input invalid={Invalid} placeholder=' امتیاز آزمون' onChange={(e) => CheckExamRatio(e)} />
-      </ModalBody>
-      <ModalBody>
-        <Label>امتیاز ظرفیت تکمیلی</Label>
-
-        <Input invalid={Invalid} placeholder=' امتیاز ظرفیت تکمیلی' onChange={(e) => ComplementEvaluationRatio(e)} />
-      </ModalBody>
+   
 
       <ModalFooter>
         <Button color='danger' onClick={toggle}>

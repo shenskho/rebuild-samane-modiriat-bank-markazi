@@ -15,6 +15,14 @@ const Religion = lazy(()=>import("@views/baseData/fixData/Religion"))
 const EmploymentType = lazy(()=>import("@views/baseData/fixData/EmploymentType"))
 const UniversityType = lazy(()=>import("@views/baseData/fixData/UniversityType"))
 const ScoreRatio = lazy(()=>import("@views/baseData/variableData/ScoreRatio"))
+const ExamAgency =lazy (()=>import("@views/baseData/variableData/ExamAgency"))
+const ComplementEvaluationAgency =lazy (()=>import("@views/baseData/variableData/ComplementEvaluationAgency"))
+const EducationField =lazy (()=>import("@views/baseData/variableData/EducationField"))
+const Job =lazy (()=>import("@views/baseData/variableData/Job"))
+const SelectionState =lazy (()=>import("@views/baseData/variableData/SelectionState"))
+const AgencyCategory =lazy (()=>import("@views/baseData/variableData/AgencyCategory"))
+
+
 
 
 const AdminRoutes = [
@@ -39,7 +47,25 @@ const AdminRoutes = [
     element: <VariableData />,
     meta: {
       action: 'read',
-      resource: '/VariableData'
+      resource: '/variableData'
+    }
+  }
+  ,
+  {
+    path: '/SelectionState',
+    element: <SelectionState />,
+    meta: {
+      action: 'read',
+      resource: '/SelectionState'
+    }
+  }
+  ,
+  {
+    path: '/AgencyCategory',
+    element: <AgencyCategory />,
+    meta: {
+      action: 'read',
+      resource: '/AgencyCategory'
     }
   }
   ,
@@ -51,6 +77,43 @@ const AdminRoutes = [
       resource: '/ScoreRatio'
     }
   }
+  ,
+  {
+    path: '/EducationField',
+    element: <EducationField />,
+    meta: {
+      action: 'read',
+      resource: '/EducationField'
+    }
+  }
+    ,
+  {
+    path: '/ExamAgency',
+    element: <ExamAgency />,
+    meta: {
+      action: 'read',
+      resource: '/ExamAgency'
+    }
+  }
+   ,
+  {
+    path: '/Job',
+    element: <Job />,
+    meta: {
+      action: 'read',
+      resource: '/Job'
+    }
+  }
+  ,
+  {
+    path: '/ComplementEvaluationAgency',
+    element: <ComplementEvaluationAgency />,
+    meta: {
+      action: 'read',
+      resource: '/ComplementEvaluationAgency'
+    }
+  }
+  
   ,
   {
     path: '/fixData',

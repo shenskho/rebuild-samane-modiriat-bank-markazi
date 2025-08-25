@@ -52,21 +52,66 @@ export default {
     updateReligion: `${PREFIX}/Religion/update-religion`,
     removeReligion: `${PREFIX}/Religion/delete-religion`
   },
+
   organization: {
     getOrganizations: `${PREFIX}/Organization/get-all-organizations`,
     createOrganizations: `${PREFIX}/Organization/create-organization`,
     updateOrganizations: `${PREFIX}/Organization/update-organization`,
     removeOrganizations: `${PREFIX}/Organization/delete-organization`
-  } /*************************************************************smaple*******************************************************************/,
-  report: {
-    createReport: `${PREFIX}/Report/create-report`,
-    updateReport: `${PREFIX}/Report/update-report`,
-    removeReport: `${PREFIX}/Report/delete-report`,
-    getAllReports: `${PREFIX}/Report/get-all-reports`,
-    executeReports: `${PREFIX}/Report/execute-report`,
-    exportExcel: `${PREFIX}/Report/export-excel`,
-    stramExport: `${PREFIX}/Report/export-excel-stram`
   },
+  ///////////////////////////variableData//////////////////////////
+  ScoreRatio: {
+    getScoreRatio: `${PREFIX}/ScoreRatio/get-all-score-ratios`,
+    createScoreRatio: `${PREFIX}/ScoreRatio/create-score-ratio`,
+    updateScoreRatio: `${PREFIX}/ScoreRatio/update-score-ratio`,
+    removeScoreRatio: `${PREFIX}/ScoreRatio/delete-score-ratio`
+  },
+  ExamAgency: {
+    getExamAgency: `${PREFIX}/ExamAgency/get-all-exam-agencies`,
+    createExamAgency: `${PREFIX}/ExamAgency/create-exam-agency`,
+    updateExamAgency: `${PREFIX}/ExamAgency/update-exam-agency`,
+    removeExamAgency: `${PREFIX}/ExamAgency/delete-exam-agency`
+  },
+  ComplementEvaluationAgency: {
+    getComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/get-all-complement-evaluation-agencies`,
+    createComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/create-complement-evaluation-agency`,
+    updateComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/update-complement-evaluation-agency`,
+    removeComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/delete-complement-evaluation-agency`
+  },
+  EducationField: {
+    getEducationField: `${PREFIX}/EducationField/get-all-education-fields`,
+    createEducationField: `${PREFIX}/EducationField/create-education-field`,
+    updateEducationField: `${PREFIX}/EducationField/update-education-field`,
+    removeEducationField: `${PREFIX}/EducationField/delete-education-field`
+  },
+  Job: {
+    getJob: `${PREFIX}/Job/get-all-jobs`,
+    createJob: `${PREFIX}/Job/create-job`,
+    updateJob: `${PREFIX}/Job/update-job`,
+    removeJob: `${PREFIX}/Job/delete-job`
+  },
+  SelectionState: {
+    getSelectionState: `${PREFIX}/SelectionState/get-all-selection-states`,
+    createSelectionState: `${PREFIX}/SelectionState/create-selection-state`,
+    updateSelectionState: `${PREFIX}/SelectionState/update-selection-state`,
+    removeSelectionState: `${PREFIX}/SelectionState/delete-selection-state`
+  },
+  AgencyCategory:{
+    getAgencyCategory: `${PREFIX}/AgencyCategory/get-all-agency-categories`,
+    createAgencyCategory: `${PREFIX}/AgencyCategory/create-agency-category`,
+    updateAgencyCategory: `${PREFIX}/AgencyCategory/update-agency-category`,
+    removeAgencyCategory: `${PREFIX}/AgencyCategory/delete-agency-category`
+  },
+  /*************************************************************smaple*******************************************************************/ report:
+    {
+      createReport: `${PREFIX}/Report/create-report`,
+      updateReport: `${PREFIX}/Report/update-report`,
+      removeReport: `${PREFIX}/Report/delete-report`,
+      getAllReports: `${PREFIX}/Report/get-all-reports`,
+      executeReports: `${PREFIX}/Report/execute-report`,
+      exportExcel: `${PREFIX}/Report/export-excel`,
+      stramExport: `${PREFIX}/Report/export-excel-stram`
+    },
 
   category: {
     getAllCategory: `${PREFIX}/Category/get-all-categories`,

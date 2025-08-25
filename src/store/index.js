@@ -12,6 +12,7 @@ import controlPanel from './slices/controlPanel'
 import Category from './slices/Category'
 
 import FixData from './slices/fixData'
+import variableData from './slices/variableData'
 
 const configs = {
   key: 'root',
@@ -28,7 +29,8 @@ const appReducer = combineReducers({
   addReport,
   controlPanel,
   Category,
-  FixData
+  FixData,
+  variableData,
 })
 
 const rootReducer = (state, action) => {
