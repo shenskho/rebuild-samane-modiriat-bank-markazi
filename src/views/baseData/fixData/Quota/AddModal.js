@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { CreateDutystatus,GetDutystatus } from '@store/slices/fixData'
+import { CreateQuota, GetQuota } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 export default function modal({ IsAddModal, SetIsAddModal }) {
   const [TitleName, SetTitleName] = useState('')
@@ -22,11 +22,11 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
   const AddCategory = () => {
     if (TitleName !== '') {
       dispatch(
-        CreateDutystatus({
+        CreateQuota({
           'title': TitleName
         })
       ).then((response) => {
-         dispatch(GetDutystatus())
+        dispatch(GetQuota())
         toggle()
       })
     } else {
@@ -36,11 +36,11 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>اضافه کردن وضعیت نظام وظیفه</ModalHeader>
+      <ModalHeader toggle={toggle}>اضافه کردن سهمیه</ModalHeader>
 
       <ModalBody>
-        <Label>وضعیت نظام وظیفه</Label>
-        <Input invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
+        <Label>سهمیه</Label>
+        <Input invalid={Invalid} placeholder=' سهمیه' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 
       <ModalFooter>

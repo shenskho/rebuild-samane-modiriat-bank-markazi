@@ -9,12 +9,55 @@ export default {
     signUp: `${PREFIX}/Authentication/sign-up`,
     signInWithsso: `${PREFIX}/Authentication/sign-in-with-sso`
   },
- dustyStatus:{
-  getDutystatus: `${PREFIX}/MilitaryState/get-all-military-states`,
+  dustyStatus: {
+    getDutystatus: `${PREFIX}/MilitaryState/get-all-military-states`,
     createDutystatus: `${PREFIX}/MilitaryState/create-military-state`,
-      updateDutystatus: `${PREFIX}/MilitaryState/update-military-state`,
-       removeDutystatus: `${PREFIX}/MilitaryState/delete-military-state`
- }/*************************************************************smaple*******************************************************************/,
+    updateDutystatus: `${PREFIX}/MilitaryState/update-military-state`,
+    removeDutystatus: `${PREFIX}/MilitaryState/delete-military-state`
+  },
+
+  Province: {
+    getProvince: `${PREFIX}/Province/get-all-provinces`,
+    createProvince: `${PREFIX}/Province/create-province`,
+    updateProvince: `${PREFIX}/Province/update-province`,
+    removeProvince: `${PREFIX}/Province/delete-province`
+  },
+  Quota: {
+    getQuota: `${PREFIX}/Quota/get-all-quotas`,
+    createQuota: `${PREFIX}/Quota/create-quota`,
+    updateQuota: `${PREFIX}/Quota/update-quota`,
+    removeQuota: `${PREFIX}/Quota/delete-quota`
+  },
+  EducationLevel: {
+    getEducationLevel: `${PREFIX}/EducationLevel/get-all-employment-types`,
+    createEducationLevel: `${PREFIX}/EducationLevel/create-employment-type`,
+    updateEducationLevel: `${PREFIX}/EducationLevel/update-employment-type`,
+    removeEducationLevel: `${PREFIX}/EducationLevel/delete-employment-type`
+  },
+  EmploymentType: {
+    getEmploymentType: `${PREFIX}/EmploymentType/get-all-employment-types`,
+    createEmploymentType: `${PREFIX}/EmploymentType/create-employment-type`,
+    updateEmploymentType: `${PREFIX}/EmploymentType/update-employment-type`,
+    removeEmploymentType: `${PREFIX}/EmploymentType/delete-employment-type`
+  },
+  UniversityType: {
+    getUniversityType: `${PREFIX}/UniversityType/get-all-university-types`,
+    createUniversityType: `${PREFIX}/UniversityType/create-university-type`,
+    updateUniversityType: `${PREFIX}/UniversityType/update-university-type`,
+    removeUniversityType: `${PREFIX}/UniversityType/delete-university-type`
+  },
+  Religion: {
+    getReligion: `${PREFIX}/Religion/get-all-religions`,
+    createReligion: `${PREFIX}/Religion/create-religion`,
+    updateReligion: `${PREFIX}/Religion/update-religion`,
+    removeReligion: `${PREFIX}/Religion/delete-religion`
+  },
+  organization: {
+    getOrganizations: `${PREFIX}/Organization/get-all-organizations`,
+    createOrganizations: `${PREFIX}/Organization/create-organization`,
+    updateOrganizations: `${PREFIX}/Organization/update-organization`,
+    removeOrganizations: `${PREFIX}/Organization/delete-organization`
+  } /*************************************************************smaple*******************************************************************/,
   report: {
     createReport: `${PREFIX}/Report/create-report`,
     updateReport: `${PREFIX}/Report/update-report`,
@@ -22,11 +65,9 @@ export default {
     getAllReports: `${PREFIX}/Report/get-all-reports`,
     executeReports: `${PREFIX}/Report/execute-report`,
     exportExcel: `${PREFIX}/Report/export-excel`,
-    stramExport:`${PREFIX}/Report/export-excel-stram`
+    stramExport: `${PREFIX}/Report/export-excel-stram`
   },
-  controlPanel: {
 
-  },
   category: {
     getAllCategory: `${PREFIX}/Category/get-all-categories`,
     createCategory: `${PREFIX}/Category/create-category`,
@@ -49,9 +90,9 @@ export default {
     updateRole: `${PREFIX}/RoleManager/update-role`
   },
   ReportPermission: {
-    getReportPermissionsOfRole:`${PREFIX}/ReportPermission/get-report-permissions-of-role`,
-    setReportPermissionsToRole :`${PREFIX}/ReportPermission/set-report-permissions-to-role`,
-    getReportPermissionsToCategory:`${PREFIX}/ReportPermission/get-category-permissions-of-user`,
-    setReportPermissionsToCategory :`${PREFIX}/ReportPermission/set-category-permissions-to-user`
+    getReportPermissionsOfRole: `${PREFIX}/ReportPermission/get-report-permissions-of-role`,
+    setReportPermissionsToRole: `${PREFIX}/ReportPermission/set-report-permissions-to-role`,
+    getReportPermissionsToCategory: `${PREFIX}/ReportPermission/get-category-permissions-of-user`,
+    setReportPermissionsToCategory: `${PREFIX}/ReportPermission/set-category-permissions-to-user`
   }
 }

@@ -41,7 +41,7 @@ import { MdMosque } from 'react-icons/md'
 import { Card, Col, Row } from 'reactstrap'
 export default function index() {
   const categoryItems = [
-    { title: 'نسبت امتیاز', icon: <FaPercent /> },
+    { title: 'نسبت امتیاز', icon: <FaPercent size={40} color='#04364a' />, link: '/ScoreRatio'  },
     { title: 'مجری آزمون کتبی', icon: <FaUserEdit /> },
     { title: 'مجری ارزیابی تکمیلی', icon: <FaUserCheck /> },
     { title: 'رشته تحصیلی', icon: <FaBook /> },

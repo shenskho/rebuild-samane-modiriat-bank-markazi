@@ -45,13 +45,13 @@ export default function index() {
 
   const categoryItems = [
     { title: 'وضعیت نظام وظیفه', icon: <FaUserShield size={40} color='#04364a' />, link: '/dutyStatus' },
-    { title: 'دستگاه اجرایی', icon: <FaBuilding size={40} color='#04364a' />, link: '/dutyStatus' },
-    { title: 'مکان جغرافیایی', icon: <FaMapMarkerAlt size={40} color='#04364a' />, link: '/dutyStatus' },
-    { title: 'مقطع تحصیلی', icon: <FaGraduationCap size={40} color='#04364a' />, link: '/dutyStatus' },
-    { title: 'سهمیه', icon: <FaFilter size={40} color='#04364a' />, link: '/dutyStatus' },
-    { title: 'مذاهب', icon: <MdMosque size={40} color='#04364a' />, link: '/dutyStatus' },
-    { title: 'نوع استخدام', icon: <FaBriefcase size={40} color='#04364a' />, link: '/dutyStatus' },
-    { title: 'نوع دانشگاه', icon: <FaUniversity size={40} color='#04364a' />, link: '/dutyStatus' }
+    { title: 'دستگاه اجرایی', icon: <FaBuilding size={40} color='#04364a' />, link: '/organization' },
+    { title: 'مکان جغرافیایی', icon: <FaMapMarkerAlt size={40} color='#04364a' />, link: '/Province' },
+    { title: 'مقطع تحصیلی', icon: <FaGraduationCap size={40} color='#04364a' />, link: '/EducationLevel' },
+    { title: 'سهمیه', icon: <FaFilter size={40} color='#04364a' />, link: '/Quota' },
+    { title: 'مذاهب', icon: <MdMosque size={40} color='#04364a' />, link: '/Religion' },
+    { title: 'نوع استخدام', icon: <FaBriefcase size={40} color='#04364a' />, link: '/EmploymentType' },
+    { title: 'نوع دانشگاه', icon: <FaUniversity size={40} color='#04364a' />, link: '/UniversityType' }
   ]
   return (
     <Row>

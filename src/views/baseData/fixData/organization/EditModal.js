@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { updateDutystatus, GetDutystatus } from '@store/slices/fixData'
+import { updateOrganizations, getOrganizations } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 import { title } from 'process'
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
@@ -26,12 +26,13 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const AddCategory = () => {
     if (titleName !== '') {
       dispatch(
-        updateDutystatus({
+        updateOrganizations({
           'id': item.id,
-          'title': titleName
+          'title': titleName,
+          'logoImageId': '13f81fec-7b13-4bb0-e943-08dde0a8e675'
         })
       ).then((response) => {
-        dispatch(GetDutystatus())
+        dispatch(getOrganizations())
         toggle()
       })
     } else {
@@ -45,10 +46,10 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر گروه دسترسی</ModalHeader>
+      <ModalHeader toggle={toggle}> تغییر دستگاه اجرایی</ModalHeader>
 
       <ModalBody>
-        <Label>عنوان جدید گروه دسترسی را وارد کنید</Label>
+        <Label>عنوان جدید دستگاه اجرایی را وارد کنید</Label>
         <Input value={titleName} invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 

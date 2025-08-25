@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { updateDutystatus, GetDutystatus } from '@store/slices/fixData'
+import { updateEmploymentType, GetEmploymentType } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 import { title } from 'process'
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
@@ -26,12 +26,12 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const AddCategory = () => {
     if (titleName !== '') {
       dispatch(
-        updateDutystatus({
+        updateEmploymentType({
           'id': item.id,
           'title': titleName
         })
       ).then((response) => {
-        dispatch(GetDutystatus())
+        dispatch(GetEmploymentType())
         toggle()
       })
     } else {
@@ -45,11 +45,11 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر گروه دسترسی</ModalHeader>
+      <ModalHeader toggle={toggle}>تغییر نوع استخدام</ModalHeader>
 
       <ModalBody>
-        <Label>عنوان جدید گروه دسترسی را وارد کنید</Label>
-        <Input value={titleName} invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
+        <Label>نوع استخدام جدید خود را وارد کنید</Label>
+        <Input value={titleName} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 
       <ModalFooter>

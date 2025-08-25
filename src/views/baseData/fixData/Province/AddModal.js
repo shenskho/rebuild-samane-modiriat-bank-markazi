@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { CreateDutystatus,GetDutystatus } from '@store/slices/fixData'
+import { createProvince, getProvince } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 export default function modal({ IsAddModal, SetIsAddModal }) {
   const [TitleName, SetTitleName] = useState('')
@@ -22,11 +22,11 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
   const AddCategory = () => {
     if (TitleName !== '') {
       dispatch(
-        CreateDutystatus({
+        createProvince({
           'title': TitleName
         })
       ).then((response) => {
-         dispatch(GetDutystatus())
+        dispatch(getProvince())
         toggle()
       })
     } else {
@@ -36,11 +36,11 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>اضافه کردن وضعیت نظام وظیفه</ModalHeader>
+      <ModalHeader toggle={toggle}>اضافه کردن مکان جغرافیایی</ModalHeader>
 
       <ModalBody>
-        <Label>وضعیت نظام وظیفه</Label>
-        <Input invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
+        <Label>مکان جغرافیایی</Label>
+        <Input invalid={Invalid} placeholder=' مکان جغرافیایی' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 
       <ModalFooter>

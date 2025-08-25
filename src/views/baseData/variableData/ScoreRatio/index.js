@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetDutystatus } from '@store/slices/fixData'
+import { GetUniversityType } from '@store/slices/fixData'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal'
 import EditModal from './EditModal'
 import DeleteModal from './DeleteModal'
 import { Plus } from 'react-feather'
+import { useNavigate } from 'react-router-dom'
 
 export default function index() {
   const store = useSelector((state) => state.FixData)
-  
+  const navigate = useNavigate()
   console.log(store)
   const dispatch = useDispatch()
   const [userItem, SetUserItem] = useState([])
@@ -29,7 +30,7 @@ export default function index() {
     SetUserItem(data)
     SetIsDeleteModal(!IsDeleteModal)
   }
-  const rowsWithIndex = store.dutyStatus.items?.map((item, i) => ({
+  const rowsWithIndex = store.UniversityType.items?.map((item, i) => ({
   ...item,
   index: i + 1 // ردیف از ۱ شروع بشه
 }))
@@ -67,15 +68,15 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetDutystatus())
+    dispatch(GetUniversityType())
   }, [])
   return (
     <Row>
       <Col lg={12}>
         <p className='route-base-color'>
-          <span className='first-route-selected'>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
-          <span className='route-caption'>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption'>وضعیت نظام وظیفه </span>
+          <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
+          <span className='route-caption' onClick={()=> navigate("/fixData")}>اطلاعات ثابت</span> /{' '}
+          <span className='route-caption' onClick={()=> navigate("/UniversityType")}>نوع دانشگاه </span>
         </p>
       </Col>
 
@@ -86,7 +87,7 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader>
-                    <h4>وضعیت نظام وظیفه </h4>
+                    <h4>نوع دانشگاه </h4>
                   </CardHeader>
 
                   <CardBody>

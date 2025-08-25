@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { CreateDutystatus,GetDutystatus } from '@store/slices/fixData'
+import { createOrganizations, getOrganizations } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 export default function modal({ IsAddModal, SetIsAddModal }) {
   const [TitleName, SetTitleName] = useState('')
@@ -22,11 +22,12 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
   const AddCategory = () => {
     if (TitleName !== '') {
       dispatch(
-        CreateDutystatus({
-          'title': TitleName
+        createOrganizations({
+          'title': TitleName,
+          'logoImageId': '13f81fec-7b13-4bb0-e943-08dde0a8e675'
         })
       ).then((response) => {
-         dispatch(GetDutystatus())
+        dispatch(getOrganizations())
         toggle()
       })
     } else {
@@ -36,10 +37,10 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>اضافه کردن وضعیت نظام وظیفه</ModalHeader>
+      <ModalHeader toggle={toggle}>اضافه کردن دستگاه اجرایی </ModalHeader>
 
       <ModalBody>
-        <Label>وضعیت نظام وظیفه</Label>
+        <Label> دستگاه اجرایی </Label>
         <Input invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 

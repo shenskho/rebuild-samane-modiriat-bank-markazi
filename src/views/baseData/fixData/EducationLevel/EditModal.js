@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { updateDutystatus, GetDutystatus } from '@store/slices/fixData'
+import { updateEducationLevel, GetEducationLevel } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 import { title } from 'process'
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
@@ -26,12 +26,12 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const AddCategory = () => {
     if (titleName !== '') {
       dispatch(
-        updateDutystatus({
+        updateEducationLevel({
           'id': item.id,
           'title': titleName
         })
       ).then((response) => {
-        dispatch(GetDutystatus())
+        dispatch(GetEducationLevel())
         toggle()
       })
     } else {
@@ -45,11 +45,11 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر گروه دسترسی</ModalHeader>
+      <ModalHeader toggle={toggle}>تغییر مقطع تحصیلی</ModalHeader>
 
       <ModalBody>
-        <Label>عنوان جدید گروه دسترسی را وارد کنید</Label>
-        <Input value={titleName} invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
+        <Label>عنوان جدید مقطع تحصیلی را وارد کنید</Label>
+        <Input value={titleName} invalid={Invalid} placeholder=' مقطع تحصیلی' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 
       <ModalFooter>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { removeDutystatus, GetDutystatus } from '@store/slices/fixData'
+import { removeProvince, getProvince } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 
 export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
@@ -12,21 +12,21 @@ export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
 
   const handeleDeleteRole = () => {
     dispatch(
-      removeDutystatus({
+      removeProvince({
         'id': item.id
       })
     ).then((response) => {
-      dispatch(GetDutystatus())
+      dispatch(getProvince())
       toggle()
     })
   }
 
   return (
     <Modal size='lg' isOpen={IsDeleteModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>حذف گروه دسترسی</ModalHeader>
+      <ModalHeader toggle={toggle}>حذف نوع مکان جغرافیایی</ModalHeader>
 
       <ModalBody>
-        <Label>{`آیا می خواهید وضعیت نظام وظیفه ${item.title} را حذف کنید؟`} </Label>
+        <Label>{`آیا می خواهید نوع مکان جغرافیایی ${item.title} را حذف کنید؟`} </Label>
       </ModalBody>
 
       <ModalFooter>
