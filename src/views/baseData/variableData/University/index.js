@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetExamAgency } from '@store/slices/variableData'
+import { GetUniversity } from '@store/slices/variableData'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal'
@@ -31,7 +31,7 @@ export default function index() {
     SetUserItem(data)
     SetIsDeleteModal(!IsDeleteModal)
   }
-  const rowsWithIndex = store.Job.items?.map((item, i) => ({
+  const rowsWithIndex = store.University.items?.map((item, i) => ({
   ...item,
   index: i + 1 // ردیف از ۱ شروع بشه
 }))
@@ -69,7 +69,7 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetExamAgency())
+    dispatch(GetUniversity())
   }, [])
   return (
     <Row>
@@ -77,7 +77,7 @@ export default function index() {
         <p className='route-base-color'>
           <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
           <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/ExamAgency")}>مجری آزمون کتبی </span>
+          <span className='route-caption' onClick={()=> navigate("/University")}>فهرست دانشگاه‌های کشور </span>
         </p>
       </Col>
 
@@ -88,7 +88,7 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader>
-                    <h4>مجری آزمون کتبی </h4>
+                    <h4>فهرست دانشگاه‌های کشور </h4>
                   </CardHeader>
 
                   <CardBody>

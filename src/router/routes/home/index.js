@@ -21,6 +21,7 @@ const EducationField =lazy (()=>import("@views/baseData/variableData/EducationFi
 const Job =lazy (()=>import("@views/baseData/variableData/Job"))
 const SelectionState =lazy (()=>import("@views/baseData/variableData/SelectionState"))
 const AgencyCategory =lazy (()=>import("@views/baseData/variableData/AgencyCategory"))
+const University =lazy (()=>import("@views/baseData/variableData/University"))
 
 
 
@@ -48,6 +49,15 @@ const AdminRoutes = [
     meta: {
       action: 'read',
       resource: '/variableData'
+    }
+  }
+  ,
+  {
+    path: '/University',
+    element: <University />,
+    meta: {
+      action: 'read',
+      resource: '/University'
     }
   }
   ,

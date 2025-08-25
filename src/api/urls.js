@@ -46,6 +46,12 @@ export default {
     updateUniversityType: `${PREFIX}/UniversityType/update-university-type`,
     removeUniversityType: `${PREFIX}/UniversityType/delete-university-type`
   },
+  University:{
+    getUniversity: `${PREFIX}/University/get-all-universities`,
+    createUniversity: `${PREFIX}/University/create-university`,
+    updateUniversity: `${PREFIX}/University/update-university`,
+    removeUniversity: `${PREFIX}/University/delete-university`
+  },
   Religion: {
     getReligion: `${PREFIX}/Religion/get-all-religions`,
     createReligion: `${PREFIX}/Religion/create-religion`,

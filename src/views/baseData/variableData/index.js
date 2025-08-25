@@ -51,7 +51,7 @@ export default function index() {
     { title: 'شغل', icon: <FaSuitcase size={40} color='#04364a' />, link: '/Job'  },
     { title: 'وضعیت گزینش', icon: <FaCheckCircle size={40} color='#04364a' />, link: '/SelectionState'  },
     { title: 'رسته عوامل مجری', icon: <FaUsers size={40} color='#04364a' />, link: '/AgencyCategory'  },
-    { title: 'فهرست دانشگاه‌ها', icon: <FaSchool /> }
+    { title: 'فهرست دانشگاه‌ها', icon: <FaSchool size={40} color='#04364a' />, link: '/University' }
   ]
   return (
     <Row>

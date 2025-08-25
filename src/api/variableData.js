@@ -91,6 +91,20 @@ export async function updateAgencyCategory(param) {
 export async function removeAgencyCategory(param) {
   return await axios.post(urls.AgencyCategory.removeAgencyCategory, param)
 }
+//////////////////University///////////////
+export async function getUniversity() {
+  return await axios.get(urls.University.getUniversity)
+}
+export async function createUniversity(param) {
+  return await axios.post(urls.University.createUniversity, param)
+}
+export async function updateUniversity(param) {
+  return await axios.post(urls.University.updateUniversity, param)
+}
+export async function removeUniversity(param) {
+  return await axios.post(urls.University.removeUniversity, param)
+}
+
 
 
 
