@@ -21,10 +21,6 @@ const EducationField =lazy (()=>import("@views/baseData/variableData/EducationFi
 const Job =lazy (()=>import("@views/baseData/variableData/Job"))
 const SelectionState =lazy (()=>import("@views/baseData/variableData/SelectionState"))
 const AgencyCategory =lazy (()=>import("@views/baseData/variableData/AgencyCategory"))
-const University =lazy (()=>import("@views/baseData/variableData/University"))
-/////////////////
-const LicenseRequest = lazy(() => import('@views/license/licenseRequest'))
-const RequestLicense = lazy(() => import('@views/license/RequestLicense'))
 
 
 
