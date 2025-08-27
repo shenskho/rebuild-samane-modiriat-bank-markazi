@@ -42,7 +42,10 @@ export default [
     id: 'admin-home5',
     title: 'مجوز استخدام',
     icon: <FaFileAlt />,
-    children: [{ title: 'مدیریت مجوزها' }, { title: 'ثبت شرایط و تعریف شغل محل‌ها' }]
+    children: [
+      { title: 'مدیریت مجوزها', navLink: '/licenseRequest' },
+      { title: 'ثبت شرایط و تعریف شغل محل‌ها', navLink: '/requestLicense' }
+    ]
   },
   {
     id: 'admin-home6',

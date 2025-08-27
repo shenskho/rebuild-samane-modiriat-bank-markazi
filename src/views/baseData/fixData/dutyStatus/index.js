@@ -12,7 +12,7 @@ import { Plus } from 'react-feather'
 
 export default function index() {
   const store = useSelector((state) => state.FixData)
-  
+
   console.log(store)
   const dispatch = useDispatch()
   const [userItem, SetUserItem] = useState([])
@@ -30,9 +30,9 @@ export default function index() {
     SetIsDeleteModal(!IsDeleteModal)
   }
   const rowsWithIndex = store.dutyStatus.items?.map((item, i) => ({
-  ...item,
-  index: i + 1 // ردیف از ۱ شروع بشه
-}))
+    ...item,
+    index: i + 1 // ردیف از ۱ شروع بشه
+  }))
   const dataGridData = {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
@@ -71,18 +71,18 @@ export default function index() {
   }, [])
   return (
     <Row>
-      <Col lg={12}>
-        <p className='route-base-color'>
-          <span className='first-route-selected'>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
-          <span className='route-caption'>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption'>وضعیت نظام وظیفه </span>
-        </p>
-      </Col>
-
       <Col lg={12} className=' base-data-container'>
         <Card className='mb-2'>
           <CardBody>
             <Row>
+              <Col lg={12} className='mb-2'>
+                <p className='route-base-color'>
+                  <span className='first-route-selected'>خانه</span> /{' '}
+                  <span className='route-caption'>اطلاعات پایه</span> /{' '}
+                  <span className='route-caption'>اطلاعات متغیر</span> /{' '}
+                  <span className='route-caption'>وضعیت نظام وظیفه </span>
+                </p>
+              </Col>
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Spinner } from 'reactstrap'
 import Countdown from 'react-countdown'
-import logo from '@assets/images/magfa/rayanLogo.webp'
+import logo from '@assets/images/magfa/single_logo.svg'
 
 export default function Maintenance() {
   const navigate = useNavigate()

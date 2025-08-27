@@ -120,6 +120,24 @@ export const updateAgencyCategory = createAsyncThunk('variableData/updateAgencyC
   const response = await apis.updateAgencyCategory(param)
   return response.data.result
 })
+//////////////University//////////////////
+export const GetUniversity = createAsyncThunk('variableData/getUniversity', async () => {
+  const response = await apis.getUniversity()
+  return response.data.result
+})
+export const CreateUniversity= createAsyncThunk('variableData/createUniversity', async (param) => {
+  const response = await apis.createUniversity(param)
+  return response.data.result
+})
+export const removeUniversity = createAsyncThunk('variableData/deleteUniversity', async (param) => {
+  const response = await apis.removeUniversity(param)
+  return response.data.result
+})
+export const updateUniversity = createAsyncThunk('variableData/updateUniversity', async (param) => {
+  const response = await apis.updateUniversity(param)
+  return response.data.result
+})
+
 
 
 
@@ -143,9 +161,13 @@ export const addReport = createSlice({
     Job:[],
     SelectionState:[],
     AgencyCategory:[],
+    University:[],
   },
   reducers: {},
   extraReducers: (builder) => {
+      builder.addCase(GetUniversity.fulfilled, (state, action) => {
+      state.University = action.payload
+    })
      builder.addCase(GetAgencyCategory.fulfilled, (state, action) => {
       state.AgencyCategory = action.payload
     })

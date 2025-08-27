@@ -9,6 +9,17 @@ export default {
     signUp: `${PREFIX}/Authentication/sign-up`,
     signInWithsso: `${PREFIX}/Authentication/sign-in-with-sso`
   },
+  
+  file: {
+    uploadFile: `${PREFIX}/File/upload-base64-doc`,
+    readFile: `${PREFIX}/File/get-base64-doc?`
+  },
+  license: {
+    getlicenses: `${PREFIX}/License/get-all-Licenses`,
+    createlicense: `${PREFIX}/License/create-License`,
+    updatelicense: `${PREFIX}/License/update-License`,
+    removelicense: `${PREFIX}/License/delete-License`
+  },
   dustyStatus: {
     getDutystatus: `${PREFIX}/MilitaryState/get-all-military-states`,
     createDutystatus: `${PREFIX}/MilitaryState/create-military-state`,
@@ -45,6 +56,12 @@ export default {
     createUniversityType: `${PREFIX}/UniversityType/create-university-type`,
     updateUniversityType: `${PREFIX}/UniversityType/update-university-type`,
     removeUniversityType: `${PREFIX}/UniversityType/delete-university-type`
+  },
+  University:{
+    getUniversity: `${PREFIX}/University/get-all-universities`,
+    createUniversity: `${PREFIX}/University/create-university`,
+    updateUniversity: `${PREFIX}/University/update-university`,
+    removeUniversity: `${PREFIX}/University/delete-university`
   },
   Religion: {
     getReligion: `${PREFIX}/Religion/get-all-religions`,

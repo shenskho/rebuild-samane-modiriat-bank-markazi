@@ -181,25 +181,25 @@ const ChartsSection = () => {
 
   return (
     <Row className='charts'>
-      <Col lg={3} md={3}>
+      <Col lg={3} md={3} className='mt-1'>
         <div className='chart-box'>
           <h3>استخدام به تفکیک سال</h3>
           <canvas ref={chartRef1}></canvas>
         </div>
       </Col>
-      <Col lg={3} md={3}>
+      <Col lg={3} md={3} className='mt-1'>
         <div className='chart-box'>
           <h3>استخدام به تفکیک جنسیت</h3>
           <canvas ref={chartRef2}></canvas>
         </div>
       </Col>
-      <Col lg={3} md={3}>
+      <Col lg={3} md={3} className='mt-1'>
         <div className='chart-box'>
           <h3>استخدام به تفکیک سهمیه</h3>
           <canvas ref={chartRef4}></canvas>
         </div>
       </Col>
-      <Col lg={3} md={3}>
+      <Col lg={3} md={3} className='mt-1'>
         <div className='chart-box'>
           <h3>آزمون‌های برگزار شده</h3>
           <canvas ref={chartRef3}></canvas>

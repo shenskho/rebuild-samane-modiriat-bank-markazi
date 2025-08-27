@@ -10,10 +10,10 @@ import auth from './slices/authentication'
 import addReport from './slices/Report'
 import controlPanel from './slices/controlPanel'
 import Category from './slices/Category'
+import License from './slices/license'
 
 import FixData from './slices/fixData'
 import variableData from './slices/variableData'
-
 const configs = {
   key: 'root',
   storage,
@@ -31,6 +31,7 @@ const appReducer = combineReducers({
   Category,
   FixData,
   variableData,
+  License
 })
 
 const rootReducer = (state, action) => {

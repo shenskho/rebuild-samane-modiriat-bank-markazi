@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { removeScoreRatio, GetScoreRatio } from '@store/slices/variableData'
+import { removeUniversity, GetUniversity } from '@store/slices/variableData'
 import { useDispatch } from 'react-redux'
 
 export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
@@ -12,21 +12,21 @@ export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
 
   const handeleDeleteRole = () => {
     dispatch(
-      removeScoreRatio({
+      removeUniversity({
         'id': item.id
       })
     ).then((response) => {
-      dispatch(GetScoreRatio())
+      dispatch(GetUniversity())
       toggle()
     })
   }
 
   return (
     <Modal size='lg' isOpen={IsDeleteModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>حذف نوع نسبت امتیاز</ModalHeader>
+      <ModalHeader toggle={toggle}>حذف دانشگاه</ModalHeader>
 
       <ModalBody>
-        <Label>{`آیا می خواهید نسبت امتیاز ${item.title} را حذف کنید؟`} </Label>
+        <Label>{`آیا می خواهید دانشگاه ${item.title} را حذف کنید؟`} </Label>
       </ModalBody>
 
       <ModalFooter>

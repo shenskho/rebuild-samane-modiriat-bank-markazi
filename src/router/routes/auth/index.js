@@ -21,8 +21,7 @@ const AuthenticationRoutes = [
       publicRoute: true,
       restricted: true
     }
-  },
-  
+  }
 
   
 ]

@@ -31,7 +31,7 @@ export default function index() {
     SetUserItem(data)
     SetIsDeleteModal(!IsDeleteModal)
   }
-  const rowsWithIndex = store.ExamAgency.items?.map((item, i) => ({
+  const rowsWithIndex = store.Job.items?.map((item, i) => ({
   ...item,
   index: i + 1 // ردیف از ۱ شروع بشه
 }))
@@ -39,7 +39,6 @@ export default function index() {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
       { dataField: 'title' , caption: 'عنوان ' },
-    
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -78,7 +77,7 @@ export default function index() {
         <p className='route-base-color'>
           <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
           <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/ExamAgency")}>مجری آزمون  </span>
+          <span className='route-caption' onClick={()=> navigate("/ExamAgency")}>مجری آزمون کتبی </span>
         </p>
       </Col>
 
@@ -89,7 +88,7 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader>
-                    <h4>نسبت امتیاز </h4>
+                    <h4>مجری آزمون کتبی </h4>
                   </CardHeader>
 
                   <CardBody>

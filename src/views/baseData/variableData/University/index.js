@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { getOrganizations } from '@store/slices/fixData'
+import { GetUniversity } from '@store/slices/variableData'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal'
@@ -10,9 +10,10 @@ import EditModal from './EditModal'
 import DeleteModal from './DeleteModal'
 import { Plus } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
+import { number } from 'prop-types'
 
 export default function index() {
-  const store = useSelector((state) => state.FixData)
+  const store = useSelector((state) => state.variableData)
   const navigate = useNavigate()
   console.log(store)
   const dispatch = useDispatch()
@@ -30,14 +31,14 @@ export default function index() {
     SetUserItem(data)
     SetIsDeleteModal(!IsDeleteModal)
   }
-  const rowsWithIndex = store.organizations.items?.map((item, i) => ({
-    ...item,
-    index: i + 1 // ردیف از ۱ شروع بشه
-  }))
+  const rowsWithIndex = store.University.items?.map((item, i) => ({
+  ...item,
+  index: i + 1 // ردیف از ۱ شروع بشه
+}))
   const dataGridData = {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
-      { dataField: 'title', caption: 'شرح ' },
+      { dataField: 'title' , caption: 'عنوان ' },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -68,24 +69,15 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(getOrganizations())
+    dispatch(GetUniversity())
   }, [])
   return (
-    
     <Row>
       <Col lg={12}>
         <p className='route-base-color'>
-          <span className='first-route-selected' onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-            خانه
-          </span>{' '}
-          / <span className='route-caption'>اطلاعات پایه</span> /{' '}
-          <span className='route-caption' onClick={() => navigate('/fixData')} style={{ cursor: 'pointer' }}>
-            اطلاعات ثابت
-          </span>{' '}
-          /{' '}
-          <span className='route-caption' onClick={() => navigate('/organization')} style={{ cursor: 'pointer' }}>
-            دستگاه اجرایی
-          </span>
+          <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
+          <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
+          <span className='route-caption' onClick={()=> navigate("/University")}>فهرست دانشگاه‌های کشور </span>
         </p>
       </Col>
 
@@ -96,7 +88,7 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader>
-                    <h4>دستگاه اجرایی</h4>
+                    <h4>فهرست دانشگاه‌های کشور </h4>
                   </CardHeader>
 
                   <CardBody>

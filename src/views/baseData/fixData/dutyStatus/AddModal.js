@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { tuple } from 'yup'
-import { CreateDutystatus,GetDutystatus } from '@store/slices/fixData'
+
+import { CreateDutystatus, GetDutystatus } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 export default function modal({ IsAddModal, SetIsAddModal }) {
   const [TitleName, SetTitleName] = useState('')
   const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
-  const toggle = (row) => {
+  const toggle = () => {
     SetIsAddModal(!IsAddModal)
   }
   const CheskInput = (e) => {
@@ -23,10 +23,10 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
     if (TitleName !== '') {
       dispatch(
         CreateDutystatus({
-          'title': TitleName
+          title: TitleName
         })
-      ).then((response) => {
-         dispatch(GetDutystatus())
+      ).then(() => {
+        dispatch(GetDutystatus())
         toggle()
       })
     } else {

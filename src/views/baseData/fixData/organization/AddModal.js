@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { tuple } from 'yup'
+
 import { createOrganizations, getOrganizations } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 export default function modal({ IsAddModal, SetIsAddModal }) {
   const [TitleName, SetTitleName] = useState('')
   const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
-  const toggle = (row) => {
+  const toggle = () => {
     SetIsAddModal(!IsAddModal)
   }
   const CheskInput = (e) => {
@@ -23,10 +23,10 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
     if (TitleName !== '') {
       dispatch(
         createOrganizations({
-          'title': TitleName,
-          'logoImageId': '13f81fec-7b13-4bb0-e943-08dde0a8e675'
+          title: TitleName,
+          logoImageId: '13f81fec-7b13-4bb0-e943-08dde0a8e675'
         })
-      ).then((response) => {
+      ).then(() => {
         dispatch(getOrganizations())
         toggle()
       })
