@@ -1,6 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { variableData as apis } from '@api'
+import { getProvince } from '@api/variableData'
+import { getEducationLevel } from '@api/variableData'
+/////////////////ExternalImport////////////////////
+
+export const Getactivity = createAsyncThunk('variableData/getactivity', async () => {
+  const response = await apis.getactivity()
+  return response.data.result
+})
+export const GetProvince = createAsyncThunk('variableData/getProvince', async () => {
+  const response = await apis.getProvince()
+  return response.data.result
+})
+export const GetEducationLevel = createAsyncThunk('variableData/getEducationLevel', async () => {
+  const response = await apis.getEducationLevel()
+  return response.data.result
+})
+
+
 /////////////////////ScoreRatio/////////////////////
 export const GetScoreRatio = createAsyncThunk('variableData/getScoreRatio', async () => {
   const response = await apis.getScoreRatio()
@@ -23,7 +41,7 @@ export const GetExamAgency = createAsyncThunk('variableData/getExamAgency', asyn
   const response = await apis.getExamAgency()
   return response.data.result
 })
-export const CreateExamAgency= createAsyncThunk('variableData/createExamAgency', async (param) => {
+export const CreateExamAgency = createAsyncThunk('variableData/createExamAgency', async (param) => {
   const response = await apis.createExamAgency(param)
   return response.data.result
 })
@@ -36,28 +54,40 @@ export const updateExamAgency = createAsyncThunk('variableData/updateExamAgency'
   return response.data.result
 })
 ///////////ComplementEvaluationAgency///////////
-export const GetComplementEvaluationAgency = createAsyncThunk('variableData/getComplementEvaluationAgency', async () => {
-  const response = await apis.getComplementEvaluationAgency()
-  return response.data.result
-})
-export const CreateComplementEvaluationAgency= createAsyncThunk('variableData/createComplementEvaluationAgency', async (param) => {
-  const response = await apis.createComplementEvaluationAgency(param)
-  return response.data.result
-})
-export const removeComplementEvaluationAgency = createAsyncThunk('variableData/deleteComplementEvaluationAgency', async (param) => {
-  const response = await apis.removeComplementEvaluationAgency(param)
-  return response.data.result
-})
-export const updateComplementEvaluationAgency = createAsyncThunk('variableData/updateComplementEvaluationAgency', async (param) => {
-  const response = await apis.updateComplementEvaluationAgency(param)
-  return response.data.result
-})
+export const GetComplementEvaluationAgency = createAsyncThunk(
+  'variableData/getComplementEvaluationAgency',
+  async () => {
+    const response = await apis.getComplementEvaluationAgency()
+    return response.data.result
+  }
+)
+export const CreateComplementEvaluationAgency = createAsyncThunk(
+  'variableData/createComplementEvaluationAgency',
+  async (param) => {
+    const response = await apis.createComplementEvaluationAgency(param)
+    return response.data.result
+  }
+)
+export const removeComplementEvaluationAgency = createAsyncThunk(
+  'variableData/deleteComplementEvaluationAgency',
+  async (param) => {
+    const response = await apis.removeComplementEvaluationAgency(param)
+    return response.data.result
+  }
+)
+export const updateComplementEvaluationAgency = createAsyncThunk(
+  'variableData/updateComplementEvaluationAgency',
+  async (param) => {
+    const response = await apis.updateComplementEvaluationAgency(param)
+    return response.data.result
+  }
+)
 ////////////////////EducationField////
 export const GetEducationField = createAsyncThunk('variableData/getEducationField', async () => {
   const response = await apis.getEducationField()
   return response.data.result
 })
-export const CreateEducationField= createAsyncThunk('variableData/createEducationField', async (param) => {
+export const CreateEducationField = createAsyncThunk('variableData/createEducationField', async (param) => {
   const response = await apis.createEducationField(param)
   return response.data.result
 })
@@ -74,7 +104,7 @@ export const GetJob = createAsyncThunk('variableData/getJob', async () => {
   const response = await apis.getJob()
   return response.data.result
 })
-export const CreateJob= createAsyncThunk('variableData/createJob', async (param) => {
+export const CreateJob = createAsyncThunk('variableData/createJob', async (param) => {
   const response = await apis.createJob(param)
   return response.data.result
 })
@@ -91,7 +121,7 @@ export const GetSelectionState = createAsyncThunk('variableData/getSelectionStat
   const response = await apis.getSelectionState()
   return response.data.result
 })
-export const CreateSelectionState= createAsyncThunk('variableData/createSelectionState', async (param) => {
+export const CreateSelectionState = createAsyncThunk('variableData/createSelectionState', async (param) => {
   const response = await apis.createSelectionState(param)
   return response.data.result
 })
@@ -108,7 +138,7 @@ export const GetAgencyCategory = createAsyncThunk('variableData/getAgencyCategor
   const response = await apis.getAgencyCategory()
   return response.data.result
 })
-export const CreateAgencyCategory= createAsyncThunk('variableData/createAgencyCategory', async (param) => {
+export const CreateAgencyCategory = createAsyncThunk('variableData/createAgencyCategory', async (param) => {
   const response = await apis.createAgencyCategory(param)
   return response.data.result
 })
@@ -125,7 +155,7 @@ export const GetUniversity = createAsyncThunk('variableData/getUniversity', asyn
   const response = await apis.getUniversity()
   return response.data.result
 })
-export const CreateUniversity= createAsyncThunk('variableData/createUniversity', async (param) => {
+export const CreateUniversity = createAsyncThunk('variableData/createUniversity', async (param) => {
   const response = await apis.createUniversity(param)
   return response.data.result
 })
@@ -138,60 +168,58 @@ export const updateUniversity = createAsyncThunk('variableData/updateUniversity'
   return response.data.result
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const addReport = createSlice({
   name: 'variableData',
   initialState: {
-    ScoreRatio:[],
-    ExamAgency:[],
-    ComplementEvaluationAgency:[],
-    EducationField:[],
-    Job:[],
-    SelectionState:[],
-    AgencyCategory:[],
-    University:[],
+    ScoreRatio: [],
+    ExamAgency: [],
+    ComplementEvaluationAgency: [],
+    EducationField: [],
+    Job: [],
+    SelectionState: [],
+    AgencyCategory: [],
+    University: [],
+    provinces: [],
+    activitys: [],
+    EducationLevel:[]
   },
   reducers: {},
   extraReducers: (builder) => {
-      builder.addCase(GetUniversity.fulfilled, (state, action) => {
-      state.University = action.payload
-    })
-     builder.addCase(GetAgencyCategory.fulfilled, (state, action) => {
-      state.AgencyCategory = action.payload
-    })
-    builder.addCase(GetSelectionState.fulfilled, (state, action) => {
-      state.SelectionState = action.payload
-    })
-    builder.addCase(GetScoreRatio.fulfilled, (state, action) => {
-      state.ScoreRatio = action.payload
-    })
-    builder.addCase(GetExamAgency.fulfilled, (state, action) => {
-      state.ExamAgency = action.payload
-    })
-    builder.addCase(GetComplementEvaluationAgency.fulfilled, (state, action) => {
-      state.ComplementEvaluationAgency = action.payload
-    })
-      builder.addCase(GetEducationField.fulfilled, (state, action) => {
-      state.EducationField = action.payload
-    })
-      builder.addCase(GetJob.fulfilled, (state, action) => {
-      state.Job = action.payload
-    })
-   
-  },
+    builder
+      .addCase(GetUniversity.fulfilled, (state, action) => {
+        state.University = action.payload
+      })
+      .addCase(GetAgencyCategory.fulfilled, (state, action) => {
+        state.AgencyCategory = action.payload
+      })
+      .addCase(GetSelectionState.fulfilled, (state, action) => {
+        state.SelectionState = action.payload
+      })
+      .addCase(GetScoreRatio.fulfilled, (state, action) => {
+        state.ScoreRatio = action.payload
+      })
+      .addCase(GetExamAgency.fulfilled, (state, action) => {
+        state.ExamAgency = action.payload
+      })
+      .addCase(GetComplementEvaluationAgency.fulfilled, (state, action) => {
+        state.ComplementEvaluationAgency = action.payload
+      })
+      .addCase(GetEducationField.fulfilled, (state, action) => {
+        state.EducationField = action.payload
+      })
+      .addCase(GetJob.fulfilled, (state, action) => {
+        state.Job = action.payload
+      })
+       .addCase(GetProvince.fulfilled, (state, action) => {
+        state.provinces = action.payload
+      })
+       .addCase(Getactivity.fulfilled, (state, action) => {
+        state.activitys = action.payload
+      })  .addCase(GetEducationLevel.fulfilled, (state, action) => {
+        state.EducationLevel = action.payload
+      })
+  }
+  
 })
-
 
 export default addReport.reducer

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { title } from 'process'
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const [titleName, setTitleName] = useState('')
+   const [University, setUniverity] = useState('')
   const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
 
@@ -20,6 +21,15 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
     } else {
       SetInvalid(false)
       setTitleName(e.target.value)
+    }
+  }
+    const CheckUniversity = (e)=>{
+      if (e.target.value.trim() === '') {
+      SetInvalid(true)
+      setUniverity('')
+    } else {
+      SetInvalid(false)
+      setUniverity(e.target.value)
     }
   }
 
@@ -50,6 +60,10 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
       <ModalBody>
         <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
         <Input value={titleName} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheskInput(e)} />
+      </ModalBody>
+         <ModalBody>
+        <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
+        <Input value={University} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheckUniversity(e)} />
       </ModalBody>
 
       <ModalFooter>

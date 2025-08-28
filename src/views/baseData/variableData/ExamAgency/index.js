@@ -31,14 +31,18 @@ export default function index() {
     SetUserItem(data)
     SetIsDeleteModal(!IsDeleteModal)
   }
-  const rowsWithIndex = store.Job.items?.map((item, i) => ({
+  const rowsWithIndex = store.ExamAgency.items?.map((item, i) => ({
   ...item,
   index: i + 1 // ردیف از ۱ شروع بشه
 }))
   const dataGridData = {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
+      //  { dataField: 'licenseImageId' , caption: 'وضعیت ' },
       { dataField: 'title' , caption: 'عنوان ' },
+      { dataField: 'licenseExpireDateShamsi' , caption: 'تاریخ اعتبار مجوز ' },
+      { dataField: 'isEnabled' , caption: 'وضعیت ' },
+    
       {
         caption: 'عملیات ',
         type: 'buttons',

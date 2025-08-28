@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { CreateScoreRatio, GetScoreRatio } from '@store/slices/variableData'
+import { CreateAgencyCategory, GetAgencyCategory } from '@store/slices/variableData'
 import { useDispatch } from 'react-redux'
 import { number } from 'prop-types'
 export default function modal({ IsAddModal, SetIsAddModal }) {
@@ -29,12 +29,12 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
   const AddCategory = () => {
     if (TitleName !== '') {
       dispatch(
-        CreateScoreRatio({
+        CreateAgencyCategory({
           'title': TitleName,
        
         })
       ).then((response) => {
-        dispatch(GetScoreRatio())
+        dispatch(GetAgencyCategory())
         toggle()
       })
     } else {
@@ -44,11 +44,11 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>اضافه نسبت امتیاز</ModalHeader>
+      <ModalHeader toggle={toggle}>اضافه رسته عوامل مجری</ModalHeader>
 
       <ModalBody>
-        <Label>نسبت امتیاز</Label>
-        <Input invalid={Invalid} placeholder=' عنوان' onChange={(e) => CheskInput(e)} />
+        <Label>رسته عوامل مجری</Label>
+        <Input invalid={Invalid} placeholder=' رسته عوامل مجری' onChange={(e) => CheskInput(e)} />
       </ModalBody>
    
 

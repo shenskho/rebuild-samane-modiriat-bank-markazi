@@ -1,5 +1,20 @@
 import axios from '@configs/axios'
 import urls from './urls'
+
+////////////////////////ExternalImports////////////
+export async function getProvince() {
+  return await axios.get(urls.Province.getProvince)
+}
+
+export async function getactivity() {
+  return await axios.get(urls.activity.getactivity)
+}
+export async function getEducationLevel() {
+  return await axios.get(urls.EducationLevel.getEducationLevel)
+}
+
+
+
 /////////////////////ScoreRatio/////////////////////
 export async function getScoreRatio() {
   return await axios.get(urls.ScoreRatio.getScoreRatio)

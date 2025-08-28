@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetEducationField } from '@store/slices/variableData'
+import { GetEducationField, GetEducationLevel } from '@store/slices/variableData'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal'
@@ -39,6 +39,7 @@ export default function index() {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
       { dataField: 'title' , caption: 'عنوان ' },
+      { dataField: 'educationLevel.title' , caption: 'مقطع تحصیلی ' },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -69,8 +70,9 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetEducationField())
+    dispatch(GetEducationField()).then(()=> dispatch(GetEducationLevel()))
   }, [])
+  
   return (
     <Row>
       <Col lg={12}>

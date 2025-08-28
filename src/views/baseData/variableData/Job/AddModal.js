@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { CreateScoreRatio, GetScoreRatio } from '@store/slices/variableData'
+import { CreateJob, GetJob } from '@store/slices/variableData'
 import { useDispatch } from 'react-redux'
 import { number } from 'prop-types'
 export default function modal({ IsAddModal, SetIsAddModal }) {
@@ -16,13 +16,9 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
     if (e.target.value.trim() === '') {
       SetInvalid(true)
       SetTitleName('')
-
-      SetComplementEvaluationRatio('')
     } else {
       SetInvalid(false)
       SetTitleName(e.target.value)
-
-      SetComplementEvaluationRatio(e.target.value)
     }
   }
 
@@ -44,10 +40,10 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>اضافه نسبت امتیاز</ModalHeader>
+      <ModalHeader toggle={toggle}>اضافه کردن شغل</ModalHeader>
 
       <ModalBody>
-        <Label>نسبت امتیاز</Label>
+        <Label>شغل</Label>
         <Input invalid={Invalid} placeholder=' عنوان' onChange={(e) => CheskInput(e)} />
       </ModalBody>
    

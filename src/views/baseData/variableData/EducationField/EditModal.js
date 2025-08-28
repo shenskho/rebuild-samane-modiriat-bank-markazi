@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { updateScoreRatio, GetScoreRatio } from '@store/slices/variableData'
+import { updateEducationField, GetEducationField,GetEducationLevel } from '@store/slices/variableData'
 import { useDispatch } from 'react-redux'
-import { title } from 'process'
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
-  const [titleName, setTitleName] = useState('')
+  const [AccessName, SetAccessName] = useState('')
   const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
 
@@ -16,22 +15,22 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const CheskInput = (e) => {
     if (e.target.value.trim() === '') {
       SetInvalid(true)
-      setTitleName('')
+      SetAccessName('')
     } else {
       SetInvalid(false)
-      setTitleName(e.target.value)
+      SetAccessName(e.target.value)
     }
   }
 
   const AddCategory = () => {
-    if (titleName !== '') {
+    if (AccessName !== '') {
       dispatch(
-        updateScoreRatio({
-          'id': item.id,
-          'title': titleName
+        updateEducationField({
+          'oldRoleName': item.title,
+          'newRoleName': AccessName
         })
       ).then((response) => {
-        dispatch(GetScoreRatio())
+        dispatch(GetEducationField())
         toggle()
       })
     } else {
@@ -40,16 +39,16 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   }
 
   useEffect(() => {
-    setTitleName(item.title)
+    SetAccessName(item.title)
   }, [item.title])
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر نوع دانشگاه</ModalHeader>
+      <ModalHeader toggle={toggle}>تغییر گروه دسترسی</ModalHeader>
 
       <ModalBody>
-        <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
-        <Input value={titleName} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheskInput(e)} />
+        <Label>عنوان جدید گروه دسترسی را وارد کنید</Label>
+        <Input value={AccessName} invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 
       <ModalFooter>

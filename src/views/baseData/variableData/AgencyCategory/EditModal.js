@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
 import { tuple } from 'yup'
-import { updateScoreRatio, GetScoreRatio } from '@store/slices/variableData'
+import { updateAgencyCategory, GetAgencyCategory } from '@store/slices/variableData'
 import { useDispatch } from 'react-redux'
 import { title } from 'process'
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
@@ -26,12 +26,12 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const AddCategory = () => {
     if (titleName !== '') {
       dispatch(
-        updateScoreRatio({
+        updateAgencyCategory({
           'id': item.id,
           'title': titleName
         })
       ).then((response) => {
-        dispatch(GetScoreRatio())
+        dispatch(GetAgencyCategory())
         toggle()
       })
     } else {
@@ -45,11 +45,11 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر نوع دانشگاه</ModalHeader>
+      <ModalHeader toggle={toggle}>تغییر نوع رسته عوامل مجری</ModalHeader>
 
       <ModalBody>
-        <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
-        <Input value={titleName} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheskInput(e)} />
+        <Label>نوع رسته عوامل مجری جدید خود را وارد کنید</Label>
+        <Input value={titleName} invalid={Invalid} placeholder=' نوع رسته عوامل مجری' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 
       <ModalFooter>

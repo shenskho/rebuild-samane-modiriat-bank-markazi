@@ -39,6 +39,7 @@ export default function index() {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
       { dataField: 'title' , caption: 'عنوان ' },
+      { dataField: 'universityType' , caption: 'نوع ' },
       {
         caption: 'عملیات ',
         type: 'buttons',

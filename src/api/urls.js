@@ -9,7 +9,9 @@ export default {
     signUp: `${PREFIX}/Authentication/sign-up`,
     signInWithsso: `${PREFIX}/Authentication/sign-in-with-sso`
   },
-  
+  activity:{
+   getactivity: `${PREFIX}/ActivityScope/get-all-activity-scopes` 
+  },
   file: {
     uploadFile: `${PREFIX}/File/upload-base64-doc`,
     readFile: `${PREFIX}/File/get-base64-doc?`
@@ -40,7 +42,7 @@ export default {
     removeQuota: `${PREFIX}/Quota/delete-quota`
   },
   EducationLevel: {
-    getEducationLevel: `${PREFIX}/EducationLevel/get-all-employment-types`,
+    getEducationLevel: `${PREFIX}/EducationLevel/get-all-education-levels`,
     createEducationLevel: `${PREFIX}/EducationLevel/create-employment-type`,
     updateEducationLevel: `${PREFIX}/EducationLevel/update-employment-type`,
     removeEducationLevel: `${PREFIX}/EducationLevel/delete-employment-type`

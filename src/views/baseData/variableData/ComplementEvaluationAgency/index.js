@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetComplementEvaluationAgency } from '@store/slices/variableData'
+import { GetComplementEvaluationAgency, GetProvince,Getactivity } from '@store/slices/variableData'
 import { useDispatch, useSelector } from 'react-redux'
 
-import AddModal from './AddModal'
+import AddModal from './AddModal2'
 import EditModal from './EditModal'
 import DeleteModal from './DeleteModal'
 import { Plus } from 'react-feather'
@@ -39,6 +39,12 @@ export default function index() {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
       { dataField: 'title' , caption: 'عنوان ' },
+      { dataField: 'licenseExpireDateShamsi' , caption: 'تاریخ اعتبار مجوز ' },
+      { dataField: 'activityScopeTitle' , caption: 'گستره فعالیت ' },
+      { dataField: 'provinceTitle' , caption: 'استان ' },
+      { dataField: 'mangerFullname' , caption: 'نام مدیرعامل ' },
+      { dataField: 'mobile' , caption: 'شماره همراه ' },
+      { dataField: 'isEnabled' , caption: 'وضعیت ' },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -69,7 +75,9 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetComplementEvaluationAgency())
+    dispatch(GetComplementEvaluationAgency()).then(() => {
+      dispatch(GetProvince()).then(()=> dispatch(Getactivity()))
+    })
   }, [])
   return (
     <Row>
