@@ -1,65 +1,123 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { tuple } from 'yup'
-import { updateEducationField, GetEducationField,GetEducationLevel } from '@store/slices/variableData'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { Button, Modal, ModalHeader, ModalBody, Input, Label, FormGroup, Form, Row, Col, FormFeedback } from 'reactstrap'
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateEducationField, GetEducationField, GetEducationLevel } from '@store/slices/variableData'
+import Select from 'react-select'
+
+const schema = yup.object({
+  educationLevelId: yup.string().required('انتخاب مقطع الزامی است'),
+  title: yup.string().required('عنوان الزامی است'),
+})
+
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
-  const [AccessName, SetAccessName] = useState('')
-  const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
+  const store = useSelector((state) => state.variableData)
 
-  const toggle = (row) => {
-    SetIsEditModal(!IsEditModal)
-  }
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isValid }
+  } = useForm({
+    mode: 'all',
+    resolver: yupResolver(schema)
+  })
 
-  const CheskInput = (e) => {
-    if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      SetAccessName('')
-    } else {
-      SetInvalid(false)
-      SetAccessName(e.target.value)
-    }
-  }
+  const toggle = () => SetIsEditModal(!IsEditModal)
 
-  const AddCategory = () => {
-    if (AccessName !== '') {
-      dispatch(
-        updateEducationField({
-          'oldRoleName': item.title,
-          'newRoleName': AccessName
-        })
-      ).then((response) => {
-        dispatch(GetEducationField())
-        toggle()
-      })
-    } else {
-      SetInvalid(true)
-    }
-  }
+  const onSubmit = (data) => {
+  console.log('editData', data)
+
+  dispatch(
+    updateEducationField({
+      id: item.id,
+      title: data.title,                 // مقدار جدید از فرم
+      educationLevelId: Number(data.educationLevelId) // حتما عدد باشد
+    })
+  ).then(() => {
+    dispatch(GetEducationField())
+    dispatch(GetEducationLevel())
+    reset()
+    toggle()
+  })
+}
+
+
 
   useEffect(() => {
-    SetAccessName(item.title)
-  }, [item.title])
+    if (item) {
+      setValue('title', item.title || '')
+      setValue('educationLevelId', item.educationLevelId || '')
+     
+    }
+  }, [item, setValue])
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر گروه دسترسی</ModalHeader>
-
+      <ModalHeader toggle={toggle}>تغییر نوع شغل</ModalHeader>
       <ModalBody>
-        <Label>عنوان جدید گروه دسترسی را وارد کنید</Label>
-        <Input value={AccessName} invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Row>
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='title'>
+                  عنوان<span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='title'
+                  control={control}
+                  render={({ field }) => <Input id='title' invalid={!!errors.title} {...field} />}
+                />
+                {errors.title && <FormFeedback>{errors.title.message}</FormFeedback>}
+              </div>
+            </Col>
+
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='educationLevelId'>
+                  مقطع <span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='educationLevelId'
+                  control={control}
+                  render={({ field }) => {
+                    const options =
+                      store.EducationLevel?.items?.map((org) => ({
+                        value: org.id,
+                        label: org.title
+                      })) || []
+
+                    return (
+                      <Select
+                        id='educationLevelId'
+                        placeholder='انتخاب مقطع'
+                        options={options}
+                        value={options.find((o) => o.value === field.value) || null}
+                        onChange={(selected) => field.onChange(selected?.value || '')}
+                        className={errors.educationLevelId ? 'is-invalid' : ''}
+                      />
+                    )
+                  }}
+                />
+                {errors.educationLevelId && <FormFeedback className='d-block'>{errors.educationLevelId.message}</FormFeedback>}
+              </div>
+            </Col>
+
+           
+
+            {/* دکمه ثبت */}
+            <Col lg={12}>
+              <Button color='primary' type='submit' block disabled={!isValid}>
+                ثبت
+              </Button>
+            </Col>
+          </Row>
+        </Form>
       </ModalBody>
-
-      <ModalFooter>
-        <Button color='danger' onClick={toggle}>
-          بستن
-        </Button>
-
-        <Button color='primary' onClick={AddCategory}>
-          ثبت
-        </Button>
-      </ModalFooter>
     </Modal>
   )
 }

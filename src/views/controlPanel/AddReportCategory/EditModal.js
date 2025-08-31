@@ -25,7 +25,9 @@ export default function modal({ IsEditModal, SetIsEditModal, treeNode }) {
         UpdateCategory({
           "id": treeNode.id,
           "title": CategoryName,
-          "parentId": treeNode.parentId
+          "parentId": treeNode.parentId,
+          "isPublic": true,
+          "organizationId": 0
         })
       ).then((response) => {
         dispatch(GetAllCategory())

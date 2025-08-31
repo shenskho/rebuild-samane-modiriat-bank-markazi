@@ -1,61 +1,150 @@
-import React, { useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { tuple } from 'yup'
-import { CreateJob, GetJob } from '@store/slices/variableData'
-import { useDispatch } from 'react-redux'
-import { number } from 'prop-types'
-export default function modal({ IsAddModal, SetIsAddModal }) {
-  const [TitleName, SetTitleName] = useState('')
+import React from 'react'
+import { Button, FormFeedback, Form, Row, Col, Modal, ModalHeader, ModalBody, Input, Label } from 'reactstrap'
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { CreateJob,GetJob } from '@store/slices/variableData'
+
+import DatePicker from 'react-multi-date-picker'
+import persian from 'react-date-object/calendars/persian'
+import persian_fa from 'react-date-object/locales/persian_fa'
+import gregorian from 'react-date-object/calendars/gregorian'
+import { Image } from 'react-feather'
+import Select from 'react-select'
+import DateObject from 'react-date-object'
+
+const schema = yup.object({
+  organizationId: yup.string().required('انتخاب استان الزامی است'),
+  title: yup.string().required('شماره عنوان الزامی است'),
  
-  const [Invalid, SetInvalid] = useState(false)
+})
+export default function LicenseModal({ IsAddModal, SetIsAddModal }) {
   const dispatch = useDispatch()
-  const toggle = (row) => {
-    SetIsAddModal(!IsAddModal)
+  const store = useSelector((state) => state.variableData)
+  console.log("store",store)
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isValid }
+  } = useForm({
+    mode: 'all',
+    resolver: yupResolver(schema)
+  })
+
+  const toggle = () => SetIsAddModal(!IsAddModal)
+
+  // نمایش شمسی از میلادی ذخیره‌شده
+  // const toPersianDisplay = (iso) => {
+  //   if (!iso) return null
+  //   return new DateObject({ date: iso, format: "YYYY-MM-DD", calendar: gregorian }).convert(persian)
+  // }
+  const faNumToEn = (faNum) => {
+    if (!faNum) return ''
+    return faNum.replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
   }
-  const CheskInput = (e) => {
-    if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      SetTitleName('')
-    } else {
-      SetInvalid(false)
-      SetTitleName(e.target.value)
-    }
+  // // ذخیره میلادی به YYYY-MM-DD
+  const toIsoYMD = (shamsiDate) => {
+    if (!shamsiDate) return null
+
+    // تبدیل اعداد فارسی به انگلیسی
+    const enDate = faNumToEn(shamsiDate)
+
+    return new DateObject({
+      date: enDate,
+      format: 'YYYY/MM/DD',
+      calendar: persian
+    })
+      .convert(gregorian)
+      .format('YYYY-MM-DD')
   }
 
-  const AddCategory = () => {
-    if (TitleName !== '') {
-      dispatch(
-        CreateScoreRatio({
-          'title': TitleName,
-       
-        })
-      ).then((response) => {
-        dispatch(GetScoreRatio())
-        toggle()
-      })
-    } else {
-      SetInvalid(true)
+  const onSubmit = (data) => {
+    console.log('licenseData (miladi)', data)
+    // 🔹 تاریخ‌ها رو به میلادی تبدیل کن
+    const payload = {
+      ...data,
+      licenseExpireDate: toIsoYMD(data.licenseExpireDate)
     }
+
+    console.log('licenseData (miladi)', payload)
+
+    dispatch(CreateJob(payload)).then(() => {
+      dispatch(GetJob()).then(() => {
+        reset() // ← این فرم رو پاک می‌کنه
+        toggle() // بس
+      })
+    })
   }
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>اضافه کردن شغل</ModalHeader>
-
+      <ModalHeader toggle={toggle}> اضافه کردن شغل</ModalHeader>
       <ModalBody>
-        <Label>شغل</Label>
-        <Input invalid={Invalid} placeholder=' عنوان' onChange={(e) => CheskInput(e)} />
-      </ModalBody>
-   
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Row>
 
-      <ModalFooter>
-        <Button color='danger' onClick={toggle}>
-          بستن
-        </Button>
-        <Button color='primary' onClick={AddCategory}>
-          ثبت
-        </Button>
-      </ModalFooter>
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='title'>
+                  عنوان<span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='title'
+                  control={control}
+                  render={({ field }) => <Input id='title' invalid={!!errors.title} {...field} />}
+                />
+                {errors.title && <FormFeedback>{errors.title.message}</FormFeedback>}
+              </div>
+            </Col>
+
+          
+
+           
+
+          
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='organizationId'>
+                  دستگاه <span className='text-danger'>*</span>
+                </Label>
+
+                <Controller
+                  name='organizationId'
+                  control={control}
+                  render={({ field }) => {
+                    const options =
+                      store.Organization?.items?.map((org) => ({
+                        value: org.id,
+                        label: org.title
+                      })) || []
+
+                    return (
+                      <Select
+                        id='organizationId'
+                        placeholder='انتخاب دستگاه'
+                        options={options}
+                        value={options.find((o) => o.value === field.value) || null}
+                        onChange={(selected) => field.onChange(selected?.value || '')}
+                        className={errors.Organization ? 'is-invalid' : ''}
+                      />
+                    )
+                  }}
+                />
+                {errors.Organization && <FormFeedback className='d-block'>{errors.Organization.message}</FormFeedback>}
+              </div>
+            </Col>
+            {/* دکمه ثبت */}
+            <Col lg={12}>
+              <Button color='primary' type='submit' block disabled={!isValid}>
+                ثبت
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </ModalBody>
     </Modal>
   )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetUniversity } from '@store/slices/variableData'
+import { GetUniversity,GetUniversityType  } from '@store/slices/variableData'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal'
@@ -39,7 +39,7 @@ export default function index() {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
       { dataField: 'title' , caption: 'عنوان ' },
-      { dataField: 'universityType' , caption: 'نوع ' },
+      { dataField: 'universityType' , caption: 'مقطع تحصیلی ' },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -70,15 +70,16 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetUniversity())
+    dispatch(GetUniversity()).then(()=> dispatch(GetUniversityType()))
   }, [])
+  
   return (
     <Row>
       <Col lg={12}>
         <p className='route-base-color'>
           <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
           <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/University")}>فهرست دانشگاه‌های کشور </span>
+          <span className='route-caption' onClick={()=> navigate("/universityType")}>رشته تحصیلی </span>
         </p>
       </Col>
 
@@ -89,7 +90,7 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader>
-                    <h4>فهرست دانشگاه‌های کشور </h4>
+                    <h4>رشته تحصیلی </h4>
                   </CardHeader>
 
                   <CardBody>

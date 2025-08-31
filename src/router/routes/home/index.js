@@ -7,7 +7,7 @@ const VariableData = lazy(() => import('@views/baseData/variableData'))
 const FixData = lazy(() => import('@views/baseData/fixData'))
 
 const DutyStatus = lazy(() => import('@views/baseData/fixData/dutyStatus'))
-const Organization = lazy (()=> import('@views/baseData/fixData/organization'))
+const Organization = lazy (()=> import('@views/baseData/fixData/Organization'))
 const Province = lazy(()=> import("@views/baseData/fixData/Province"))
 const EducationLevel = lazy(()=> import("@views/baseData/fixData/EducationLevel"))
 const Quota = lazy(()=>import("@views/baseData/fixData/Quota"))
@@ -145,11 +145,11 @@ const AdminRoutes = [
   }
   ,
   {
-    path: '/organization',
+    path: '/Organization',
     element: <Organization />,
     meta: {
       action: 'read',
-      resource: '/organization'
+      resource: '/Organization'
     }
   }
     ,

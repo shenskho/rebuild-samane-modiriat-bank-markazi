@@ -83,7 +83,7 @@ export default function index() {
             اطلاعات ثابت
           </span>{' '}
           /{' '}
-          <span className='route-caption' onClick={() => navigate('/organization')} style={{ cursor: 'pointer' }}>
+          <span className='route-caption' onClick={() => navigate('/Organization')} style={{ cursor: 'pointer' }}>
             دستگاه اجرایی
           </span>
         </p>

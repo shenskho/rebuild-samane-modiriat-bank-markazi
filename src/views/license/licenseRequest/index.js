@@ -62,10 +62,10 @@ export default function index() {
                       <Col lg={3} md={3}>
                         <div className='d-flex align-items-center'>
                           <div className='w-100'>
-                            <Label for='organization-filter' className='text-bold font-color'>
+                            <Label for='Organization-filter' className='text-bold font-color'>
                               دستگاه
                             </Label>
-                            <Select id='organization-filter' placeholder='همه' options={[]} isClearable={true} />
+                            <Select id='Organization-filter' placeholder='همه' options={[]} isClearable={true} />
                           </div>
                           <FaFilter color='#04364a' size={24} className='mt-1 ml-1' />
                         </div>

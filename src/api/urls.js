@@ -72,11 +72,11 @@ export default {
     removeReligion: `${PREFIX}/Religion/delete-religion`
   },
 
-  organization: {
+  Organization: {
     getOrganizations: `${PREFIX}/Organization/get-all-organizations`,
-    createOrganizations: `${PREFIX}/Organization/create-organization`,
-    updateOrganizations: `${PREFIX}/Organization/update-organization`,
-    removeOrganizations: `${PREFIX}/Organization/delete-organization`
+    createOrganizations: `${PREFIX}/Organization/create-Organization`,
+    updateOrganizations: `${PREFIX}/Organization/update-Organization`,
+    removeOrganizations: `${PREFIX}/Organization/delete-Organization`
   },
   ///////////////////////////variableData//////////////////////////
   ScoreRatio: {

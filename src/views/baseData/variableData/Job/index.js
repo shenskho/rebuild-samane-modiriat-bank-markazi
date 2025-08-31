@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetJob } from '@store/slices/variableData'
+import { GetJob,GetOrganization  } from '@store/slices/variableData'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal'
@@ -69,8 +69,9 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetJob())
+    dispatch(GetJob()).then(()=> dispatch(GetOrganization()))
   }, [])
+  
   return (
     <Row>
       <Col lg={12}>

@@ -15,16 +15,16 @@ export async function removeDutystatus(param) {
 }
 /////////////////////Organizations/////////////////////
 export async function getOrganizations() {
-  return await axios.get(urls.organization.getOrganizations)
+  return await axios.get(urls.Organization.getOrganizations)
 }
 export async function createOrganizations(param) {
-  return await axios.post(urls.organization.createOrganizations, param)
+  return await axios.post(urls.Organization.createOrganizations, param)
 }
 export async function updateOrganizations(param) {
-  return await axios.post(urls.organization.updateOrganizations, param)
+  return await axios.post(urls.Organization.updateOrganizations, param)
 }
 export async function removeOrganizations(param) {
-  return await axios.post(urls.organization.removeOrganizations, param)
+  return await axios.post(urls.Organization.removeOrganizations, param)
 }
 /////////////////////Province/////////////////////
 export async function getProvince() {

@@ -12,6 +12,12 @@ export async function getactivity() {
 export async function getEducationLevel() {
   return await axios.get(urls.EducationLevel.getEducationLevel)
 }
+export async function getOrganization() {
+  return await axios.get(urls.Organization.getOrganizations)
+}
+export async function getUniversityType() {
+  return await axios.get(urls.UniversityType.getUniversityType)
+}
 
 
 

@@ -1,66 +1,141 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { tuple } from 'yup'
-import { updateJob, GetJob } from '@store/slices/variableData'
-import { useDispatch } from 'react-redux'
-import { title } from 'process'
+import React, { useEffect } from 'react'
+import { Button, Modal, ModalHeader, ModalBody, Input, Label, FormGroup, Form, Row, Col, FormFeedback } from 'reactstrap'
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateJob, GetJob, GetOrganization } from '@store/slices/variableData'
+import Select from 'react-select'
+
+const schema = yup.object({
+  organizationId: yup.string().required('انتخاب دستگاه الزامی است'),
+  title: yup.string().required('عنوان الزامی است'),
+})
+
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
-  const [titleName, setTitleName] = useState('')
-  const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
+  const store = useSelector((state) => state.variableData)
 
-  const toggle = (row) => {
-    SetIsEditModal(!IsEditModal)
-  }
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isValid }
+  } = useForm({
+    mode: 'all',
+    resolver: yupResolver(schema)
+  })
 
-  const CheskInput = (e) => {
-    if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      setTitleName('')
-    } else {
-      SetInvalid(false)
-      setTitleName(e.target.value)
-    }
-  }
+  const toggle = () => SetIsEditModal(!IsEditModal)
 
-  const AddCategory = () => {
-    if (titleName !== '') {
-      dispatch(
-        updateJob({
-          'id': item.id,
-          'title': titleName
-        })
-      ).then((response) => {
-        dispatch(GetJob())
-        toggle()
+  const onSubmit = (data) => {
+    console.log('editData', data)
+    
+    dispatch(
+      updateJob({
+        'id': item.id,
+        'title': data.title,
+        'organizationId': data.organizationId,
+        'status': data.status
       })
-    } else {
-      SetInvalid(true)
-    }
+    ).then(() => {
+      dispatch(GetJob())
+      dispatch(GetOrganization())
+      reset()
+      toggle()
+    })
   }
 
   useEffect(() => {
-    setTitleName(item.title)
-  }, [item.title])
+    if (item) {
+      setValue('title', item.title || '')
+      setValue('organizationId', item.organizationId || '')
+      setValue('status', item.status !== false)
+    }
+  }, [item, setValue])
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
       <ModalHeader toggle={toggle}>تغییر نوع شغل</ModalHeader>
-
       <ModalBody>
-        <Label>نوع شغل جدید خود را وارد کنید</Label>
-        <Input value={titleName} invalid={Invalid} placeholder=' نوع شغل' onChange={(e) => CheskInput(e)} />
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Row>
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='title'>
+                  عنوان<span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='title'
+                  control={control}
+                  render={({ field }) => <Input id='title' invalid={!!errors.title} {...field} />}
+                />
+                {errors.title && <FormFeedback>{errors.title.message}</FormFeedback>}
+              </div>
+            </Col>
+
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='organizationId'>
+                  دستگاه <span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='organizationId'
+                  control={control}
+                  render={({ field }) => {
+                    const options =
+                      store.Organization?.items?.map((org) => ({
+                        value: org.id,
+                        label: org.title
+                      })) || []
+
+                    return (
+                      <Select
+                        id='organizationId'
+                        placeholder='انتخاب دستگاه'
+                        options={options}
+                        value={options.find((o) => o.value === field.value) || null}
+                        onChange={(selected) => field.onChange(selected?.value || '')}
+                        className={errors.organizationId ? 'is-invalid' : ''}
+                      />
+                    )
+                  }}
+                />
+                {errors.organizationId && <FormFeedback className='d-block'>{errors.organizationId.message}</FormFeedback>}
+              </div>
+            </Col>
+
+            <Col lg={6}>
+              <div className='mb-1'>
+                <FormGroup check>
+                  <Controller
+                    name='status'
+                    control={control}
+                    render={({ field }) => (
+                      <Label check>
+                        <Input 
+                          type="checkbox" 
+                          checked={field.value}
+                          onChange={(e) => field.onChange(e.target.checked)}
+                        />
+                        {' '}فعال
+                      </Label>
+                    )}
+                  />
+                </FormGroup>
+              </div>
+            </Col>
+
+            {/* دکمه ثبت */}
+            <Col lg={12}>
+              <Button color='primary' type='submit' block disabled={!isValid}>
+                ثبت
+              </Button>
+            </Col>
+          </Row>
+        </Form>
       </ModalBody>
-
-      <ModalFooter>
-        <Button color='danger' onClick={toggle}>
-          بستن
-        </Button>
-
-        <Button color='primary' onClick={AddCategory}>
-          ثبت
-        </Button>
-      </ModalFooter>
     </Modal>
   )
 }

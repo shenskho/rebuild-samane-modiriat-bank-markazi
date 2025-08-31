@@ -25,7 +25,9 @@ export default function AddTreeNodeModal({ IsAddNodeModal, SetIsAddNodeModal,tre
       dispatch(
         CreateCategory({
           'title': CategoryName,
-          "parentId": treeNode.id
+          "parentId": treeNode.id,
+          'isPublic': true,
+          'organizationId': 0
         }),
      
       ).then((response) => {

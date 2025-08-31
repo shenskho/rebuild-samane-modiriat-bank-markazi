@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { variableData as apis } from '@api'
 import { getProvince } from '@api/variableData'
 import { getEducationLevel } from '@api/variableData'
+import { getOrganization } from '@api/variableData'
 /////////////////ExternalImport////////////////////
 
 export const Getactivity = createAsyncThunk('variableData/getactivity', async () => {
@@ -15,6 +16,14 @@ export const GetProvince = createAsyncThunk('variableData/getProvince', async ()
 })
 export const GetEducationLevel = createAsyncThunk('variableData/getEducationLevel', async () => {
   const response = await apis.getEducationLevel()
+  return response.data.result
+})
+export const GetOrganization = createAsyncThunk('variableData/getOrganization', async () => {
+  const response = await apis.getOrganization()
+  return response.data.result
+})
+export const GetUniversityType = createAsyncThunk('variableData/getUniversityType', async () => {
+  const response = await apis.getUniversityType()
   return response.data.result
 })
 
@@ -181,11 +190,19 @@ export const addReport = createSlice({
     University: [],
     provinces: [],
     activitys: [],
-    EducationLevel:[]
+    EducationLevel:[],
+    Organization:[],
+    UniversityType:[],
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(GetUniversityType.fulfilled, (state, action) => {
+        state.UniversityType = action.payload
+      })
+      .addCase(GetOrganization.fulfilled, (state, action) => {
+        state.Organization = action.payload
+      })
       .addCase(GetUniversity.fulfilled, (state, action) => {
         state.University = action.payload
       })

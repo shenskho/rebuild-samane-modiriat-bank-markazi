@@ -45,7 +45,7 @@ export default function index() {
 
   const categoryItems = [
     { title: 'وضعیت نظام وظیفه', icon: <FaUserShield size={40} color='#04364a' />, link: '/dutyStatus' },
-    { title: 'دستگاه اجرایی', icon: <FaBuilding size={40} color='#04364a' />, link: '/organization' },
+    { title: 'دستگاه اجرایی', icon: <FaBuilding size={40} color='#04364a' />, link: '/Organization' },
     { title: 'مکان جغرافیایی', icon: <FaMapMarkerAlt size={40} color='#04364a' />, link: '/Province' },
     { title: 'مقطع تحصیلی', icon: <FaGraduationCap size={40} color='#04364a' />, link: '/EducationLevel' },
     { title: 'سهمیه', icon: <FaFilter size={40} color='#04364a' />, link: '/Quota' },
