@@ -18,6 +18,10 @@ export const GetEducationLevel = createAsyncThunk('variableData/getEducationLeve
   const response = await apis.getEducationLevel()
   return response.data.result
 })
+export const updateEducationLevel = createAsyncThunk('variableData/updateEducationLevel', async (param) => {
+  const response = await apis.updateEducationLevel(param)
+  return response.data.result
+})
 export const GetOrganization = createAsyncThunk('variableData/getOrganization', async () => {
   const response = await apis.getOrganization()
   return response.data.result

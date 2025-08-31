@@ -12,6 +12,17 @@ export async function getactivity() {
 export async function getEducationLevel() {
   return await axios.get(urls.EducationLevel.getEducationLevel)
 }
+export async function createEducationLevel(param) {
+  return await axios.post(urls.EducationLevel.createEducationLevel, param)
+}
+export async function updateEducationLevel(param) {
+  return await axios.post(urls.EducationLevel.updateEducationLevel, param)
+}
+export async function removeEducationLevel(param) {
+  return await axios.post(urls.EducationLevel.removeEducationLevel, param)
+}
+
+
 export async function getOrganization() {
   return await axios.get(urls.Organization.getOrganizations)
 }

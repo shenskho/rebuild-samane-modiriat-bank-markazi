@@ -43,9 +43,9 @@ export default {
   },
   EducationLevel: {
     getEducationLevel: `${PREFIX}/EducationLevel/get-all-education-levels`,
-    createEducationLevel: `${PREFIX}/EducationLevel/create-employment-type`,
-    updateEducationLevel: `${PREFIX}/EducationLevel/update-employment-type`,
-    removeEducationLevel: `${PREFIX}/EducationLevel/delete-employment-type`
+    createEducationLevel: `${PREFIX}/EducationLevel/create-education-level`,
+    updateEducationLevel: `${PREFIX}/EducationLevel/update-education-level`,
+    removeEducationLevel: `${PREFIX}/EducationLevel/delete-education-level`
   },
   EmploymentType: {
     getEmploymentType: `${PREFIX}/EmploymentType/get-all-employment-types`,
