@@ -58,7 +58,7 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر نوع شغل</ModalHeader>
+      <ModalHeader toggle={toggle}>ویرایش رشته تحصیلی</ModalHeader>
       <ModalBody>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
@@ -86,18 +86,20 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
                   control={control}
                   render={({ field }) => {
                     const options =
-                      store.EducationLevel?.items?.map((org) => ({
-                        value: org.id,
-                        label: org.title
+                      store.EducationLevel?.items?.map((level) => ({
+                        value: level.id,
+                        label: level.title
                       })) || []
+
+                    const normalize = (v) => (v === undefined || v === null || v === '' ? '' : Number(v))
 
                     return (
                       <Select
                         id='educationLevelId'
                         placeholder='انتخاب مقطع'
                         options={options}
-                        value={options.find((o) => o.value === field.value) || null}
-                        onChange={(selected) => field.onChange(selected?.value || '')}
+                        value={options.find((o) => o.value === normalize(field.value)) || null}
+                        onChange={(selected) => field.onChange(normalize(selected?.value))}
                         className={errors.educationLevelId ? 'is-invalid' : ''}
                       />
                     )
