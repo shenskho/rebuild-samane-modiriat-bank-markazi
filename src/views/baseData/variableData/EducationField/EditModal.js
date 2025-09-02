@@ -8,8 +8,11 @@ import { updateEducationField, GetEducationField, GetEducationLevel } from '@sto
 import Select from 'react-select'
 
 const schema = yup.object({
-  educationLevelId: yup.string().required('انتخاب مقطع الزامی است'),
-  title: yup.string().required('عنوان الزامی است'),
+  educationLevelId: yup
+    .number()
+    .typeError('انتخاب مقطع الزامی است')
+    .required('انتخاب مقطع الزامی است'),
+  title: yup.string().required('عنوان الزامی است')
 })
 
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
