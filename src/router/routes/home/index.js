@@ -7,26 +7,26 @@ const VariableData = lazy(() => import('@views/baseData/variableData'))
 const FixData = lazy(() => import('@views/baseData/fixData'))
 
 const DutyStatus = lazy(() => import('@views/baseData/fixData/dutyStatus'))
-const Organization = lazy (()=> import('@views/baseData/fixData/Organization'))
-const Province = lazy(()=> import("@views/baseData/fixData/Province"))
-const EducationLevel = lazy(()=> import("@views/baseData/fixData/EducationLevel"))
-const Quota = lazy(()=>import("@views/baseData/fixData/Quota"))
-const Religion = lazy(()=>import("@views/baseData/fixData/Religion"))
-const EmploymentType = lazy(()=>import("@views/baseData/fixData/EmploymentType"))
-const UniversityType = lazy(()=>import("@views/baseData/fixData/UniversityType"))
-const ScoreRatio = lazy(()=>import("@views/baseData/variableData/ScoreRatio"))
-const ExamAgency =lazy (()=>import("@views/baseData/variableData/ExamAgency"))
-const ComplementEvaluationAgency =lazy (()=>import("@views/baseData/variableData/ComplementEvaluationAgency"))
-const EducationField =lazy (()=>import("@views/baseData/variableData/EducationField"))
-const Job =lazy (()=>import("@views/baseData/variableData/Job"))
-const SelectionState =lazy (()=>import("@views/baseData/variableData/SelectionState"))
-const AgencyCategory =lazy (()=>import("@views/baseData/variableData/AgencyCategory"))
-const University =lazy (()=>import("@views/baseData/variableData/University"))
+const Organization = lazy(() => import('@views/baseData/fixData/Organization'))
+const Province = lazy(() => import('@views/baseData/fixData/Province'))
+const EducationLevel = lazy(() => import('@views/baseData/fixData/EducationLevel'))
+const Quota = lazy(() => import('@views/baseData/fixData/Quota'))
+const Religion = lazy(() => import('@views/baseData/fixData/Religion'))
+const EmploymentType = lazy(() => import('@views/baseData/fixData/EmploymentType'))
+const UniversityType = lazy(() => import('@views/baseData/fixData/UniversityType'))
+const ScoreRatio = lazy(() => import('@views/baseData/variableData/ScoreRatio'))
+const ExamAgency = lazy(() => import('@views/baseData/variableData/ExamAgency'))
+const ComplementEvaluationAgency = lazy(() => import('@views/baseData/variableData/ComplementEvaluationAgency'))
+const EducationField = lazy(() => import('@views/baseData/variableData/EducationField'))
+const Job = lazy(() => import('@views/baseData/variableData/Job'))
+const SelectionState = lazy(() => import('@views/baseData/variableData/SelectionState'))
+const AgencyCategory = lazy(() => import('@views/baseData/variableData/AgencyCategory'))
+const University = lazy(() => import('@views/baseData/variableData/University'))
 const LicenseRequest = lazy(() => import('@views/license/licenseRequest'))
 const RequestLicense = lazy(() => import('@views/license/RequestLicense'))
 
-
-
+const ExamCenter = lazy(() => import('@views/ExeamOrganier/examCenter'))
+const ExamScope = lazy(() => import('@views/ExeamOrganier/examScope'))
 
 const AdminRoutes = [
   {
@@ -52,8 +52,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/variableData'
     }
-  }
-  ,
+  },
   {
     path: '/University',
     element: <University />,
@@ -61,8 +60,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/University'
     }
-  }
-  ,
+  },
   {
     path: '/SelectionState',
     element: <SelectionState />,
@@ -70,8 +68,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/SelectionState'
     }
-  }
-  ,
+  },
   {
     path: '/AgencyCategory',
     element: <AgencyCategory />,
@@ -79,8 +76,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/AgencyCategory'
     }
-  }
-  ,
+  },
   {
     path: '/ScoreRatio',
     element: <ScoreRatio />,
@@ -88,8 +84,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/ScoreRatio'
     }
-  }
-  ,
+  },
   {
     path: '/EducationField',
     element: <EducationField />,
@@ -97,8 +92,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/EducationField'
     }
-  }
-    ,
+  },
   {
     path: '/ExamAgency',
     element: <ExamAgency />,
@@ -106,8 +100,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/ExamAgency'
     }
-  }
-   ,
+  },
   {
     path: '/Job',
     element: <Job />,
@@ -115,8 +108,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/Job'
     }
-  }
-  ,
+  },
   {
     path: '/ComplementEvaluationAgency',
     element: <ComplementEvaluationAgency />,
@@ -124,9 +116,8 @@ const AdminRoutes = [
       action: 'read',
       resource: '/ComplementEvaluationAgency'
     }
-  }
-  
-  ,
+  },
+
   {
     path: '/fixData',
     element: <FixData />,
@@ -142,8 +133,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/DutyStatus'
     }
-  }
-  ,
+  },
   {
     path: '/Organization',
     element: <Organization />,
@@ -151,8 +141,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/Organization'
     }
-  }
-    ,
+  },
   {
     path: '/EducationLevel',
     element: <EducationLevel />,
@@ -160,8 +149,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/EducationLevel'
     }
-  }
-  ,
+  },
   {
     path: '/EmploymentType',
     element: <EmploymentType />,
@@ -169,8 +157,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/EmploymentType'
     }
-  }
-  ,
+  },
   {
     path: '/UniversityType',
     element: <UniversityType />,
@@ -178,8 +165,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/UniversityType'
     }
-  }
-  ,
+  },
   {
     path: '/Quota',
     element: <Quota />,
@@ -187,8 +173,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/Quota'
     }
-  }
-  ,
+  },
   {
     path: '/Religion',
     element: <Religion />,
@@ -196,8 +181,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/Religion'
     }
-  }
-   ,
+  },
   {
     path: '/Province',
     element: <Province />,
@@ -205,8 +189,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/Province'
     }
-  }
-  ,
+  },
   {
     path: '/licenseRequest',
     element: <LicenseRequest />,
@@ -221,6 +204,22 @@ const AdminRoutes = [
     meta: {
       action: 'read',
       resource: '/requestLicense'
+    }
+  },
+    {
+    path: '/examCenter',
+    element: <ExamCenter />,
+    meta: {
+      action: 'read',
+      resource: '/examCenter'
+    }
+  },
+  {
+    path: '/examScope',
+    element: <ExamScope />,
+    meta: {
+      action: 'read',
+      resource: '/examScope'
     }
   }
 ]

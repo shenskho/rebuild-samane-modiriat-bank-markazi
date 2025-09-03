@@ -71,7 +71,6 @@ export default function index() {
     dispatch(getOrganizations())
   }, [])
   return (
-    
     <Row>
       <Col lg={12}>
         <p className='route-base-color'>

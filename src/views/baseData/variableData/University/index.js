@@ -39,7 +39,7 @@ export default function index() {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
       { dataField: 'title' , caption: 'عنوان ' },
-      { dataField: 'universityType' , caption: 'مقطع تحصیلی ' },
+      { dataField: 'universityType.title' , caption: 'عنوان ' },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -79,7 +79,7 @@ export default function index() {
         <p className='route-base-color'>
           <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
           <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/universityType")}>رشته تحصیلی </span>
+          <span className='route-caption' onClick={()=> navigate("/University")}>فهرست دانشگاه ها </span>
         </p>
       </Col>
 
@@ -90,7 +90,7 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader>
-                    <h4>رشته تحصیلی </h4>
+                    <h4> فهرست دانشگاه ها </h4>
                   </CardHeader>
 
                   <CardBody>

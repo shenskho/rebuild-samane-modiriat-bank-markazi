@@ -10,7 +10,7 @@ import EditModal from './EditModal'
 import DeleteModal from './DeleteModal'
 import { Plus } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
-import { number } from 'prop-types'
+
 
 export default function index() {
   const store = useSelector((state) => state.variableData)
@@ -32,14 +32,14 @@ export default function index() {
     SetIsDeleteModal(!IsDeleteModal)
   }
   const rowsWithIndex = store.EducationField.items?.map((item, i) => ({
-  ...item,
-  index: i + 1 // ردیف از ۱ شروع بشه
-}))
+    ...item,
+    index: i + 1 // ردیف از ۱ شروع بشه
+  }))
   const dataGridData = {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
-      { dataField: 'title' , caption: 'عنوان ' },
-      { dataField: 'educationLevel.title' , caption: 'مقطع تحصیلی ' },
+      { dataField: 'title', caption: 'عنوان ' },
+      { dataField: 'educationLevel.title', caption: 'مقطع تحصیلی ' },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -70,16 +70,24 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetEducationField()).then(()=> dispatch(GetEducationLevel()))
+    dispatch(GetEducationField()).then(() => dispatch(GetEducationLevel()))
   }, [])
-  
+
   return (
     <Row>
       <Col lg={12}>
         <p className='route-base-color'>
-          <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/EducationField")}>رشته تحصیلی </span>
+          <span className='first-route-selected' onClick={() => navigate('/')}>
+            خانه
+          </span>{' '}
+          / <span className='route-caption'>اطلاعات پایه</span> /{' '}
+          <span className='route-caption' onClick={() => navigate('/variableData')}>
+            اطلاعات متغیر
+          </span>{' '}
+          /{' '}
+          <span className='route-caption' onClick={() => navigate('/EducationField')}>
+            رشته تحصیلی{' '}
+          </span>
         </p>
       </Col>
 

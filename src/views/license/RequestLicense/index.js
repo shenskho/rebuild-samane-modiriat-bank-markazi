@@ -146,7 +146,7 @@ export default function index() {
                                 <strong className='gray-color'>aklsjdlas l kasdlak s</strong>
                               </div>
                               <div className='d-flex justify-content-center mt-1'>
-                                <Button className=' p-1 w-100'>دانلود فایل (PDF)</Button>
+                                <Button className='p-1 w-100 custom-download-btn'>دانلود فایل (PDF)</Button>
                               </div>
                             </CardBody>
                           </Card>

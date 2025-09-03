@@ -1,74 +1,150 @@
-import React, { useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { tuple } from 'yup'
-import { CreateUniversity, GetUniversity } from '@store/slices/variableData'
-import { useDispatch } from 'react-redux'
-import { number } from 'prop-types'
-export default function modal({ IsAddModal, SetIsAddModal }) {
-  const [TitleName, SetTitleName] = useState('')
- const [University, setUniverity] = useState('')
-  const [Invalid, SetInvalid] = useState(false)
+import React from 'react'
+import { Button, FormFeedback, Form, Row, Col, Modal, ModalHeader, ModalBody, Input, Label } from 'reactstrap'
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { CreateUniversity,GetUniversity } from '@store/slices/variableData'
+
+import DatePicker from 'react-multi-date-picker'
+import persian from 'react-date-object/calendars/persian'
+import persian_fa from 'react-date-object/locales/persian_fa'
+import gregorian from 'react-date-object/calendars/gregorian'
+import { Image } from 'react-feather'
+import Select from 'react-select'
+import DateObject from 'react-date-object'
+
+const schema = yup.object({
+  universityTypeId: yup.string().required('انتخاب استان الزامی است'),
+  title: yup.string().required('شماره عنوان الزامی است'),
+ 
+})
+export default function LicenseModal({ IsAddModal, SetIsAddModal }) {
   const dispatch = useDispatch()
-  const toggle = (row) => {
-    SetIsAddModal(!IsAddModal)
+  const store = useSelector((state) => state.variableData)
+  console.log("store",store)
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isValid }
+  } = useForm({
+    mode: 'all',
+    resolver: yupResolver(schema)
+  })
+
+  const toggle = () => SetIsAddModal(!IsAddModal)
+
+  // نمایش شمسی از میلادی ذخیره‌شده
+  // const toPersianDisplay = (iso) => {
+  //   if (!iso) return null
+  //   return new DateObject({ date: iso, format: "YYYY-MM-DD", calendar: gregorian }).convert(persian)
+  // }
+  const faNumToEn = (faNum) => {
+    if (!faNum) return ''
+    return faNum.replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
   }
-  const CheskInput = (e) => {
-    if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      SetTitleName('')
-    } else {
-      SetInvalid(false)
-      SetTitleName(e.target.value)
-    }
-  }
-  const CheckUniversity = (e)=>{
-      if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      setUniverity('')
-    } else {
-      SetInvalid(false)
-      setUniverity(e.target.value)
-    }
+  // // ذخیره میلادی به YYYY-MM-DD
+  const toIsoYMD = (shamsiDate) => {
+    if (!shamsiDate) return null
+
+    // تبدیل اعداد فارسی به انگلیسی
+    const enDate = faNumToEn(shamsiDate)
+
+    return new DateObject({
+      date: enDate,
+      format: 'YYYY/MM/DD',
+      calendar: persian
+    })
+      .convert(gregorian)
+      .format('YYYY-MM-DD')
   }
 
-  const AddCategory = () => {
-    if (TitleName !== '') {
-      dispatch(
-        CreateUniversity({
-          'title': TitleName,
-       
-        })
-      ).then((response) => {
-        dispatch(GetUniversity())
-        toggle()
-      })
-    } else {
-      SetInvalid(true)
+  const onSubmit = (data) => {
+    console.log('licenseData (miladi)', data)
+    // 🔹 تاریخ‌ها رو به میلادی تبدیل کن
+    const payload = {
+      ...data,
+      licenseExpireDate: toIsoYMD(data.licenseExpireDate)
     }
+
+    console.log('licenseData (miladi)', payload)
+
+    dispatch(CreateUniversity(payload)).then(() => {
+      dispatch(GetUniversity()).then(() => {
+        reset() // ← این فرم رو پاک می‌کنه
+        toggle() // بس
+      })
+    })
   }
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>اضافه عنوان دانشگاه</ModalHeader>
-
+      <ModalHeader toggle={toggle}> اضافه کردن دانشگاه</ModalHeader>
       <ModalBody>
-        <Label>عنوان دانشگاه</Label>
-        <Input invalid={Invalid} placeholder=' عنوان' onChange={(e) => CheskInput(e)} />
-      </ModalBody>
-        <ModalBody>
-        <Label>نوع دانشگاه</Label>
-        <Input invalid={Invalid} placeholder=' نوع' onChange={(e) => CheckUniversity(e)} />
-      </ModalBody>
-   
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Row>
 
-      <ModalFooter>
-        <Button color='danger' onClick={toggle}>
-          بستن
-        </Button>
-        <Button color='primary' onClick={AddCategory}>
-          ثبت
-        </Button>
-      </ModalFooter>
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='title'>
+                  عنوان<span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='title'
+                  control={control}
+                  render={({ field }) => <Input id='title' invalid={!!errors.title} {...field} />}
+                />
+                {errors.title && <FormFeedback>{errors.title.message}</FormFeedback>}
+              </div>
+            </Col>
+
+          
+
+           
+
+          
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='universityTypeId'>
+                  دستگاه <span className='text-danger'>*</span>
+                </Label>
+
+                <Controller
+                  name='universityTypeId'
+                  control={control}
+                  render={({ field }) => {
+                    const options =
+                      store.UniversityType?.items?.map((org) => ({
+                        value: org.id,
+                        label: org.title
+                      })) || []
+
+                    return (
+                      <Select
+                        id='universityTypeId'
+                        placeholder='انتخاب نوع دانشگاه'
+                        options={options}
+                        value={options.find((o) => o.value === field.value) || null}
+                        onChange={(selected) => field.onChange(selected?.value || '')}
+                        className={errors.UniversityType ? 'is-invalid' : ''}
+                      />
+                    )
+                  }}
+                />
+                {errors.UniversityType && <FormFeedback className='d-block'>{errors.UniversityType.message}</FormFeedback>}
+              </div>
+            </Col>
+            {/* دکمه ثبت */}
+            <Col lg={12}>
+              <Button color='primary' type='submit' block disabled={!isValid}>
+                ثبت
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </ModalBody>
     </Modal>
   )
 }

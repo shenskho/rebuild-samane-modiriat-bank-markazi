@@ -1,80 +1,121 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { tuple } from 'yup'
-import { updateScoreRatio, GetScoreRatio } from '@store/slices/variableData'
-import { useDispatch } from 'react-redux'
-import { title } from 'process'
+import React, { useEffect } from 'react'
+import { Button, Modal, ModalHeader, ModalBody, Input, Label, FormGroup, Form, Row, Col, FormFeedback } from 'reactstrap'
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUniversity, GetUniversity, GetUniversityType } from '@store/slices/variableData'
+import Select from 'react-select'
+
+const schema = yup.object({
+  universityTypeId: yup.string().required('انتخاب دستگاه الزامی است'),
+  title: yup.string().required('عنوان الزامی است'),
+})
+
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
-  const [titleName, setTitleName] = useState('')
-   const [University, setUniverity] = useState('')
-  const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
+  const store = useSelector((state) => state.variableData)
 
-  const toggle = (row) => {
-    SetIsEditModal(!IsEditModal)
-  }
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isValid }
+  } = useForm({
+    mode: 'all',
+    resolver: yupResolver(schema)
+  })
 
-  const CheskInput = (e) => {
-    if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      setTitleName('')
-    } else {
-      SetInvalid(false)
-      setTitleName(e.target.value)
-    }
-  }
-    const CheckUniversity = (e)=>{
-      if (e.target.value.trim() === '') {
-      SetInvalid(true)
-      setUniverity('')
-    } else {
-      SetInvalid(false)
-      setUniverity(e.target.value)
-    }
-  }
+  const toggle = () => SetIsEditModal(!IsEditModal)
 
-  const AddCategory = () => {
-    if (titleName !== '') {
-      dispatch(
-        updateScoreRatio({
-          'id': item.id,
-          'title': titleName
-        })
-      ).then((response) => {
-        dispatch(GetScoreRatio())
-        toggle()
+  const onSubmit = (data) => {
+    console.log('editData', data)
+    
+    dispatch(
+      updateUniversity({
+        'id': item.id,
+        'title': data.title,
+        'universityTypeId': data.universityTypeId,
       })
-    } else {
-      SetInvalid(true)
-    }
+    ).then(() => {
+      dispatch(GetUniversity())
+      dispatch(GetUniversityType())
+      reset()
+      toggle()
+    })
   }
 
   useEffect(() => {
-    setTitleName(item.title)
-  }, [item.title])
+    if (item) {
+      setValue('title', item.title || '')
+      setValue('universityTypeId', item.universityTypeId || '')
+      setValue('status', item.status !== false)
+    }
+  }, [item, setValue])
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر نوع دانشگاه</ModalHeader>
-
+      <ModalHeader toggle={toggle}>تغییر نوع شغل</ModalHeader>
       <ModalBody>
-        <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
-        <Input value={titleName} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheskInput(e)} />
-      </ModalBody>
-         <ModalBody>
-        <Label>نوع دانشگاه جدید خود را وارد کنید</Label>
-        <Input value={University} invalid={Invalid} placeholder=' نوع استخدام' onChange={(e) => CheckUniversity(e)} />
-      </ModalBody>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Row>
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='title'>
+                  عنوان<span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='title'
+                  control={control}
+                  render={({ field }) => <Input id='title' invalid={!!errors.title} {...field} />}
+                />
+                {errors.title && <FormFeedback>{errors.title.message}</FormFeedback>}
+              </div>
+            </Col>
 
-      <ModalFooter>
-        <Button color='danger' onClick={toggle}>
-          بستن
-        </Button>
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='universityTypeId'>
+                  دستگاه <span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='universityTypeId'
+                  control={control}
+                  render={({ field }) => {
+                    const options =
+                      store.UniversityType?.items?.map((org) => ({
+                        value: org.id,
+                        label: org.title
+                      })) || []
 
-        <Button color='primary' onClick={AddCategory}>
-          ثبت
-        </Button>
-      </ModalFooter>
+                    return (
+                      <Select
+                        id='universityTypeId'
+                        placeholder='انتخاب نوع دانشگاه'
+                        options={options}
+                        value={options.find((o) => o.value === field.value) || null}
+                        onChange={(selected) => field.onChange(selected?.value || '')}
+                        className={errors.universityTypeId ? 'is-invalid' : ''}
+                      />
+                    )
+                  }}
+                />
+                {errors.universityTypeId && <FormFeedback className='d-block'>{errors.universityTypeId.message}</FormFeedback>}
+              </div>
+            </Col>
+
+           
+
+            {/* دکمه ثبت */}
+            <Col lg={12}>
+              <Button color='primary' type='submit' block disabled={!isValid}>
+                ثبت
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </ModalBody>
     </Modal>
   )
 }

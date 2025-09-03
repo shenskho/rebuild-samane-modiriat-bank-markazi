@@ -61,8 +61,8 @@ export default [
       { title: 'معرفی آزمون' },
       { title: 'لیست نفرات' },
       { title: 'عوامل اجرایی مجری' },
-      { title: 'حوزه آزمون' },
-      { title: 'مدیریت حوزه‌های آزمون' },
+           { title: 'حوزه آزمون', navLink: '/examScope' },
+      { title: 'مدیریت حوزه‌های آزمون', navLink: '/examCenter' },
       { title: 'قرنطینه سوال' },
       { title: 'طراح سوال' },
       { title: 'تولید دفترچه آزمون' }

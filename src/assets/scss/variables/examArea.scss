@@ -1,0 +1,50 @@
+.scope-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  // height: 100%;
+  margin-top: 2rem;
+  width: 100%;
+  // max-width: 300px;
+}
+
+.scope-active {
+  background-color: #d1fae5;
+  color: #10b981;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+.scope-un-active {
+  background-color: #d1fae5;
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.scope-divider-line {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+}
+.scope-title {
+  font-size: 15px;
+  color: #000000;
+  font-weight: 900;
+  margin: 0;
+}
+
+.scope-value{
+  color: gray !important;
+  font-weight: 450;
+}
+.delete-button{
+  background-color: #e55604 !important;
+  border: #e55604;
+}

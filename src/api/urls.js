@@ -23,38 +23,38 @@ export default {
     removelicense: `${PREFIX}/License/delete-License`
   },
   dustyStatus: {
-    getDutystatus: `${PREFIX}/MilitaryState/get-all-military-states`,
+    getDutystatus: `${PREFIX}/MilitaryState/get-all-military-states-pagination`,
     createDutystatus: `${PREFIX}/MilitaryState/create-military-state`,
     updateDutystatus: `${PREFIX}/MilitaryState/update-military-state`,
     removeDutystatus: `${PREFIX}/MilitaryState/delete-military-state`
   },
 
   Province: {
-    getProvince: `${PREFIX}/Province/get-all-provinces`,
+    getProvince: `${PREFIX}/Province/get-all-provinces-pagination`,
     createProvince: `${PREFIX}/Province/create-province`,
     updateProvince: `${PREFIX}/Province/update-province`,
     removeProvince: `${PREFIX}/Province/delete-province`
   },
   Quota: {
-    getQuota: `${PREFIX}/Quota/get-all-quotas`,
+    getQuota: `${PREFIX}/Quota/get-all-quotas-pagination`,
     createQuota: `${PREFIX}/Quota/create-quota`,
     updateQuota: `${PREFIX}/Quota/update-quota`,
     removeQuota: `${PREFIX}/Quota/delete-quota`
   },
   EducationLevel: {
-    getEducationLevel: `${PREFIX}/EducationLevel/get-all-education-levels`,
+    getEducationLevel: `${PREFIX}/EducationLevel/get-all-education-levels-pagination`,
     createEducationLevel: `${PREFIX}/EducationLevel/create-education-level`,
     updateEducationLevel: `${PREFIX}/EducationLevel/update-education-level`,
     removeEducationLevel: `${PREFIX}/EducationLevel/delete-education-level`
   },
   EmploymentType: {
-    getEmploymentType: `${PREFIX}/EmploymentType/get-all-employment-types`,
+    getEmploymentType: `${PREFIX}/EmploymentType/get-all-employment-types-pagination`,
     createEmploymentType: `${PREFIX}/EmploymentType/create-employment-type`,
     updateEmploymentType: `${PREFIX}/EmploymentType/update-employment-type`,
     removeEmploymentType: `${PREFIX}/EmploymentType/delete-employment-type`
   },
   UniversityType: {
-    getUniversityType: `${PREFIX}/UniversityType/get-all-university-types`,
+    getUniversityType: `${PREFIX}/UniversityType/get-all-university-types-pagination`,
     createUniversityType: `${PREFIX}/UniversityType/create-university-type`,
     updateUniversityType: `${PREFIX}/UniversityType/update-university-type`,
     removeUniversityType: `${PREFIX}/UniversityType/delete-university-type`
@@ -66,21 +66,21 @@ export default {
     removeUniversity: `${PREFIX}/University/delete-university`
   },
   Religion: {
-    getReligion: `${PREFIX}/Religion/get-all-religions`,
+    getReligion: `${PREFIX}/Religion/get-all-religions-pagination`,
     createReligion: `${PREFIX}/Religion/create-religion`,
     updateReligion: `${PREFIX}/Religion/update-religion`,
     removeReligion: `${PREFIX}/Religion/delete-religion`
   },
 
   Organization: {
-    getOrganizations: `${PREFIX}/Organization/get-all-organizations`,
+    getOrganizations: `${PREFIX}/Organization/get-all-organizations-pagination`,
     createOrganizations: `${PREFIX}/Organization/create-Organization`,
     updateOrganizations: `${PREFIX}/Organization/update-Organization`,
     removeOrganizations: `${PREFIX}/Organization/delete-Organization`
   },
   ///////////////////////////variableData//////////////////////////
   ScoreRatio: {
-    getScoreRatio: `${PREFIX}/ScoreRatio/get-all-score-ratios`,
+    getScoreRatio: `${PREFIX}/ScoreRatio/get-all-score-ratios-pagination`,
     createScoreRatio: `${PREFIX}/ScoreRatio/create-score-ratio`,
     updateScoreRatio: `${PREFIX}/ScoreRatio/update-score-ratio`,
     removeScoreRatio: `${PREFIX}/ScoreRatio/delete-score-ratio`
@@ -92,7 +92,7 @@ export default {
     removeExamAgency: `${PREFIX}/ExamAgency/delete-exam-agency`
   },
   ComplementEvaluationAgency: {
-    getComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/get-all-complement-evaluation-agencies`,
+    getComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/get-all-complement-evaluation-agencies-pagination`,
     createComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/create-complement-evaluation-agency`,
     updateComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/update-complement-evaluation-agency`,
     removeComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/delete-complement-evaluation-agency`

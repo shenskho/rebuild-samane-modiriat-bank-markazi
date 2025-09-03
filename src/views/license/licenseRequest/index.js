@@ -102,8 +102,13 @@ export default function index() {
                                   <strong className='font-color'>تعداد استخدام  : </strong>{' '}
                                   <strong className='gray-color'> {item.employmentCount}</strong>
                                 </div>
-                                <div className='d-flex justify-content-center mt-1'>
-                                  <Button className=' p-1 w-100'>دانلود فایل </Button>
+                                <div className='d-flex justify-content-center mt-1' >
+                                  <Button 
+                                    className='p-1 w-100 custom-download-btn' 
+                                    color="primary"
+                                  >
+                                    دانلود فایل 
+                                  </Button>
                                 </div>
                               </CardBody>
                             </Card>

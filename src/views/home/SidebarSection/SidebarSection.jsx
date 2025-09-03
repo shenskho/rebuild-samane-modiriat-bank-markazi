@@ -32,7 +32,7 @@ const SidebarSection = ({ events }) => {
           </a>
         </button>
       </div>
-      <div className='today-events-box'>
+      <div className='today-events-box mt-1'>
         <h3>امروز: {todayFormatted}</h3>
         {todayEvents.length > 0 ? (
           <ul>
@@ -46,7 +46,7 @@ const SidebarSection = ({ events }) => {
           <p>رویدادی برای امروز وجود ندارد.</p>
         )}
       </div>
-      <div className='upcoming-events-box'>
+      <div className='upcoming-events-box mt-1'>
         <h3>رویدادهای پیش‌رو:</h3>
         {upcomingEvents.length > 0 ? (
           <ul>
@@ -67,7 +67,7 @@ const SidebarSection = ({ events }) => {
           <p>رویداد پیش‌رو وجود ندارد.</p>
         )}
       </div>
-      <div className='dashboardNotification'>
+      <div className='dashboardNotification mt-1'>
         <h3>ورود به صفحه ی مدیریت کاربران</h3>
         <div className='dashboardNotificationButton'>
           <Link to='/AccessLevel'>

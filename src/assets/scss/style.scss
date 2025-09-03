@@ -18,7 +18,14 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 @import '../../@core/scss/base/bootstrap-extended/include';
 @import '../../@core/scss/base/components/include';
 @import '../scss/variables/main.scss';
-
+@import '../scss/variables/examArea.scss';
+@import '../scss/variables/mapView.scss';
+@import '../scss/variables/license.scss';
+@import '../scss/variables/baseData.scss';
+@import '../scss/variables/Dashboard.scss';
+@import '../../@core/scss/base/bootstrap-extended/include';
+@import '../../@core/scss/base/components/include';
+@import '../scss/variables/main.scss';
 // /*==============================================================================================*/
 // /* vazirmatn font */
 @import '../fonts/vazirmatn/UI/Vazirmatn-RD-UI-font-face.css';
@@ -282,6 +289,26 @@ cursor: pointer;
 }
 .wrapper {
   background-color: #eef3f2 !important;
+}
+
+/* دکمه دانلود سفارشی */
+.custom-download-btn {
+  background-color: #04364a !important;
+  border-color: #04364a !important;
+  color: white !important;
+}
+
+.custom-download-btn:hover {
+  background-color: #032a3a !important;
+  border-color: #032a3a !important;
+  color: white !important;
+}
+
+.custom-download-btn:focus {
+  background-color: #04364a !important;
+  border-color: #04364a !important;
+  color: white !important;
+  box-shadow: 0 0 0 0.2rem rgba(4, 54, 74, 0.25) !important;
 }
 
 

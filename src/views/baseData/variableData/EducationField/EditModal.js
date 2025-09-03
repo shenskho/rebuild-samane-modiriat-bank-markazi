@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, Input, Label, FormGroup, Form, Row, Col, FormFeedback } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, Input, Label, Form, Row, Col, FormFeedback } from 'reactstrap'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -8,8 +8,8 @@ import { updateEducationField, GetEducationField, GetEducationLevel } from '@sto
 import Select from 'react-select'
 
 const schema = yup.object({
-  educationLevelId: yup.string().required('انتخاب مقطع الزامی است'),
-  title: yup.string().required('عنوان الزامی است'),
+  educationLevelId: yup.number().required('انتخاب مقطع الزامی است'),
+  title: yup.string().required('عنوان الزامی است')
 })
 
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
@@ -30,42 +30,43 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const toggle = () => SetIsEditModal(!IsEditModal)
 
   const onSubmit = (data) => {
-  console.log('editData', data)
+    console.log('📤 داده‌ای که ارسال میشه:', {
+        id: item.id,
+        ...data
 
-  dispatch(
-    updateEducationField({
-      id: item.id,
-      title: data.title,                 // مقدار جدید از فرم
-      educationLevelId: Number(data.educationLevelId) // حتما عدد باشد
+      })
+
+    dispatch(
+      updateEducationField({
+        id: item.id,
+        ...data
+      })
+    ).then((res) => {
+      console.log('✅ پاسخ updateEducationField:', res)
+      dispatch(GetEducationField())
+      dispatch(GetEducationLevel())
+      reset()
+      toggle()
     })
-  ).then(() => {
-    dispatch(GetEducationField())
-    dispatch(GetEducationLevel())
-    reset()
-    toggle()
-  })
-}
-
-
+  }
 
   useEffect(() => {
     if (item) {
       setValue('title', item.title || '')
-      setValue('educationLevelId', item.educationLevelId || '')
-     
+      setValue('educationLevelId', item.educationLevel?.id || '') // مقدار پیش‌فرض به صورت عدد
     }
   }, [item, setValue])
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر نوع شغل</ModalHeader>
+      <ModalHeader toggle={toggle}>ویرایش رشته تحصیلی</ModalHeader>
       <ModalBody>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
             <Col lg={6}>
               <div className='mb-1'>
                 <Label for='title'>
-                  عنوان<span className='text-danger'>*</span>
+                  عنوان <span className='text-danger'>*</span>
                 </Label>
                 <Controller
                   name='title'
@@ -85,19 +86,18 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
                   name='educationLevelId'
                   control={control}
                   render={({ field }) => {
-                    const options =
-                      store.EducationLevel?.items?.map((org) => ({
-                        value: org.id,
-                        label: org.title
-                      })) || []
+                    const options = store.EducationLevel?.items?.map(level => ({
+                      value: Number(level.id),
+                      label: level.title
+                    })) || []
 
                     return (
                       <Select
                         id='educationLevelId'
                         placeholder='انتخاب مقطع'
                         options={options}
-                        value={options.find((o) => o.value === field.value) || null}
-                        onChange={(selected) => field.onChange(selected?.value || '')}
+                        value={options.find(o => o.value === Number(field.value)) || null}
+                        onChange={(selected) => field.onChange(Number(selected?.value) || '')}
                         className={errors.educationLevelId ? 'is-invalid' : ''}
                       />
                     )
@@ -107,10 +107,7 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
               </div>
             </Col>
 
-           
-
-            {/* دکمه ثبت */}
-            <Col lg={12}>
+            <Col lg={12} className='mt-2'>
               <Button color='primary' type='submit' block disabled={!isValid}>
                 ثبت
               </Button>

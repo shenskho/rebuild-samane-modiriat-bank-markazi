@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetComplementEvaluationAgency, GetProvince,Getactivity } from '@store/slices/variableData'
+import { GetComplementEvaluationAgency, GetProvince, Getactivity } from '@store/slices/variableData'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal2'
@@ -10,7 +10,6 @@ import EditModal from './EditModal'
 import DeleteModal from './DeleteModal'
 import { Plus } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
-import { number } from 'prop-types'
 
 export default function index() {
   const store = useSelector((state) => state.variableData)
@@ -32,19 +31,19 @@ export default function index() {
     SetIsDeleteModal(!IsDeleteModal)
   }
   const rowsWithIndex = store.ComplementEvaluationAgency.items?.map((item, i) => ({
-  ...item,
-  index: i + 1 // ردیف از ۱ شروع بشه
-}))
+    ...item,
+    index: i + 1 // ردیف از ۱ شروع بشه
+  }))
   const dataGridData = {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
-      { dataField: 'title' , caption: 'عنوان ' },
-      { dataField: 'licenseExpireDateShamsi' , caption: 'تاریخ اعتبار مجوز ' },
-      { dataField: 'activityScopeTitle' , caption: 'گستره فعالیت ' },
-      { dataField: 'provinceTitle' , caption: 'استان ' },
-      { dataField: 'mangerFullname' , caption: 'نام مدیرعامل ' },
-      { dataField: 'mobile' , caption: 'شماره همراه ' },
-      { dataField: 'isEnabled' , caption: 'وضعیت ' },
+      { dataField: 'title', caption: 'عنوان ' },
+      { dataField: 'licenseExpireDateShamsi', caption: 'تاریخ اعتبار مجوز ' },
+      { dataField: 'activityScopeTitle', caption: 'گستره فعالیت ' },
+      { dataField: 'provinceTitle', caption: 'استان ' },
+      { dataField: 'mangerFullname', caption: 'نام مدیرعامل ' },
+      { dataField: 'mobile', caption: 'شماره همراه ' },
+      { dataField: 'isEnabled', caption: 'وضعیت ' },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -76,16 +75,24 @@ export default function index() {
 
   useEffect(() => {
     dispatch(GetComplementEvaluationAgency()).then(() => {
-      dispatch(GetProvince()).then(()=> dispatch(Getactivity()))
+      dispatch(GetProvince()).then(() => dispatch(Getactivity()))
     })
   }, [])
   return (
     <Row>
       <Col lg={12}>
         <p className='route-base-color'>
-          <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
-          <span className='route-caption' onClick={()=> navigate("/ComplementEvaluationAgency")}>مجری ارزیابی تکمیلی </span>
+          <span className='first-route-selected' onClick={() => navigate('/')}>
+            خانه
+          </span>{' '}
+          / <span className='route-caption'>اطلاعات پایه</span> /{' '}
+          <span className='route-caption' onClick={() => navigate('/variableData')}>
+            اطلاعات متغیر
+          </span>{' '}
+          /{' '}
+          <span className='route-caption' onClick={() => navigate('/ComplementEvaluationAgency')}>
+            مجری ارزیابی تکمیلی{' '}
+          </span>
         </p>
       </Col>
 
