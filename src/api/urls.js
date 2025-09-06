@@ -9,8 +9,8 @@ export default {
     signUp: `${PREFIX}/Authentication/sign-up`,
     signInWithsso: `${PREFIX}/Authentication/sign-in-with-sso`
   },
-  activity:{
-   getactivity: `${PREFIX}/ActivityScope/get-all-activity-scopes` 
+  activity: {
+    getactivity: `${PREFIX}/ActivityScope/get-all-activity-scopes`
   },
   file: {
     uploadFile: `${PREFIX}/File/upload-base64-doc`,
@@ -30,10 +30,29 @@ export default {
   },
 
   Province: {
-    getProvince: `${PREFIX}/Province/get-all-provinces-pagination`,
+    getProvince: `${PREFIX}/Province/get-all-provinces-pagination?Page=1&PageSize=999999`,
     createProvince: `${PREFIX}/Province/create-province`,
     updateProvince: `${PREFIX}/Province/update-province`,
     removeProvince: `${PREFIX}/Province/delete-province`
+  },
+  City: {
+    getCity: `${PREFIX}/City/get-all-cities-pagination?Page=1&PageSize=9999`,
+    createCity: `${PREFIX}/City/create-city`,
+    updateCity: `${PREFIX}/City/update-city`,
+    removeCity: `${PREFIX}/City/delete-city`
+  },
+  Veteran: {
+    getVeteran: `${PREFIX}/Veteran/get-all-veterans-pagination?PageSize=9999`,
+    createVeteran: `${PREFIX}/Veteran/create-veteran`,
+    updateVeteran: `${PREFIX}/Veteran/update-veteran`,
+    removeVeteran: `${PREFIX}/Veteran/delete-veteran`
+  },
+
+  ActivityScope: {
+    getActivityScope: `${PREFIX}/ActivityScope/get-all-activity-scopes-pagination?PageSize=9999`,
+    createActivityScope: `${PREFIX}/ActivityScope/create-activity-scope`,
+    updateActivityScope: `${PREFIX}/ActivityScope/update-activity-scope`,
+    removeActivityScope: `${PREFIX}/ActivityScope/delete-activity-scope`
   },
   Quota: {
     getQuota: `${PREFIX}/Quota/get-all-quotas-pagination`,
@@ -59,7 +78,7 @@ export default {
     updateUniversityType: `${PREFIX}/UniversityType/update-university-type`,
     removeUniversityType: `${PREFIX}/UniversityType/delete-university-type`
   },
-  University:{
+  University: {
     getUniversity: `${PREFIX}/University/get-all-universities`,
     createUniversity: `${PREFIX}/University/create-university`,
     updateUniversity: `${PREFIX}/University/update-university`,
@@ -115,12 +134,37 @@ export default {
     updateSelectionState: `${PREFIX}/SelectionState/update-selection-state`,
     removeSelectionState: `${PREFIX}/SelectionState/delete-selection-state`
   },
-  AgencyCategory:{
+  AgencyCategory: {
     getAgencyCategory: `${PREFIX}/AgencyCategory/get-all-agency-categories`,
     createAgencyCategory: `${PREFIX}/AgencyCategory/create-agency-category`,
     updateAgencyCategory: `${PREFIX}/AgencyCategory/update-agency-category`,
     removeAgencyCategory: `${PREFIX}/AgencyCategory/delete-agency-category`
   },
+
+  ExamScopeMain: {
+    getExamScope: `${PREFIX}/MainSite/get-all-MainSites-pagination?Page=1&PageSize=999999`,
+    createExamScope: `${PREFIX}/MainSite/create-MainSite`,
+    updateExamScope: `${PREFIX}/MainSite/update-MainSite`,
+    removeExamScope: `${PREFIX}/MainSite/delete-MainSite`
+  },
+  ExamScopeSecound: {
+    getExamScopeSecound: `${PREFIX}/SubSite/get-all-sub-sites-pagination?Page=1&PageSize=999999`,
+    createExamScopeSecound: `${PREFIX}/SubSite/create-sub-site`,
+    updateExamScopeSecound: `${PREFIX}/SubSite/update-sub-site`,
+    removeExamScopeSecound: `${PREFIX}/SubSite/delete-sub-site`
+  },
+
+  ExamAllocation: {
+    setExamAllocation: `${PREFIX}/ExamAllocation/start_exam_allocation`
+  },
+  Report: {
+    getPersonalAnswer: `${PREFIX}/Report/get-personal-answer`,
+    getMatchImage: `${PREFIX}/Report/get-matching-album`,
+    getChaireNumber: `${PREFIX}/Report/get-seating-number`,
+    getAttendance: `${PREFIX}/Report/get-attendance`,
+    getSubsiteHelp: `${PREFIX}/Report/get-subsite-help`
+  },
+
   /*************************************************************smaple*******************************************************************/ report:
     {
       createReport: `${PREFIX}/Report/create-report`,

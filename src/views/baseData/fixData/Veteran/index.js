@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetComplementEvaluationAgency, GetProvince, Getactivity } from '@store/slices/variableData'
+import { GetVeteran,GetQuota  } from '@store/slices/fixData'
 import { useDispatch, useSelector } from 'react-redux'
 
-import AddModal from './AddModal2'
+import AddModal from './AddModal'
 import EditModal from './EditModal'
 import DeleteModal from './DeleteModal'
 import { Plus } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
+import { number } from 'prop-types'
 
 export default function index() {
-  const store = useSelector((state) => state.variableData)
+  const store = useSelector((state) => state.FixData)
   const navigate = useNavigate()
   console.log(store)
   const dispatch = useDispatch()
@@ -30,20 +31,14 @@ export default function index() {
     SetUserItem(data)
     SetIsDeleteModal(!IsDeleteModal)
   }
-  const rowsWithIndex = store.ComplementEvaluationAgency.items?.map((item, i) => ({
-    ...item,
-    index: i + 1 // ردیف از ۱ شروع بشه
-  }))
+  const rowsWithIndex = store.Veteran.items?.map((item, i) => ({
+  ...item,
+  index: i + 1 // ردیف از ۱ شروع بشه
+}))
   const dataGridData = {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
-      { dataField: 'title', caption: 'عنوان ' },
-      { dataField: 'licenseExpireDateShamsi', caption: 'تاریخ اعتبار مجوز ' },
-      { dataField: 'activityScopeTitle', caption: 'گستره فعالیت ' },
-      { dataField: 'provinceTitle', caption: 'استان ' },
-      { dataField: 'mangerFullname', caption: 'نام مدیرعامل ' },
-      { dataField: 'mobile', caption: 'شماره همراه ' },
-      { dataField: 'isEnabled', caption: 'وضعیت ' },
+      { dataField: 'title' , caption: 'عنوان ' },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -74,25 +69,16 @@ export default function index() {
   }
 
   useEffect(() => {
-    dispatch(GetComplementEvaluationAgency()).then(() => {
-      dispatch(GetProvince()).then(() => dispatch(Getactivity()))
-    })
+    dispatch(GetVeteran()).then(()=> dispatch(GetQuota()))
   }, [])
+  
   return (
     <Row>
       <Col lg={12}>
         <p className='route-base-color'>
-          <span className='first-route-selected' onClick={() => navigate('/')}>
-            خانه
-          </span>{' '}
-          / <span className='route-caption'>اطلاعات پایه</span> /{' '}
-          <span className='route-caption' onClick={() => navigate('/variableData')}>
-            اطلاعات متغیر
-          </span>{' '}
-          /{' '}
-          <span className='route-caption' onClick={() => navigate('/ComplementEvaluationAgency')}>
-            مجری ارزیابی نهایی{' '}
-          </span>
+          <span className='first-route-selected' onClick={()=> navigate("/")}>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
+          <span className='route-caption' onClick={()=> navigate("/variableData")}>اطلاعات متغیر</span> /{' '}
+          <span className='route-caption' onClick={()=> navigate("/Veteran")}>وضعیت ایثارگری </span>
         </p>
       </Col>
 
@@ -103,7 +89,7 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader>
-                    <h4>مجری ارزیابی نهایی </h4>
+                    <h4>وضعیت ایثارگری </h4>
                   </CardHeader>
 
                   <CardBody>

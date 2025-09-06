@@ -25,7 +25,10 @@ import {
   FaSitemap,
   FaFilePdf,
   FaChartLine,
-  FaUsersCog
+  FaUsersCog,
+  FaCity,
+  FaWaveSquare,
+  FaHandHoldingHeart,
 } from 'react-icons/fa'
 import {
   FaFileCircleExclamation,
@@ -51,7 +54,10 @@ export default function index() {
     { title: 'سهمیه', icon: <FaFilter size={40} color='#04364a' />, link: '/Quota' },
     { title: 'مذاهب', icon: <MdMosque size={40} color='#04364a' />, link: '/Religion' },
     { title: 'نوع استخدام', icon: <FaBriefcase size={40} color='#04364a' />, link: '/EmploymentType' },
-    { title: 'نوع دانشگاه', icon: <FaUniversity size={40} color='#04364a' />, link: '/UniversityType' }
+    { title: 'نوع دانشگاه', icon: <FaUniversity size={40} color='#04364a' />, link: '/UniversityType' },
+    { title: 'فهرست شهر ها', icon: <FaCity size={40} color='#04364a' />, link: '/City' },
+    { title: 'گستره فعالیت', icon: <FaWaveSquare size={40} color='#04364a' />, link: '/ActivityScope' },
+    { title: 'وضعیت ایثارگری', icon: <FaHandHoldingHeart size={40} color='#04364a' />, link: '/Veteran' },
   ]
   return (
     <Row>

@@ -46,7 +46,7 @@ export default function index() {
   const categoryItems = [
     { title: 'نسبت امتیاز', icon: <FaPercent size={40} color='#04364a' />, link: '/ScoreRatio'  },
     { title: 'مجری آزمون کتبی', icon: <FaUserEdit size={40} color='#04364a' />, link: '/ExamAgency' },
-    { title: 'مجری ارزیابی تکمیلی', icon: <FaUserCheck size={40} color='#04364a' />, link: '/ComplementEvaluationAgency'  },
+    { title: 'مجری ارزیابی نهایی', icon: <FaUserCheck size={40} color='#04364a' />, link: '/ComplementEvaluationAgency'  },
     { title: 'رشته تحصیلی', icon: <FaBook size={40} color='#04364a' />, link: '/EducationField'  },
     { title: 'شغل', icon: <FaSuitcase size={40} color='#04364a' />, link: '/Job'  },
     { title: 'وضعیت گزینش', icon: <FaCheckCircle size={40} color='#04364a' />, link: '/SelectionState'  },

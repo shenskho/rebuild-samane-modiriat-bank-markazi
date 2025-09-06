@@ -85,7 +85,7 @@ export default function LicenseModal({ IsAddModal, SetIsAddModal }) {
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}> مجوز جذب</ModalHeader>
+      <ModalHeader toggle={toggle}> اضافه کردن مجری ارزیابی نهایی</ModalHeader>
       <ModalBody>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>

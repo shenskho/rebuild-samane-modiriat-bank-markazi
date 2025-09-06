@@ -45,10 +45,10 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>تغییر گروه دسترسی</ModalHeader>
+      <ModalHeader toggle={toggle}>ویرایش وضعیت نظام وظیفه</ModalHeader>
 
       <ModalBody>
-        <Label>عنوان جدید گروه دسترسی را وارد کنید</Label>
+        <Label>وضعیت جدید نظام وظیفه را وارد کنید</Label>
         <Input value={titleName} invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
       </ModalBody>
 

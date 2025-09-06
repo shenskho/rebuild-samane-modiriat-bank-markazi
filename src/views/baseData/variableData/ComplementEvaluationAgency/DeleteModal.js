@@ -23,10 +23,10 @@ export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsDeleteModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>حذف مجری ارزیابی تکمیلی</ModalHeader>
+      <ModalHeader toggle={toggle}>حذف مجری ارزیابی نهایی</ModalHeader>
 
       <ModalBody>
-        <Label>{`آیا می خواهید مجری ارزیابی تکمیلی ${item.title} را حذف کنید؟`} </Label>
+        <Label>{`آیا می خواهید مجری ارزیابی نهایی ${item.title} را حذف کنید؟`} </Label>
       </ModalBody>
 
       <ModalFooter>

@@ -1,35 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { removeDutystatus, GetDutystatus } from '@store/slices/fixData'
+import { RemoveExamScopeSecound , GetExamScopeSecound} from '@store/slices/examScope'
 import { useDispatch } from 'react-redux'
 
 export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
+
   const dispatch = useDispatch()
 
   const toggle = (row) => {
     SetIsDeleteModal(!IsDeleteModal)
   }
 
+
   const handeleDeleteRole = () => {
-    dispatch(
-      removeDutystatus({
-        'id': item.id
+
+      dispatch(
+        RemoveExamScopeSecound({
+          "id": item.id
+        })
+      ).then((response) => {
+        dispatch(GetExamScopeSecound())
+        toggle()
       })
-    ).then((response) => {
-      dispatch(GetDutystatus())
-      toggle()
-    })
+  
   }
 
   return (
     <Modal size='lg' isOpen={IsDeleteModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>حذف وضعیت نظام وظیفه</ModalHeader>
+      <ModalHeader toggle={toggle}>حذف   حوزه فرعی</ModalHeader>
 
       <ModalBody>
-        <Label>{`آیا می خواهید وضعیت نظام وظیفه ${item.title} را حذف کنید؟`} </Label>
+        <h5>{`آیا میخواهید  حوزه فرعی ${item.title}  را حذف کنید؟`} </h5>
+        
       </ModalBody>
 
       <ModalFooter>
+
         <Button color='primary' onClick={toggle}>
           بستن
         </Button>
@@ -37,7 +43,10 @@ export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
         <Button color='danger' onClick={handeleDeleteRole}>
           حذف
         </Button>
+
       </ModalFooter>
+
     </Modal>
+
   )
 }

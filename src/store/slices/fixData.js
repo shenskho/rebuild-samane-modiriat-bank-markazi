@@ -137,6 +137,58 @@ export const updateUniversityType = createAsyncThunk('fixData/updateUniversityTy
   const response = await apis.updateUniversityType(param)
   return response.data.result
 })
+/////////////////////City//////////////////////
+export const GetCity = createAsyncThunk('fixData/getCity', async () => {
+  const response = await apis.getCity()
+  return response.data.result
+})
+export const CreateCity = createAsyncThunk('fixData/CreateCity', async (param) => {
+  const response = await apis.createCity(param)
+  return response.data.result
+})
+export const removeCity = createAsyncThunk('fixData/deleteCity', async (param) => {
+  const response = await apis.removeCity(param)
+  return response.data.result
+})
+export const updateCity = createAsyncThunk('fixData/updateCity', async (param) => {
+  const response = await apis.updateCity(param)
+  return response.data.result
+})
+///////////////////ActivityScope/////////////
+export const GetActivityScope = createAsyncThunk('fixData/getActivityScope', async () => {
+  const response = await apis.getActivityScope()
+  return response.data.result
+})
+export const CreateActivityScope = createAsyncThunk('fixData/CreateActivityScope', async (param) => {
+  const response = await apis.createActivityScope(param)
+  return response.data.result
+})
+export const removeActivityScope = createAsyncThunk('fixData/deleteActivityScope', async (param) => {
+  const response = await apis.removeActivityScope(param)
+  return response.data.result
+})
+export const updateActivityScope = createAsyncThunk('fixData/updateActivityScope', async (param) => {
+  const response = await apis.updateActivityScope(param)
+  return response.data.result
+})
+///////////////Veteran//////////////
+export const GetVeteran = createAsyncThunk('fixData/getVeteran', async () => {
+  const response = await apis.getVeteran()
+  return response.data.result
+})
+export const CreateVeteran = createAsyncThunk('fixData/CreateVeteran', async (param) => {
+  const response = await apis.createVeteran(param)
+  return response.data.result
+})
+export const removeVeteran = createAsyncThunk('fixData/deleteVeteran', async (param) => {
+  const response = await apis.removeVeteran(param)
+  return response.data.result
+})
+export const updateVeteran = createAsyncThunk('fixData/updateVeteran', async (param) => {
+  const response = await apis.updateVeteran(param)
+  return response.data.result
+})
+
 
 
 
@@ -155,9 +207,21 @@ export const addReport = createSlice({
     Religion:[],
     EmploymentType:[],
     UniversityType:[],
+    City:[],
+    ActivityScope:[],
+    Veteran:[],
   },
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(GetVeteran.fulfilled, (state, action) => {
+      state.Veteran = action.payload
+    })
+    builder.addCase(GetActivityScope.fulfilled, (state, action) => {
+      state.ActivityScope = action.payload
+    })
+    builder.addCase(GetCity.fulfilled, (state, action) => {
+      state.City = action.payload
+    })
     builder.addCase(GetDutystatus.fulfilled, (state, action) => {
       state.dutyStatus = action.payload
     })

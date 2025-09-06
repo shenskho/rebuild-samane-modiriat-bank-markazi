@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { removeDutystatus, GetDutystatus } from '@store/slices/fixData'
+import { removeVeteran, GetVeteran } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
 
 export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
@@ -12,21 +12,21 @@ export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
 
   const handeleDeleteRole = () => {
     dispatch(
-      removeDutystatus({
+      removeVeteran({
         'id': item.id
       })
     ).then((response) => {
-      dispatch(GetDutystatus())
+      dispatch(GetVeteran())
       toggle()
     })
   }
 
   return (
     <Modal size='lg' isOpen={IsDeleteModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>حذف وضعیت نظام وظیفه</ModalHeader>
+      <ModalHeader toggle={toggle}>حذف وضعیت ایثارگری</ModalHeader>
 
       <ModalBody>
-        <Label>{`آیا می خواهید وضعیت نظام وظیفه ${item.title} را حذف کنید؟`} </Label>
+        <Label>{`آیا می خواهید وضعیت ایثارگری ${item.title} را حذف کنید؟`} </Label>
       </ModalBody>
 
       <ModalFooter>

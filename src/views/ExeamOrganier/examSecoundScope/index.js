@@ -5,7 +5,7 @@ import {
   PaginationLink
 } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
-import { GetExamScope, GetProvince, GetCity } from '@store/slices/examScope'
+import { GetExamScopeSecound, GetProvince, GetExamScope } from '@store/slices/examScope'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AddModal from './AddModal'
@@ -38,10 +38,10 @@ export default function Index() {
     SetIsDeleteModal(!IsDeleteModal)
   }
   useEffect(() => {
-    dispatch(GetExamScope()).then(() => dispatch(GetProvince()))
+    dispatch(GetExamScopeSecound()).then(() => dispatch(GetProvince()).then(() => dispatch(GetExamScope())))
   }, [dispatch])
 
-  const licenses = store.mainScopes?.items || []
+  const licenses = store.secoundScopes?.items || []
 
   // محاسبه آیتم‌های صفحه فعلی
   const indexOfLastCard = currentPage * cardsPerPage
@@ -59,7 +59,7 @@ export default function Index() {
               خانه
             </span>{' '}
             /<span className='route-caption'> سازماندهی آزمون </span> /{' '}
-            <span className='route-caption'> حوزه آزمون </span>
+            <span className='route-caption'> حوزه فرعی آزمون </span>
           </p>
         </Row>
         <div>
@@ -70,7 +70,7 @@ export default function Index() {
                   <Card id='Home' className='card-back-none'>
                     <CardHeader>
                       <div className='d-flex justify-content-between w-100'>
-                        <h4 className='pt-1'> حوزه آزمون </h4>
+                        <h4 className='pt-1'> حوزه فرعی آزمون </h4>
                         <Button className='btn-base-data-add' color='white' onClick={() => SetIsAddModal(!IsAddModal)}>
                           افزودن <Plus size={20} color='white' />
                         </Button>
@@ -79,38 +79,34 @@ export default function Index() {
                     </CardHeader>
 
                     <Row>
-                      {currentCards?.map((item) => (
-                        <Col lg={3} md={4} sm={6} key={item.id} className='d-flex justify-content-center'>
+                      {currentCards.map((item) => (
+                        <Col lg={3} md={4} sm={6} key={item?.id} className='d-flex justify-content-center'>
                           <div className='scope-card '>
                             <div className='d-flex justify-content-between'>
                               <FaBuilding size={23} color='#e0e0e0' />
-                              <h4> {item.title}</h4>
+                              <h4> {item?.title}</h4>
                               <span className='scope-active'> فعال</span>
                             </div>
                             <p className='scope-title'>
                               {' '}
-                              استان - شهر : <span className='scope-value'>{` ${item.provinceTitle} - ${item.cityTitle}`} </span>
+                              اصلی  حوزه : <span className='scope-value'>{` ${item?.mainSiteTitle}`} </span>
                             </p>
                             <p className='scope-title'>
                               {' '}
-                              نام و نام خانوادگی مدیر حوزه : <br /><span className='scope-value mt-05'>{` ${item.managerFirstname}  ${item.managerLastname}`}</span>
+                              اصلی  فرعی : <span className='scope-value'>{` ${item?.title}`} </span>
                             </p>
                             <span className='scope-divider-line'></span>
                             <p className='scope-title'>
                               {' '}
-                              تاریخ قرارداد : <span className='scope-value'>{item.contractDateShamsi.substring(0, 10)} </span>
+                              جنسیت  : <span className='scope-value'>{item?.genderTitle} </span>
                             </p>
                             <p className='scope-title'>
                               {' '}
-                              مبلغ قرارداد : <span className='scope-value'> {item.contractPrice} ریال </span>
+                              ظرفیت : <span className='scope-value'> {item?.capacity}  </span>
                             </p>
                             <p className='scope-title'>
                               {' '}
-                              آدرس : <span className='scope-value'>{item.address}</span>
-                            </p>
-                            <p className='scope-title'>
-                              {' '}
-                              تلفن : <span className='scope-value'>{item.telephone}</span>
+                              آدرس : <span className='scope-value'> {item?.address}  </span>
                             </p>
                             <div className='d-flex justify-content-end'>
                               <Button color='primary' onClick={() => handeleEditRole(item)}> ویرایش</Button>
@@ -120,7 +116,6 @@ export default function Index() {
                         </Col>
                       ))}
                     </Row>
-
                     {/* pagination controls */}
                     {licenses.length > cardsPerPage && (
                       <div className="d-flex justify-content-center mt-3">

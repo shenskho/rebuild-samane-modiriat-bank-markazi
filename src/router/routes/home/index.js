@@ -7,7 +7,8 @@ const VariableData = lazy(() => import('@views/baseData/variableData'))
 const FixData = lazy(() => import('@views/baseData/fixData'))
 
 const DutyStatus = lazy(() => import('@views/baseData/fixData/dutyStatus'))
-const Organization = lazy(() => import('@views/baseData/fixData/Organization'))
+const Organization = lazy(() => import('@views/baseData/fixData/organization'))
+const City = lazy(()=>import('@views/baseData/fixData/City'))
 const Province = lazy(() => import('@views/baseData/fixData/Province'))
 const EducationLevel = lazy(() => import('@views/baseData/fixData/EducationLevel'))
 const Quota = lazy(() => import('@views/baseData/fixData/Quota'))
@@ -27,7 +28,10 @@ const RequestLicense = lazy(() => import('@views/license/RequestLicense'))
 
 const ExamCenter = lazy(() => import('@views/ExeamOrganier/examCenter'))
 const ExamScope = lazy(() => import('@views/ExeamOrganier/examScope'))
-
+const ExamSecoundScope = lazy(() => import('@views/ExeamOrganier/examSecoundScope'))
+const PrintRequirement = lazy(() => import('@views/ExeamOrganier/printRequirement'))
+const ActivityScope = lazy(() => import('@views/baseData/fixData/ActivityScope'))
+const Veteran = lazy(() => import('@views/baseData/fixData/Veteran'))
 const AdminRoutes = [
   {
     path: '/home',
@@ -54,13 +58,41 @@ const AdminRoutes = [
     }
   },
   {
+    path: '/City',
+    element: <City />,
+    meta: {
+      action: 'read',
+      resource: '/City'
+    }
+  }
+ ,
+  {
+    path: '/Veteran',
+    element: <Veteran />,
+    meta: {
+      action: 'read',
+      resource: '/Veteran'
+    }
+  }
+ ,
+  {
+    path: '/ActivityScope',
+    element: <ActivityScope />,
+    meta: {
+      action: 'read',
+      resource: '/ActivityScope'
+    }
+  }
+  ,
+  {
     path: '/University',
     element: <University />,
     meta: {
       action: 'read',
       resource: '/University'
     }
-  },
+  }
+  ,
   {
     path: '/SelectionState',
     element: <SelectionState />,
@@ -221,7 +253,25 @@ const AdminRoutes = [
       action: 'read',
       resource: '/examScope'
     }
+  },
+  {
+    path: '/examSecoundScope',
+    element: <ExamSecoundScope />,
+    meta: {
+      action: 'read',
+      resource: '/examSecoundScope'
+    }
+  },
+  {
+    path: '/printRequirement',
+    element: <PrintRequirement />,
+    meta: {
+      action: 'read',
+      resource: '/printRequirement'
+    }
   }
 ]
+
+
 
 export default AdminRoutes

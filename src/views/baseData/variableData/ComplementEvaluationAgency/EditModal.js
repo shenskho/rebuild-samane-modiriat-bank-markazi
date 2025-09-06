@@ -97,7 +97,7 @@ export default function LicenseModal({ IsEditModal, SetIsEditModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsEditModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}> مجوز جذب</ModalHeader>
+      <ModalHeader toggle={toggle}> ویرایش مجری ارزیابی نهایی</ModalHeader>
       <ModalBody>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>

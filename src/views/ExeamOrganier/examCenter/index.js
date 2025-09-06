@@ -1,23 +1,43 @@
 import React, { useState } from 'react'
-import { Card, CardBody, Row, Col, CardHeader, Button, Input, Label } from 'reactstrap'
+import {
+  Card, CardBody, Row, Col, CardHeader, Button, Input, Label, Pagination,
+  PaginationItem,
+  PaginationLink
+} from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 
-import { useSelector } from 'react-redux'
-import { Getlicenses } from '@store/slices/license'
+import { useDispatch, useSelector } from 'react-redux'
+import { SetExamAllocation } from '@store/slices/examScope'
 import AddModal from './AddModal'
 import MapView from './MapView'
-import { Plus } from 'react-feather'
+
 import { useNavigate } from 'react-router-dom'
-import Select from 'react-select'
-import { FaFilter, FaSortAmountUpAlt } from 'react-icons/fa'
+
 
 export default function index() {
   const store = useSelector((state) => state.License)
   console.log(store)
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
   const [StateName, SetStateName] = useState('')
   const [IsAddModal, SetIsAddModal] = useState(false)
+
+  const [organizeMessage, SetorganizeMessage] = useState("")
+
+
+  const handeleOrganizeExam = () => {
+    const param = {
+      examId: 1
+    }
+    dispatch(SetExamAllocation(param)).then((response) => {
+      console.log(response)
+      if (response.payload) {
+ SetorganizeMessage("سازماندهی با موفقیت انجام شد")
+      }
+    })
+   
+
+  }
 
   return (
     <Row>
@@ -35,10 +55,18 @@ export default function index() {
           <Card className='mb-1'>
             <CardBody>
               <Row>
+                <Row >
+                  <Col lg={6}>
+                    <Button color='primary' onClick={() => handeleOrganizeExam()}>سازماندهی</Button>
+                  </Col>
+                  <Col lg={6}>
+                    <h5 className='mt-1' color='green'>{organizeMessage}</h5>
+                  </Col>
+                </Row>
                 <Col lg={12}>
                   <Card id='Home'>
-                   
-           
+
+
                     <CardBody>
                       <Row className='map-view-container'>
                         <Col lg={8} >
@@ -55,7 +83,7 @@ export default function index() {
                             <div className='details-container mt-5'>
                               <strong className='mt-1'>تعداد کل داوطلبان:</strong>
                               <strong>123123 نفر</strong>
-                             <span className='line-divider'></span>
+                              <span className='line-divider'></span>
                               <div className='details-down-container'>
                                 <strong> تعداد داوطلبان ساماندهی‌نشده:</strong>
                                 <strong>123111223 نفر</strong>

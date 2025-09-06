@@ -14,6 +14,10 @@ import License from './slices/license'
 
 import FixData from './slices/fixData'
 import variableData from './slices/variableData'
+
+import examScope from './slices/examScope'
+
+
 const configs = {
   key: 'root',
   storage,
@@ -31,7 +35,8 @@ const appReducer = combineReducers({
   Category,
   FixData,
   variableData,
-  License
+  License,
+  examScope
 })
 
 const rootReducer = (state, action) => {

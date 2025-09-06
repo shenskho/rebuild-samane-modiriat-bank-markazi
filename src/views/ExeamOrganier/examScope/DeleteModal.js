@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { DeleteRole , ReadRoles} from '@store/slices/controlPanel'
+import { RemoveExamScope , GetExamScope} from '@store/slices/examScope'
 import { useDispatch } from 'react-redux'
 
 export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
@@ -15,11 +15,11 @@ export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
   const handeleDeleteRole = () => {
 
       dispatch(
-        DeleteRole({
-          "rollName": item.name
+        RemoveExamScope({
+          "id": item.id
         })
       ).then((response) => {
-        dispatch(ReadRoles())
+        dispatch(GetExamScope())
         toggle()
       })
   
@@ -27,10 +27,10 @@ export default function EditModal({ IsDeleteModal, SetIsDeleteModal, item }) {
 
   return (
     <Modal size='lg' isOpen={IsDeleteModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>حذف  گروه دسترسی</ModalHeader>
+      <ModalHeader toggle={toggle}>حذف   حوزه</ModalHeader>
 
       <ModalBody>
-        <Label>{`آیا میخواهید گروه دسترسی ${item.name}  را حذف کنید؟`} </Label>
+        <h5>{`آیا میخواهید  حوزه ${item.title}  را حذف کنید؟`} </h5>
         
       </ModalBody>
 

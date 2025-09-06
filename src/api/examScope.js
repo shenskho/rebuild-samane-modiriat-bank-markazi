@@ -1,0 +1,72 @@
+import axios from '@configs/axios'
+import axiosBlob from '@configs/axios/getBlob'
+import urls from './urls'
+
+/////////////////////ExamScopeMain/////////////////////
+export async function getExamScope() {
+  return await axios.get(urls.ExamScopeMain.getExamScope)
+}
+export async function createExamScope(param) {
+  return await axios.post(urls.ExamScopeMain.createExamScope, param)
+}
+export async function updateExamScope(param) {
+  return await axios.post(urls.ExamScopeMain.updateExamScope, param)
+}
+export async function removeExamScope(param) {
+  return await axios.post(urls.ExamScopeMain.removeExamScope, param)
+}
+/////////////////////////extra/////////////////////////////
+
+export async function getProvince() {
+  return await axios.get(urls.Province.getProvince)
+}
+export async function getCity(param) {
+  return await axios.get(urls.City.getCity + param)
+}
+
+/////////////////////////secound/////////////////////////////
+
+export async function getExamScopeSecound() {
+  return await axios.get(urls.ExamScopeSecound.getExamScopeSecound)
+}
+
+export async function createExamScopeSecound(param) {
+  return await axios.post(urls.ExamScopeSecound.createExamScopeSecound, param)
+}
+
+export async function updateExamScopeSecound(param) {
+  return await axios.post(urls.ExamScopeSecound.updateExamScopeSecound, param)
+}
+
+export async function removeExamScopeSecound(param) {
+  return await axios.post(urls.ExamScopeSecound.removeExamScopeSecound, param)
+}
+
+///////////////////////ExamAllocation///////////////////////
+
+export async function setExamAllocation(param) {
+  return await axios.post(urls.ExamAllocation.setExamAllocation, param)
+}
+
+/////////////////////Reports///////////////////
+
+export async function getPersonalAnswer(param) {
+  return await axios.get(urls.Report.getPersonalAnswer + param)
+}
+
+export async function getMatchImage(param) {
+  return await axios.get(urls.Report.getMatchImage + param)
+}
+
+export async function getChaireNumber(param) {
+  return await axios.get(urls.Report.getChaireNumber + param)
+}
+
+export async function getAttendance(param) {
+  return await axios.get(urls.Report.getAttendance + param)
+}
+
+
+export async function getSubsiteHelp(param) {
+  return await axiosBlob.get(urls.Report.getSubsiteHelp + param)
+}

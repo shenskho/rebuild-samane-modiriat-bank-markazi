@@ -1,5 +1,5 @@
 // Logo Import
-import logo from '@assets/images/magfa/rayanLogo.webp'
+import logo from '../assets/images/magfa/rayanLogo.webp'
 
 // You can customize the template with the help of this file
 

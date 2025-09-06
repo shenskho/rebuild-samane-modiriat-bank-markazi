@@ -103,5 +103,42 @@ export async function updateUniversityType(param) {
 export async function removeUniversityType(param) {
   return await axios.post(urls.UniversityType.removeUniversityType, param)
 }
-
-
+///////////////////City///////////////////
+export async function getCity() {
+  return await axios.get(urls.City.getCity)
+}
+export async function createCity(param) {
+  return await axios.post(urls.City.createCity, param)
+}
+export async function updateCity(param) {
+  return await axios.post(urls.City.updateCity, param)
+}
+export async function removeCity(param) {
+  return await axios.post(urls.City.removeCity, param)
+}
+//////////////////////////ActivityScope///////////////
+export async function getActivityScope() {
+  return await axios.get(urls.ActivityScope.getActivityScope)
+}
+export async function createActivityScope(param) {
+  return await axios.post(urls.ActivityScope.createActivityScope, param)
+}
+export async function updateActivityScope(param) {
+  return await axios.post(urls.ActivityScope.updateActivityScope, param)
+}
+export async function removeActivityScope(param) {
+  return await axios.post(urls.ActivityScope.removeActivityScope, param)
+}
+///////////////Veteran//////////
+export async function getVeteran() {
+  return await axios.get(urls.Veteran.getVeteran)
+}
+export async function createVeteran(param) {
+  return await axios.post(urls.Veteran.createVeteran, param)
+}
+export async function updateVeteran(param) {
+  return await axios.post(urls.Veteran.updateVeteran, param)
+}
+export async function removeVeteran(param) {
+  return await axios.post(urls.Veteran.removeVeteran, param)
+}

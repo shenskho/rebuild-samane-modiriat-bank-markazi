@@ -9,8 +9,11 @@ NProgress.configure({ showSpinner: false })
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
+    responseType: 'blob',       // ← مهم برای فایل
+
   headers: {
-    'Content-Type': 'application/json'
+    // 'Content-Type': 'application/json',
+     'accept': '*/*',
   }
 })
 

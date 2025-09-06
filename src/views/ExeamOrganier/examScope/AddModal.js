@@ -4,37 +4,37 @@ import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-import { Createlicense, Getlicenses, UploadFile } from '@store/slices/license'
+import { CreateExamScope, GetExamScope, GetCity } from '@store/slices/examScope'
 
 import DatePicker from 'react-multi-date-picker'
 import persian from 'react-date-object/calendars/persian'
 import persian_fa from 'react-date-object/locales/persian_fa'
 import gregorian from 'react-date-object/calendars/gregorian'
-import { Image } from 'react-feather'
 import Select from 'react-select'
 import DateObject from 'react-date-object'
 
 const schema = yup.object({
-  organizationId: yup.string().required('انتخاب دستگاه الزامی است'),
-  licenseNumber: yup.string().required('شماره مجوز الزامی است'),
-  issuanceDate: yup.string().required('تاریخ صدور الزامی است'),
-  imageId: yup.string().required('بارگذاری تصویر الزامی است'), // ✅ just string, since after upload we store imageId
-  expireDate: yup.string().required('تاریخ انقضاء الزامی است'),
-  employmentCount: yup
-    .number()
-    .typeError('باید عدد باشد')
-    .positive('عدد معتبر وارد کنید')
-    .required('تعداد استخدام الزامی است')
+  title: yup.string().required('عنوان الزامی است'),
+  provinceId: yup.number().typeError('استان الزامی است').required('استان الزامی است'),
+  cityId: yup.number().typeError('شهر الزامی است').required('شهر الزامی است'),
+  managerFirstname: yup.string().required('نام مدیر الزامی است'),
+  managerLastname: yup.string().required('نام خانوادگی مدیر الزامی است'),
+  contractDate: yup.string().required('تاریخ قرارداد الزامی است'),
+  contractPrice: yup.number().typeError('مبلغ قرارداد باید عدد باشد').required('مبلغ قرارداد الزامی است'),
+  address: yup.string().required('آدرس الزامی است'),
+  telephone: yup
+    .string()
+    .matches(/^0\d{9,10}$/, 'شماره تلفن معتبر نیست')
+    .required('تلفن الزامی است')
 })
 
 export default function LicenseModal({ IsAddModal, SetIsAddModal }) {
   const dispatch = useDispatch()
-  const store = useSelector((state) => state.FixData)
-  console.log(store)
+  const store = useSelector((state) => state.examScope)
+  console.log('store', store)
   const {
     control,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors, isValid }
   } = useForm({
@@ -43,17 +43,10 @@ export default function LicenseModal({ IsAddModal, SetIsAddModal }) {
   })
 
   const toggle = () => SetIsAddModal(!IsAddModal)
-
-  // نمایش شمسی از میلادی ذخیره‌شده
-  // const toPersianDisplay = (iso) => {
-  //   if (!iso) return null
-  //   return new DateObject({ date: iso, format: "YYYY-MM-DD", calendar: gregorian }).convert(persian)
-  // }
   const faNumToEn = (faNum) => {
     if (!faNum) return ''
     return faNum.replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
   }
-  // // ذخیره میلادی به YYYY-MM-DD
   const toIsoYMD = (shamsiDate) => {
     if (!shamsiDate) return null
 
@@ -70,212 +63,218 @@ export default function LicenseModal({ IsAddModal, SetIsAddModal }) {
   }
 
   const onSubmit = (data) => {
-    console.log('licenseData (miladi)', data)
-    // 🔹 تاریخ‌ها رو به میلادی تبدیل کن
     const payload = {
       ...data,
-      issuanceDate: toIsoYMD(data.issuanceDate),
-      expireDate: toIsoYMD(data.expireDate)
+      provinceId: Number(data.provinceId),
+      cityId: Number(data.cityId),
+      contractPrice: Number(data.contractPrice),
+      contractDate: toIsoYMD(data.contractDate) // ✅ تاریخ به میلادی
     }
 
-    console.log('licenseData (miladi)', payload)
+    console.log('ExamScope', payload)
 
-    dispatch(Createlicense(payload)).then(() => {
-      dispatch(Getlicenses()).then(() => {
-        reset() // ← این فرم رو پاک می‌کنه
-        toggle() // بس
+    dispatch(CreateExamScope(payload)).then(() => {
+      dispatch(GetExamScope()).then(() => {
+        reset()
+        toggle()
       })
     })
   }
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}> مجوز جذب</ModalHeader>
+      <ModalHeader toggle={toggle}>مجوز جذب</ModalHeader>
       <ModalBody>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
-            {/* دستگاه */}
-
+            {/* عنوان */}
             <Col lg={6}>
               <div className='mb-1'>
-                <Label for='organizationId'>
-                  دستگاه <span className='text-danger'>*</span>
+                <Label for='title'>
+                  عنوان <span className='text-danger'>*</span>
                 </Label>
-
                 <Controller
-                  name='organizationId'
+                  name='title'
+                  control={control}
+                  render={({ field }) => <Input id='title' invalid={!!errors.title} {...field} />}
+                />
+                {errors.title && <FormFeedback>{errors.title.message}</FormFeedback>}
+              </div>
+            </Col>
+
+            {/* استان */}
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='provinceId'>
+                  استان <span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='provinceId'
                   control={control}
                   render={({ field }) => {
                     const options =
-                      store.organizations?.items?.map((org) => ({
+                      store.province?.items?.map((org) => ({
                         value: org.id,
                         label: org.title
                       })) || []
-
                     return (
                       <Select
-                        id='organizationId'
-                        placeholder='انتخاب دستگاه'
+                        id='provinceId'
+                        placeholder='انتخاب استان'
                         options={options}
                         value={options.find((o) => o.value === field.value) || null}
-                        onChange={(selected) => field.onChange(selected?.value || '')}
-                        className={errors.organizationId ? 'is-invalid' : ''}
+                        onChange={(selected) => {
+                          const selectedValue = selected?.value || 0
+                          field.onChange(selectedValue)
+
+                          // ریست کردن شهر وقتی استان عوض میشه
+                          reset((prev) => ({ ...prev, cityId: 0 }))
+
+                          // گرفتن شهرها بر اساس استان
+                          if (selectedValue) {
+                            dispatch(GetCity(selectedValue))
+                          }
+                        }}
+                        className={errors.provinceId ? 'is-invalid' : ''}
                       />
                     )
                   }}
                 />
-                {errors.organizationId && (
-                  <FormFeedback className='d-block'>{errors.organizationId.message}</FormFeedback>
-                )}
-              </div>
-            </Col>
-            {/* شماره مجوز */}
-            <Col lg={6}>
-              <div className='mb-1'>
-                <Label for='licenseNumber'>
-                  شماره مجوز <span className='text-danger'>*</span>
-                </Label>
-                <Controller
-                  name='licenseNumber'
-                  control={control}
-                  render={({ field }) => <Input id='licenseNumber' invalid={!!errors.licenseNumber} {...field} />}
-                />
-                {errors.licenseNumber && <FormFeedback>{errors.licenseNumber.message}</FormFeedback>}
+                {errors.provinceId && <FormFeedback className='d-block'>{errors.provinceId.message}</FormFeedback>}
               </div>
             </Col>
 
-            {/* تاریخ صدور */}
+            {/* شهر */}
             <Col lg={6}>
               <div className='mb-1'>
-                <Label for='issuanceDate'>
-                  تاریخ صدور <span className='text-danger'>*</span>
+                <Label for='cityId'>
+                  شهر <span className='text-danger'>*</span>
                 </Label>
                 <Controller
-                  name='issuanceDate'
+                  name='cityId'
                   control={control}
-                  render={({ field }) => (
-                    <DatePicker
-                      calendar={persian}
-                      locale={persian_fa}
-                      inputClass={`form-control ${errors.issuanceDate ? 'is-invalid' : ''}`}
-                      value={field.value}
-                      // onChange={(date) => field.onChange(date?.format?.('YYYY-MM-DD'))}
-                      onChange={(date) => field.onChange(date)}
-                    />
-                  )}
+                  render={({ field }) => {
+                    const options =
+                      store.citys?.items?.map((org) => ({
+                        value: org.id,
+                        label: org.title
+                      })) || []
+                    return (
+                      <Select
+                        id='cityId'
+                        placeholder='انتخاب شهر'
+                        options={options}
+                        value={options.find((o) => o.value === field.value) || null}
+                        onChange={(selected) => field.onChange(selected?.value || 0)}
+                        className={errors.cityId ? 'is-invalid' : ''}
+                      />
+                    )
+                  }}
                 />
-                {errors.issuanceDate && <FormFeedback>{errors.issuanceDate.message}</FormFeedback>}
+                {errors.cityId && <FormFeedback className='d-block'>{errors.cityId.message}</FormFeedback>}
               </div>
             </Col>
 
-            {/* تاریخ انقضاء */}
+            {/* نام مدیر */}
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='managerFirstname'>
+                  نام مدیر <span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='managerFirstname'
+                  control={control}
+                  render={({ field }) => <Input id='managerFirstname' invalid={!!errors.managerFirstname} {...field} />}
+                />
+                {errors.managerFirstname && <FormFeedback>{errors.managerFirstname.message}</FormFeedback>}
+              </div>
+            </Col>
+
+            {/* نام خانوادگی مدیر */}
+            <Col lg={6}>
+              <div className='mb-1'>
+                <Label for='managerLastname'>
+                  نام خانوادگی مدیر <span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='managerLastname'
+                  control={control}
+                  render={({ field }) => <Input id='managerLastname' invalid={!!errors.managerLastname} {...field} />}
+                />
+                {errors.managerLastname && <FormFeedback>{errors.managerLastname.message}</FormFeedback>}
+              </div>
+            </Col>
+
+            {/* تاریخ قرارداد */}
             <Col lg={6}>
               <div className='mb-1 '>
-                <Label for='expireDate' className='w-100'>
-                  تاریخ انقضاء <span className='text-danger'>*</span>
+                <Label for='contractDate' className='w-100'>
+                  تاریخ عقد قرارداد <span className='text-danger'>*</span>
                 </Label>
                 <Controller
-                  name='expireDate'
+                  name='contractDate'
                   control={control}
                   render={({ field }) => (
                     <DatePicker
                       calendar={persian}
                       className=''
                       locale={persian_fa}
-                      inputClass={`form-control w-100 ${errors.expireDate ? 'is-invalid' : ''}`}
+                      inputClass={`form-control w-100 ${errors.contractDate ? 'is-invalid' : ''}`}
                       value={field.value}
                       onChange={(date) => field.onChange(date)}
                     />
                   )}
                 />
-                {errors.expireDate && <FormFeedback>{errors.expireDate.message}</FormFeedback>}
+                {errors.contractDate && <FormFeedback>{errors.contractDate.message}</FormFeedback>}
               </div>
             </Col>
 
-            {/* تعداد استخدام */}
+            {/* مبلغ قرارداد */}
             <Col lg={6}>
               <div className='mb-1'>
-                <Label for='employmentCount'>
-                  تعداد استخدام <span className='text-danger'>*</span>
+                <Label for='contractPrice'>
+                  مبلغ قرارداد <span className='text-danger'>*</span>
                 </Label>
                 <Controller
-                  name='employmentCount'
+                  name='contractPrice'
                   control={control}
                   render={({ field }) => (
-                    <Input type='number' id='employmentCount' invalid={!!errors.employmentCount} {...field} />
+                    <Input type='number' id='contractPrice' invalid={!!errors.contractPrice} {...field} />
                   )}
                 />
-                {errors.employmentCount && <FormFeedback>{errors.employmentCount.message}</FormFeedback>}
+                {errors.contractPrice && <FormFeedback>{errors.contractPrice.message}</FormFeedback>}
               </div>
             </Col>
-            {/* تصویر مجوز */}
             <Col lg={6}>
               <div className='mb-1'>
-                <Label for='imageId'>
-                  تصویر مجوز <span className='text-danger'>*</span>
+                <Label for='telephone'>
+                  تلفن <span className='text-danger'>*</span>
                 </Label>
                 <Controller
-                  name='imageId'
+                  name='telephone'
                   control={control}
-                  render={({ field }) => {
-                    const [fileName, setFileName] = React.useState('') // for showing selected file
-
-                    const handleRemove = () => {
-                      setFileName('')
-                      field.onChange('') // clear value in form
-                      document.getElementById('imageId').value = null // reset input
-                    }
-
-                    return (
-                      <div className='d-flex align-items-center'>
-                        {/* Hidden file input */}
-                        <Input
-                          id='imageId'
-                          type='file'
-                          accept='image/*'
-                          style={{ display: 'none' }}
-                          invalid={!!errors.imageId}
-                          onChange={async (e) => {
-                            const file = e.target.files?.[0]
-                            if (file) {
-                              setFileName(file.name) // show file name
-                              const formData = new FormData()
-                              formData.append('files', file)
-
-                              const result = await dispatch(UploadFile(formData))
-                              const imageId = result?.payload?.list[0]?.id
-                              if (imageId) {
-                                field.onChange(imageId) // set value in form
-                              }
-                            }
-                          }}
-                        />
-
-                        {/* Custom button */}
-
-                        {/* Display file name + remove icon */}
-                        <div className='d-flex align-items-center justify-content-left pl-0 pr-0 form-control'>
-                          <Button
-                            color='primary'
-                            className='m-0'
-                            onClick={() => document.getElementById('imageId').click()}
-                          >
-                            <Image size={20} color='white' />
-                          </Button>
-                          <span className='text-center ml-1'>{fileName || 'فایلی انتخاب نشده'}</span>
-                          {fileName && (
-                            <Button color='danger' size='sm' outline className='ms-2' onClick={handleRemove}>
-                              ✕
-                            </Button>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  }}
+                  render={({ field }) => <Input id='telephone' invalid={!!errors.telephone} {...field} />}
                 />
-                {errors.imageId && <FormFeedback className='d-block'>{errors.imageId.message}</FormFeedback>}
+                {errors.telephone && <FormFeedback>{errors.telephone.message}</FormFeedback>}
               </div>
             </Col>
+            {/* آدرس */}
+            <Col lg={12}>
+              <div className='mb-1'>
+                <Label for='address'>
+                  آدرس <span className='text-danger'>*</span>
+                </Label>
+                <Controller
+                  name='address'
+                  control={control}
+                  render={({ field }) => <Input type='textarea' id='address' invalid={!!errors.address} {...field} />}
+                />
+                {errors.address && <FormFeedback>{errors.address.message}</FormFeedback>}
+              </div>
+            </Col>
+
+            {/* تلفن */}
+
             {/* دکمه ثبت */}
             <Col lg={12}>
               <Button color='primary' type='submit' block disabled={!isValid}>

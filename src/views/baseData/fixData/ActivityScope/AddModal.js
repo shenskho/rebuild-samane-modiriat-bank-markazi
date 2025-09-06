@@ -1,40 +1,32 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap'
-import { tuple } from 'yup'
-import { CreateScoreRatio, GetScoreRatio } from '@store/slices/variableData'
+
+import {  CreateActivityScope, GetActivityScope } from '@store/slices/fixData'
 import { useDispatch } from 'react-redux'
-import { number } from 'prop-types'
 export default function modal({ IsAddModal, SetIsAddModal }) {
   const [TitleName, SetTitleName] = useState('')
- 
   const [Invalid, SetInvalid] = useState(false)
   const dispatch = useDispatch()
-  const toggle = (row) => {
+  const toggle = () => {
     SetIsAddModal(!IsAddModal)
   }
   const CheskInput = (e) => {
     if (e.target.value.trim() === '') {
       SetInvalid(true)
       SetTitleName('')
-
-      SetComplementEvaluationRatio('')
     } else {
       SetInvalid(false)
       SetTitleName(e.target.value)
-
-      SetComplementEvaluationRatio(e.target.value)
     }
   }
-
   const AddCategory = () => {
     if (TitleName !== '') {
       dispatch(
-        CreateScoreRatio({
-          'title': TitleName,
-       
+        CreateActivityScope({
+          title: TitleName,
         })
-      ).then((response) => {
-        dispatch(GetScoreRatio())
+      ).then(() => {
+        dispatch(GetActivityScope())
         toggle()
       })
     } else {
@@ -44,13 +36,12 @@ export default function modal({ IsAddModal, SetIsAddModal }) {
 
   return (
     <Modal size='lg' isOpen={IsAddModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>اضافه کردن مجری آزمون کتبی</ModalHeader>
+      <ModalHeader toggle={toggle}>اضافه کردن گستره فعالیت </ModalHeader>
 
       <ModalBody>
-        <Label>مجری آزمون کتبی</Label>
-        <Input invalid={Invalid} placeholder=' عنوان' onChange={(e) => CheskInput(e)} />
+        <Label> گستره فعالیت </Label>
+        <Input invalid={Invalid} placeholder=' ' onChange={(e) => CheskInput(e)} />
       </ModalBody>
-   
 
       <ModalFooter>
         <Button color='danger' onClick={toggle}>

@@ -4,13 +4,14 @@ import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
 import { GetDutystatus } from '@store/slices/fixData'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { Navigate, useNavigate } from 'react-router-dom'
 import AddModal from './AddModal'
 import EditModal from './EditModal'
 import DeleteModal from './DeleteModal'
 import { Plus } from 'react-feather'
 
 export default function index() {
+  const navigate = useNavigate()
   const store = useSelector((state) => state.FixData)
 
   console.log(store)
@@ -79,8 +80,8 @@ export default function index() {
                 <p className='route-base-color'>
                   <span className='first-route-selected'>خانه</span> /{' '}
                   <span className='route-caption'>اطلاعات پایه</span> /{' '}
-                  <span className='route-caption'>اطلاعات متغیر</span> /{' '}
-                  <span className='route-caption'>وضعیت نظام وظیفه </span>
+                  <span className='route-caption' onClick={()=>navigate('/fixData')}>اطلاعات ثابت</span> /{' '}
+                  <span className='route-caption' onClick={()=>navigate('/dutyStatus')}>وضعیت نظام وظیفه </span>
                 </p>
               </Col>
               <Col lg={12}>
