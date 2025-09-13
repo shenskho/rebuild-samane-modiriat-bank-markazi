@@ -9,9 +9,14 @@ export async function readTypes() {
 
 
 ////////////UseMannager
-export async function readUsers(data) {
-  return await axios.post(urls.userManager.readUsers,data)
+export async function readUsers() {
+  return await axios.get(urls.userManager.readUsers)
 }
+export async function createUser(param) {
+  return await axios.post(urls.userManager.createUser, param)
+}
+
+
 export async function setUserPanelType(data) {
   return await axios.post(urls.userManager.setUserPanelType, data)
 }

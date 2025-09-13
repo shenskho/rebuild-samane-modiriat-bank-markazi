@@ -3,7 +3,7 @@ import '@core/scss/react/pages/page-authentication.scss'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { SignUp, ReadUsers } from '@store/slices/controlPanel'
+import { CreateUser, ReadUsers } from '@store/slices/controlPanel'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
@@ -22,7 +22,7 @@ export default function index() {
 
   const schema = yup.object({
     userName: yup.string().required('(الزامی)'),
-    passWord: yup
+    password: yup
       .string()
       .required('(الزامی)')
       .min(8, '(حداقل 8 کاراکتر)')
@@ -34,7 +34,9 @@ export default function index() {
       .min(8, '(حداقل 8 کاراکتر)')
       .max(50, '(حداکثر 50 کاراکتر)')
       .matches(/^(?=.*[a-z])(?=.*[0-9])/, 'باید تلفیقی از حروف انگلیسی و اعداد باشد'),
-    email: yup.string().email('ایمیل معتبر نمی باشد').required('(الزامی)')
+    email: yup.string().email('ایمیل معتبر نمی باشد').required('(الزامی)'),
+    firstname: yup.string().required('(الزامی)'),
+    lastname: yup.string().required('(الزامی)')
   })
 
   const {
@@ -51,8 +53,10 @@ export default function index() {
       { dataField: 'index', caption: '#', width: 'auto', cssClass: 'text-center' },
 
       { dataField: 'userName', caption: 'نام کاربری' },
-      { dataField: 'email', caption: 'ایمیل' },
 
+      { dataField: 'firstName', caption: 'نام' },
+      { dataField: 'lastName', caption: 'نام خوانوادگی' },
+      { dataField: 'email', caption: 'ایمیل' }
       // {
       //   caption: 'تخصیص نقش',
       //   type: 'buttons',
@@ -75,23 +79,23 @@ export default function index() {
       //   ]
       // }
     ],
-    rows: store.userList?.list
+    rows: store.userList?.items
   }
 
   const onSubmit = async (data) => {
-
-    if (data.passWord == data.rePassWord) {
-
-      dispatch(SignUp({
-        "userName": data.userName,
-        "password":  data.passWord,
-        "email": data.email
-      })).then(() => {
-        dispatch(ReadUsers({}))
+    if (data.password == data.rePassWord) {
+      dispatch(
+        CreateUser({
+          'roleName': 'operator',
+          'userName': data.userName,
+          'password': data.password,
+          'email': data.email,
+          'firstname': data.firstname,
+          'lastname': data.lastname
+        })
+      ).then(() => {
+        dispatch(ReadUsers())
       })
-
-
-
     } else {
       toast((t) => <ToastContent t={t} message={'کلمه های  عبور باهم تطابق ندارد'} />, {
         duration: 5000,
@@ -106,9 +110,7 @@ export default function index() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const { hasError, result } = await dispatch(
-          ReadUsers({})
-        ).unwrap()
+        const { hasError, result } = await dispatch(ReadUsers()).unwrap()
         if (!hasError) {
           SetPossitionList(result.items)
         }
@@ -124,7 +126,7 @@ export default function index() {
       <CardBody>
         <Form className='auth-login-form mt-2' onSubmit={handleSubmit(onSubmit)}>
           <Row>
-            <Col lg={3}>
+            <Col lg={6}>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
                   <Label for='userName'>
@@ -145,8 +147,50 @@ export default function index() {
                 />
               </div>
             </Col>
-
-            <Col lg={3}>
+               <Col lg={6}>
+              <div className='mb-1'>
+                <div className='d-flex justify-content-between'>
+                  <Label for='firstname'>
+                    نام  <span className='text-danger'>*</span>{' '}
+                    {errors.firstname && (
+                      <FormFeedback tag='span' className='d-inline'>
+                        {errors.firstname.message}
+                      </FormFeedback>
+                    )}
+                  </Label>
+                </div>
+                <Controller
+                  name='firstname'
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Input id='firstname' invalid={fieldState.error !== undefined} {...field} placeholder=' ' />
+                  )}
+                />
+              </div>
+            </Col>
+                <Col lg={6}>
+              <div className='mb-1'>
+                <div className='d-flex justify-content-between'>
+                  <Label for='lastname'>
+                    نام خوانوادگی  <span className='text-danger'>*</span>{' '}
+                    {errors.lastname && (
+                      <FormFeedback tag='span' className='d-inline'>
+                        {errors.lastname.message}
+                      </FormFeedback>
+                    )}
+                  </Label>
+                </div>
+                <Controller
+                  name='lastname'
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Input id='lastname' invalid={fieldState.error !== undefined} {...field} placeholder=' ' />
+                  )}
+                />
+              </div>
+            </Col>
+               
+            <Col lg={6}>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
                   <Label for='email'>
@@ -168,32 +212,37 @@ export default function index() {
               </div>
             </Col>
 
-            <Col lg={3}>
+            <Col lg={6}>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
-                  <Label for='passWord'>
+                  <Label for='password'>
                     کلمه ی عبور<span className='text-danger'>*</span>{' '}
-                    {errors.passWord && (
+                    {errors.password && (
                       <FormFeedback tag='span' className='d-inline'>
-                        {errors.passWord.message}
+                        {errors.password.message}
                       </FormFeedback>
                     )}
                   </Label>
                 </div>
                 <Controller
-                  name='passWord'
+                  name='password'
                   control={control}
                   render={({ field, fieldState }) => (
-                    <InputPasswordToggle id='passWord' invalid={fieldState.error !== undefined} {...field} placeholder=' ' />
+                    <InputPasswordToggle
+                      id='password'
+                      invalid={fieldState.error !== undefined}
+                      {...field}
+                      placeholder=' '
+                    />
                   )}
                 />
               </div>
             </Col>
-            <Col lg={3}>
+            <Col lg={6}>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
                   <Label for='rePassWord'>
-                  تکرار کلمه ی عبور <span className='text-danger'>*</span>{' '}
+                    تکرار کلمه ی عبور <span className='text-danger'>*</span>{' '}
                     {errors.rePassWord && (
                       <FormFeedback tag='span' className='d-inline'>
                         {errors.rePassWord.message}
@@ -205,7 +254,12 @@ export default function index() {
                   name='rePassWord'
                   control={control}
                   render={({ field, fieldState }) => (
-                    <InputPasswordToggle id='rePassWord'  invalid={fieldState.error !== undefined} {...field} placeholder=' ' />
+                    <InputPasswordToggle
+                      id='rePassWord'
+                      invalid={fieldState.error !== undefined}
+                      {...field}
+                      placeholder=' '
+                    />
                   )}
                 />
               </div>
@@ -223,7 +277,6 @@ export default function index() {
                   <h4>لیست کاربران</h4>
                 </CardHeader>
                 <CardBody>
-
                   <DxDataGrid
                     data={dataGridData}
                     paginationSize={10}
@@ -232,7 +285,6 @@ export default function index() {
                       useIcons: false
                     }}
                   />
-                  
                 </CardBody>
               </Card>
             </Col>

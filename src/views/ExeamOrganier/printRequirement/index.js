@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, CardBody, Row, Col, CardHeader, Button, Input, Label } from 'reactstrap'
+import { Card, CardBody, Row, Col, CardHeader, Button, Input, Label, Spinner } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,7 +9,10 @@ import {
   GetChaireNumber,
   GetMatchImage,
   GetPersonalAnswer,
-  GetSubsiteHelp
+  GetSubsiteHelp,
+  GetAllScopes,
+  GetAllAnware,
+  GetAllfinalExam
 } from '@store/slices/examScope'
 
 import Select from 'react-select'
@@ -24,7 +27,9 @@ export default function index() {
   console.log(store)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingAnsware, setIsLoadingAnsware] = useState(false)
+  const [isLoadingfinalExam, setIsLoadingfinalExam] = useState(false)
   const handeleGetAttendance = (scope) => {
     dispatch(GetAttendance(`?ExamId=1&SubSiteId=${scope}`)).then((response) => {
       const data = response.payload
@@ -134,6 +139,66 @@ export default function index() {
     })
   }
 
+  const handeleGetAllScopes = () => {
+    setIsLoading(true)
+    dispatch(GetAllScopes(`?ExamId=1`)).then((response) => {
+      // اینجا دیگه فقط Blob داری
+      const blob = response.payload
+
+      // اسم فایل رو دستی بده
+      const filename = 'گزارش_آزمون استخدامی بانک مرکزی.zip'
+
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = filename
+      link.click()
+      URL.revokeObjectURL(url)
+      setIsLoading(false)
+    })
+  }
+  const handeleGetAllAnware = () => {
+    setIsLoadingAnsware(true)
+    dispatch(GetAllAnware(`?ExamId=1`)).then((response) => {
+      // اینجا دیگه فقط Blob داری
+      const blob = response.payload
+
+      // اسم فایل رو دستی بده
+      const filename = 'پاسخ برگ استخدامی بانک مرکزی.zip'
+
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = filename
+      link.click()
+      URL.revokeObjectURL(url)
+      setIsLoadingAnsware(false)
+    })
+  }
+
+  const handeleShowMessage = () => {
+    toast((t) => <ToastContent t={t} message={'ابتدا حوزه مورد نظر را انتخاب کنید!'} />, {
+      duration: 5000,
+      style: {
+        background: 'var(--bs-danger)',
+        color: 'var(--bs-white)'
+      }
+    })
+  }
+  const handeleGetAllfinalExam = (scope) => {
+    setIsLoadingfinalExam(true)
+    dispatch(GetAllfinalExam(`?ExamId=1`)).then((response) => {
+      const blob = response.payload // مستقیم Blob
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+
+      link.download = `گزارش نهایی سازماندهی آزمون.xlsx`
+      link.click()
+      URL.revokeObjectURL(url)
+          setIsLoadingfinalExam(false)
+    })
+  }
   useEffect(() => {
     dispatch(GetExamScopeSecound())
   }, [])
@@ -155,7 +220,25 @@ export default function index() {
             <CardBody>
               <Row>
                 <Col lg={12}>
-                  <Label for='secoundScope'>حوزه</Label>
+                  <Button color='primary' className='w-100' onClick={() => handeleGetAllScopes()}>
+                    {isLoading ? <Spinner size={22} /> : ' دانلود(zip) خروجی کل حوزه ها'}
+                  </Button>
+                </Col>
+                <Col lg={12}>
+                  <Button color='primary' className='w-100 mt-1' onClick={() => handeleGetAllAnware()}>
+                    {isLoadingAnsware ? <Spinner size={22} /> : ' دانلود(zip) خروجی کل پاسخ برگ  ها'}
+                  </Button>
+                </Col>
+                <Col lg={12}>
+                  <Button color='primary' className='w-100 mt-1' onClick={() => handeleGetAllfinalExam()}>
+                    {isLoadingfinalExam ? <Spinner size={22} /> : ' دانلود(zip) خروجی گزارش نهایی سازماندهی آرمون'}
+                  </Button>
+                </Col>
+
+                <Col lg={12}>
+                  <Label for='secoundScope' className='header-font'>
+                    حوزه
+                  </Label>
                   <Select
                     id='secoundScope'
                     placeholder='انتخاب حوزه فرعی'
@@ -171,17 +254,7 @@ export default function index() {
                 <Col>
                   <div
                     className='printRequirement text-center'
-                    onClick={() =>
-                      secoundScope === 0
-                        ? toast((t) => <ToastContent t={t} message={'ابتدا حوزه مورد نظر را انتخاب کنید!'} />, {
-                            duration: 5000,
-                            style: {
-                              background: 'var(--bs-danger)',
-                              color: 'var(--bs-white)'
-                            }
-                          })
-                        : handeleGetMatchImage(secoundScope)
-                    }
+                    onClick={() => (secoundScope === 0 ? handeleShowMessage() : handeleGetMatchImage(secoundScope))}
                   >
                     <div className='w-100 d-flex justify-content-center'>
                       <Download size={25} color='#04364a' />
@@ -195,17 +268,7 @@ export default function index() {
                 <Col>
                   <div
                     className='printRequirement text-center'
-                    onClick={() =>
-                      secoundScope === 0
-                        ? toast((t) => <ToastContent t={t} message={'ابتدا حوزه مورد نظر را انتخاب کنید!'} />, {
-                            duration: 5000,
-                            style: {
-                              background: 'var(--bs-danger)',
-                              color: 'var(--bs-white)'
-                            }
-                          })
-                        : handeleGetAttendance(secoundScope)
-                    }
+                    onClick={() => (secoundScope === 0 ? handeleShowMessage() : handeleGetAttendance(secoundScope))}
                   >
                     <div className='w-100 d-flex justify-content-center'>
                       <Download size={25} color='#04364a' />
@@ -218,17 +281,7 @@ export default function index() {
                 <Col>
                   <div
                     className='printRequirement text-center'
-                    onClick={() =>
-                      secoundScope === 0
-                        ? toast((t) => <ToastContent t={t} message={'ابتدا حوزه مورد نظر را انتخاب کنید!'} />, {
-                            duration: 5000,
-                            style: {
-                              background: 'var(--bs-danger)',
-                              color: 'var(--bs-white)'
-                            }
-                          })
-                        : handeleGetChaireNumber(secoundScope)
-                    }
+                    onClick={() => (secoundScope === 0 ? handeleShowMessage() : handeleGetChaireNumber(secoundScope))}
                   >
                     <div className='w-100 d-flex justify-content-center'>
                       <Download size={25} color='#04364a' />
@@ -241,17 +294,7 @@ export default function index() {
                 <Col>
                   <div
                     className='printRequirement text-center'
-                    onClick={() =>
-                      secoundScope === 0
-                        ? toast((t) => <ToastContent t={t} message={'ابتدا حوزه مورد نظر را انتخاب کنید!'} />, {
-                            duration: 5000,
-                            style: {
-                              background: 'var(--bs-danger)',
-                              color: 'var(--bs-white)'
-                            }
-                          })
-                        : handeleGetPersonalAnswer(secoundScope)
-                    }
+                    onClick={() => (secoundScope === 0 ? handeleShowMessage() : handeleGetPersonalAnswer(secoundScope))}
                   >
                     <div className='w-100 d-flex justify-content-center'>
                       <Download size={25} color='#04364a' />
@@ -264,17 +307,7 @@ export default function index() {
                 <Col>
                   <div
                     className='printRequirement text-center'
-                    onClick={() =>
-                      secoundScope === 0
-                        ? toast((t) => <ToastContent t={t} message={'ابتدا حوزه مورد نظر را انتخاب کنید!'} />, {
-                            duration: 5000,
-                            style: {
-                              background: 'var(--bs-danger)',
-                              color: 'var(--bs-white)'
-                            }
-                          })
-                        : handeleGetSubsiteHelp(secoundScope)
-                    }
+                    onClick={() => (secoundScope === 0 ? handeleShowMessage() : handeleGetSubsiteHelp(secoundScope))}
                   >
                     <div className='w-100 d-flex justify-content-center'>
                       <Download size={25} color='#04364a' />

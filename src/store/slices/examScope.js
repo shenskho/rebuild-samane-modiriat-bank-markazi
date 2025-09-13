@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { examScope as apis } from '@api'
-import { getAttendance, getChaireNumber, getMatchImage } from '@api/examScope'
+
+import { getAttendance, getChaireNumber, getMatchImage, getAllScopes } from '@api/examScope'
 
 /////////////////////main/////////////////////
 
@@ -89,6 +90,22 @@ export const GetSubsiteHelp = createAsyncThunk('examScope/getSubsiteHelp', async
   const response = await apis.getSubsiteHelp(param)
   return response.data
 })
+export const GetAllScopes = createAsyncThunk('examScope/getAllScopes', async (param) => {
+  const response = await apis.getAllScopes(param)
+  return response.data
+})
+export const GetAllAnware = createAsyncThunk('examScope/getAllAnware', async (param) => {
+  const response = await apis.getAllAnware(param)
+  return response.data
+})
+
+export const GetAllfinalExam = createAsyncThunk('examScope/getAllfinalExam', async (param) => {
+  const response = await apis.getAllfinalExam(param)
+  return response.data
+})
+
+
+
 
 export const examScope = createSlice({
   name: 'examScope',

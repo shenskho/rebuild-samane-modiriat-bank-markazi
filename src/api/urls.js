@@ -14,7 +14,7 @@ export default {
   },
   file: {
     uploadFile: `${PREFIX}/File/upload-base64-doc`,
-    readFile: `${PREFIX}/File/get-base64-doc?`
+    readFile: `${PREFIX}/File/get-base64-doc?DocumentId=`
   },
   license: {
     getlicenses: `${PREFIX}/License/get-all-Licenses`,
@@ -97,6 +97,14 @@ export default {
     updateOrganizations: `${PREFIX}/Organization/update-Organization`,
     removeOrganizations: `${PREFIX}/Organization/delete-Organization`
   },
+  Ticket: {
+    getTickets: `${PREFIX}/Ticket/get-all-tickets-pagination?PageSize=99999999`,
+    answareTicket: `${PREFIX}/Ticket/answer-ticket`,
+    takeTicket: `${PREFIX}/Ticket/assign-ticket-operator`,
+    getUser: `${PREFIX}/Applicant/get-total-applicant-info?ApplicantId=`,
+    editUser: `${PREFIX}/Applicant/edit-total-applicant-info`,
+    getTicket:`${PREFIX}/Ticket/get-ticket?Id=`
+  },
   ///////////////////////////variableData//////////////////////////
   ScoreRatio: {
     getScoreRatio: `${PREFIX}/ScoreRatio/get-all-score-ratios-pagination`,
@@ -162,7 +170,10 @@ export default {
     getMatchImage: `${PREFIX}/Report/get-matching-album`,
     getChaireNumber: `${PREFIX}/Report/get-seating-number`,
     getAttendance: `${PREFIX}/Report/get-attendance`,
-    getSubsiteHelp: `${PREFIX}/Report/get-subsite-help`
+    getSubsiteHelp: `${PREFIX}/Report/get-subsite-help`,
+    getAllScopes: `${PREFIX}/Report/get-exam-export`,
+    getAllAnware: `${PREFIX}/Report/get-total-personal-answers`,
+    getAllfinalExam: `${PREFIX}/Report/get-final-excel`
   },
 
   /*************************************************************smaple*******************************************************************/ report:
@@ -186,7 +197,8 @@ export default {
     readUsers: `${PREFIX}/UserManager/read-user`,
     setUserPanelType: `${PREFIX}/UserManager/set-user-panel-type`,
     addRoleToUser: `${PREFIX}/UserManager/add-role-to-user`,
-    readUserRole: `${PREFIX}/UserManager/read-user-role`
+    readUserRole: `${PREFIX}/UserManager/read-user-role`,
+    createUser: `${PREFIX}/UserManager/create-user`
   },
   panelType: {
     readTypes: `${PREFIX}/PanelType/get-all-panel-types`

@@ -14,7 +14,7 @@ import License from './slices/license'
 
 import FixData from './slices/fixData'
 import variableData from './slices/variableData'
-
+import operator from './slices/operator'
 import examScope from './slices/examScope'
 
 
@@ -36,7 +36,8 @@ const appReducer = combineReducers({
   FixData,
   variableData,
   License,
-  examScope
+  examScope,
+  operator
 })
 
 const rootReducer = (state, action) => {

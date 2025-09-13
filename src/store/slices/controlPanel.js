@@ -13,7 +13,8 @@ import {
   readUserRole,
   getReportPermissionsToCategory,
   setReportPermissionsToCategory,
-  getAllCategory
+  getAllCategory,
+  createUser
 } from '@api/controlPanel'
 
 import { signUp } from '@api/auth'
@@ -23,8 +24,13 @@ export const SignUp = createAsyncThunk('controlPanel/SignUp', async (data) => {
   return response.data
 })
 
-export const ReadUsers = createAsyncThunk('controlPanel/readUsers', async (data) => {
-  const response = await readUsers(data)
+export const ReadUsers = createAsyncThunk('controlPanel/readUsers', async () => {
+  const response = await readUsers()
+
+  return response.data.result
+})
+export const CreateUser = createAsyncThunk('controlPanel/createUser', async (param) => {
+  const response = await createUser(param)
 
   return response.data.result
 })
@@ -82,22 +88,26 @@ export const GetAllReports = createAsyncThunk('controlPanel/getAllReports', asyn
   const response = await getAllReports(data)
   return response.data.result
 })
-export const GetReportPermissionsToCategory = createAsyncThunk( 'controlPanel/getReportPermissionsToCategory', async (data) => {
+export const GetReportPermissionsToCategory = createAsyncThunk(
+  'controlPanel/getReportPermissionsToCategory',
+  async (data) => {
     const response = await getReportPermissionsToCategory(data)
 
     return response.data.result
   }
 )
-export const SetReportPermissionsToCategory = createAsyncThunk('controlPanel/setReportPermissionsToCategory', async (data) => {
-  const response = await setReportPermissionsToCategory(data)
-  return response.data.result
-})
+export const SetReportPermissionsToCategory = createAsyncThunk(
+  'controlPanel/setReportPermissionsToCategory',
+  async (data) => {
+    const response = await setReportPermissionsToCategory(data)
+    return response.data.result
+  }
+)
 
 export const GetAllCategory = createAsyncThunk('controlPanel/getAllCategory', async () => {
   const response = await getAllCategory()
   return response.data?.result
 })
-
 
 export const controlPanel = createSlice({
   name: 'controlPanel',
@@ -109,7 +119,7 @@ export const controlPanel = createSlice({
     Reports: [],
     userRoles: [],
     userCategorys: [],
-    categorys:[]
+    categorys: []
   },
   reducers: {},
   extraReducers: (builder) => {

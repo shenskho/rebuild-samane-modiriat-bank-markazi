@@ -64,11 +64,14 @@ export const Extralogin = createAsyncThunk('authentication/login', async (arg) =
           localStorage.setItem('token', result.token)
     localStorage.setItem('refreshToken', result.refreshToken)
     localStorage.setItem('tokenExpiryTime', result.expiredAt)
-    localStorage.setItem('role', 'result.roles')
-    localStorage.setItem('username', 'result.username')
-    localStorage.setItem('firstName', 'result.userFullname')
-    localStorage.setItem('lastName', `(${'result.postTitle'})`)
-    localStorage.setItem('panelTypeTitle', 'result.panelTypeTitle')
+    localStorage.setItem('role', result.roleName)
+    localStorage.setItem('username', result.username)
+    localStorage.setItem('firstName', result.firstName)
+    localStorage.setItem('lastName',  result.lastName)
+    localStorage.setItem('panelTypeTitle', result.roleName)
+
+  
+  
       // localStorage.setItem('token', result.token)
       // localStorage.setItem('refreshToken', result.refreshToken)
       // localStorage.setItem('tokenExpiryTime', result.expiredAt)

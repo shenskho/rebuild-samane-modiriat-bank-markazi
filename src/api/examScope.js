@@ -66,7 +66,18 @@ export async function getAttendance(param) {
   return await axios.get(urls.Report.getAttendance + param)
 }
 
-
 export async function getSubsiteHelp(param) {
   return await axiosBlob.get(urls.Report.getSubsiteHelp + param)
 }
+export async function getAllScopes(param) {
+  return await axiosBlob.get(urls.Report.getAllScopes + param)
+}
+
+export async function getAllAnware(param) {
+  return await axiosBlob.get(urls.Report.getAllAnware + param)
+}
+
+export async function getAllfinalExam(param) {
+  return await axiosBlob.get(urls.Report.getAllfinalExam + param)
+}
+

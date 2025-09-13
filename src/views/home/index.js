@@ -1,9 +1,10 @@
 import ChartsSection from './ChartsSection/ChartsSection'
 import CalendarSection from './CalendarSection/CalendarSection'
-import SidebarSection from "./SidebarSection/SidebarSection"
+import SidebarSection from './SidebarSection/SidebarSection'
 import { useEffect, useState } from 'react'
 import { recruitmentData } from './data'
-import { Col ,Row} from 'reactstrap'
+import { Col, Row } from 'reactstrap'
+import Operators from '../operators'
 export default function index() {
   // useAuth().panelTypeTitle
   // const navigate = useNavigate()
@@ -65,22 +66,28 @@ export default function index() {
 
   return (
     <div className='dashboard'>
-      <ChartsSection />
-       <Row className='text-right'>
-  
-         <Col lg={9}>
+      {localStorage.getItem('role') === 'SuperAdmin' ? (
+        <>
+         <Operators/>
+          {/* {' '}
+          <ChartsSection />
+          <Row className='text-right'>
+            <Col lg={9}>
               <CalendarSection
-        events={events}
-        onAddEvent={handleAddEvent}
-        onUpdateEvent={handleUpdateEvent}
-        onDeleteEvent={handleDeleteEvent}
-      />
-        </Col>
-              <Col lg={3}>
-          <SidebarSection events={events}/>
-        </Col>
-       </Row>
-
+                events={events}
+                onAddEvent={handleAddEvent}
+                onUpdateEvent={handleUpdateEvent}
+                onDeleteEvent={handleDeleteEvent}
+              />
+            </Col>
+            <Col lg={3}>
+              <SidebarSection events={events} />
+            </Col>
+          </Row> */}
+        </>
+      ) : (
+     <Operators/>
+      )}
     </div>
   )
 }

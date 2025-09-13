@@ -4,4 +4,5 @@ import * as fixData from './fixData'
 import * as variableData from './variableData'
 import * as license from './license'
 import * as examScope from './examScope'
-export { authAPI, dailyReport, fixData, variableData, license,examScope }
+import * as operators from './operators'
+export { authAPI, dailyReport, fixData, variableData, license, examScope, operators }

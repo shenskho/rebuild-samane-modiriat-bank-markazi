@@ -17,7 +17,7 @@ export default function index() {
           </CardHeader>
         </Card>
       </Col>
-
+{/* 
       <Col lg={4}>
         <Card style={{ backgroundColor: '#f9844a' }} className='panel-card' onClick={() => navigate('/role')}>
           <CardHeader className='d-flex justify-content-between '>
@@ -58,7 +58,7 @@ export default function index() {
             <img src={AccessControl} width={60} height={60} />
           </CardHeader>
         </Card>
-      </Col>
+      </Col> */}
     </Row>
   )
 }
