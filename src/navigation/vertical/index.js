@@ -58,7 +58,7 @@ export default [
     title: 'سازماندهی آزمون',
     icon: <FaUsersCog />,
     children: [
-      { title: 'معرفی آزمون' },
+      { title: 'معرفی آزمون', navLink: './IntroductionExams' },
       { title: 'لیست نفرات' },
       { title: 'عوامل اجرایی مجری' },
       { title: 'حوزه آزمون', navLink: '/examScope' },
@@ -66,7 +66,8 @@ export default [
       { title: 'ملزومات چاپی', navLink: '/printRequirement' },
       { title: 'مدیریت حوزه‌های آزمون', navLink: '/examCenter' },
       { title: 'قرنطینه سوال' },
-      { title: 'طراح سوال' },
+      { title: 'قرنطینه چاپ', navLink: '/printQuarantine' },
+      { title: 'طراح سوال', navLink:'/questionDesigner' },
       { title: 'تولید دفترچه آزمون' }
     ]
   },

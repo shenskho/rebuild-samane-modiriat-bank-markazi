@@ -28,7 +28,7 @@ export default function UserDropdown() {
         <Avatar img={defaultAvatar} imgHeight='50' imgWidth='50' />
       </DropdownToggle>
       <DropdownMenu end>
-        {panelTypeTitle === 'superadmin' ? (
+        {panelTypeTitle === 'SuperAdmin' ? (
           <DropdownItem tag='span' onClick={() => navigate('./controlPanel')}>
             <Settings size={14} className='me-75' />
             <span className='align-middle'>پنل مدیریت</span>

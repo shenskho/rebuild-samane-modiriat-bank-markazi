@@ -69,6 +69,25 @@ export const updateEducationLevel = createAsyncThunk('fixData/updateEducationLev
   const response = await apis.updateEducationLevel(param)
   return response.data.result
 })
+
+/////////////////EducationFils///////////////
+export const GetEducationField = createAsyncThunk('fixData/getEducationField', async (param) => {
+  const response = await apis.getEducationField(param)
+  return response.data.result
+})
+export const CreateEducationField = createAsyncThunk('fixData/createEducationField', async (param) => {
+  const response = await apis.createEducationField(param)
+  return response.data.result
+})
+export const RemoveEducationField = createAsyncThunk('fixData/removeEducationField', async (param) => {
+  const response = await apis.removeEducationField(param)
+  return response.data.result
+})
+export const UpdateEducationField = createAsyncThunk('fixData/updateEducationField', async (param) => {
+  const response = await apis.updateEducationField(param)
+  return response.data.result
+})
+
 //////////////Quota/////////////////
 export const GetQuota = createAsyncThunk('fixData/getQuota', async () => {
   const response = await apis.getQuota()
@@ -189,13 +208,6 @@ export const updateVeteran = createAsyncThunk('fixData/updateVeteran', async (pa
   return response.data.result
 })
 
-
-
-
-
-
-
-
 export const addReport = createSlice({
   name: 'fixData',
   initialState: {
@@ -203,13 +215,14 @@ export const addReport = createSlice({
     organizations: [],
     Province: [],
     EducationLevel: [],
+    EducationField: [],
     Quota: [],
-    Religion:[],
-    EmploymentType:[],
-    UniversityType:[],
-    City:[],
-    ActivityScope:[],
-    Veteran:[],
+    Religion: [],
+    EmploymentType: [],
+    UniversityType: [],
+    City: [],
+    ActivityScope: [],
+    Veteran: []
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -240,14 +253,16 @@ export const addReport = createSlice({
     builder.addCase(GetReligion.fulfilled, (state, action) => {
       state.Religion = action.payload
     })
-     builder.addCase(GetEmploymentType.fulfilled, (state, action) => {
+    builder.addCase(GetEmploymentType.fulfilled, (state, action) => {
       state.EmploymentType = action.payload
     })
-       builder.addCase(GetUniversityType.fulfilled, (state, action) => {
+    builder.addCase(GetUniversityType.fulfilled, (state, action) => {
       state.UniversityType = action.payload
     })
-  },
+    builder.addCase(GetEducationField.fulfilled, (state, action) => {
+      state.EducationField = action.payload
+    })
+  }
 })
-
 
 export default addReport.reducer

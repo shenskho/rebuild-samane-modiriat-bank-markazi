@@ -32,6 +32,8 @@ const ExamSecoundScope = lazy(() => import('@views/ExeamOrganier/examSecoundScop
 const PrintRequirement = lazy(() => import('@views/ExeamOrganier/printRequirement'))
 const ActivityScope = lazy(() => import('@views/baseData/fixData/ActivityScope'))
 const Veteran = lazy(() => import('@views/baseData/fixData/Veteran'))
+const IntroductionExams = lazy(() => import('@views/ExeamOrganier/IntroductionExams'))
+const questionDesigner = lazy(() => import('@views/ExeamOrganier/questionDesigner'))
 const AdminRoutes = [
   {
     path: '/home',
@@ -55,6 +57,15 @@ const AdminRoutes = [
     meta: {
       action: 'read',
       resource: '/variableData'
+    }
+  },
+ 
+  {
+    path: '/IntroductionExams',
+    element: <IntroductionExams />,
+    meta: {
+      action: 'read',
+      resource: '/IntroductionExams'
     }
   },
   {

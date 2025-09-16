@@ -16,7 +16,7 @@ import FixData from './slices/fixData'
 import variableData from './slices/variableData'
 import operator from './slices/operator'
 import examScope from './slices/examScope'
-
+import examOrganizer from './slices/examOrganizer'
 
 const configs = {
   key: 'root',
@@ -37,7 +37,8 @@ const appReducer = combineReducers({
   variableData,
   License,
   examScope,
-  operator
+  operator,
+  examOrganizer
 })
 
 const rootReducer = (state, action) => {

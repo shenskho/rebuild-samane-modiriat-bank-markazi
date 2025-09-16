@@ -80,4 +80,20 @@ export async function getAllAnware(param) {
 export async function getAllfinalExam(param) {
   return await axiosBlob.get(urls.Report.getAllfinalExam + param)
 }
+///////////////////////IntroductionExams//////////////
+export async function getIntroductionExams() {
+  return await axios.get(urls.IntroductionExams.getIntroductionExams)
+}
+
+export async function createIntroductionExams(param) {
+  return await axios.post(urls.IntroductionExams.createIntroductionExams, param)
+}
+
+export async function updateIntroductionExams(param) {
+  return await axios.post(urls.IntroductionExams.updateIntroductionExams, param)
+}
+
+export async function removeIntroductionExams(param) {
+  return await axios.post(urls.IntroductionExams.removeIntroductionExams, param)
+}
 

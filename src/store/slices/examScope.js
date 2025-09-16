@@ -103,7 +103,26 @@ export const GetAllfinalExam = createAsyncThunk('examScope/getAllfinalExam', asy
   const response = await apis.getAllfinalExam(param)
   return response.data
 })
+/////////////////////////////////IntroductionExams///////////
+export const GetIntroductionExams = createAsyncThunk('examScope/getIntroductionExams', async () => {
+  const response = await apis.getIntroductionExams()
+  return response.data.result
+})
 
+export const CreateIntroductionExams = createAsyncThunk('examScope/createIntroductionExams', async (param) => {
+  const response = await apis.createIntroductionExams(param)
+  return response.data.result
+})
+
+export const UpdateIntroductionExams = createAsyncThunk('examScope/updateIntroductionExams', async (param) => {
+  const response = await apis.updateIntroductionExams(param)
+  return response.data.result
+})
+
+export const RemoveIntroductionExams = createAsyncThunk('examScope/removeIntroductionExams', async (param) => {
+  const response = await apis.removeIntroductionExams(param)
+  return response.data.result
+})
 
 
 
@@ -113,7 +132,8 @@ export const examScope = createSlice({
     mainScopes: [],
     secoundScopes: [],
     citys: [],
-    province: []
+    province: [],
+    IntroductionExams:[]
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -121,6 +141,9 @@ export const examScope = createSlice({
 
       .addCase(GetExamScope.fulfilled, (state, action) => {
         state.mainScopes = action.payload
+      })
+      .addCase(GetIntroductionExams.fulfilled, (state, action) => {
+        state.IntroductionExams = action.payload
       })
       .addCase(GetExamScopeSecound.fulfilled, (state, action) => {
         state.secoundScopes = action.payload

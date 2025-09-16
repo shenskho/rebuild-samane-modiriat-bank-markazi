@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { operators as apis } from '@api'
 /////////////////////ScoreRatio/////////////////////
-export const GetTickets = createAsyncThunk('operator/getTickets', async () => {
-  const response = await apis.getTickets()
+export const GetTickets = createAsyncThunk('operator/getTickets', async ({ page, pageSize }) => {
+  const response = await apis.getTickets(page, pageSize)
   return response.data.result
 })
 
@@ -29,8 +29,6 @@ export const EditUser = createAsyncThunk('operator/editUser', async (param) => {
   return response.data.result
 })
 
-
-
 export const Removelicense = createAsyncThunk('operator/removelicense', async (param) => {
   const response = await apis.removelicense(param)
   return response.data.result
@@ -53,12 +51,14 @@ export const addReport = createSlice({
   name: 'operator',
   initialState: {
     licenses: [],
-    tickets: []
+    tickets: [],
+    totalCount: 0
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(GetTickets.fulfilled, (state, action) => {
-      state.tickets = action.payload
+      state.tickets = action.payload.items
+      state.totalCount = action.payload.totalCount
     })
   }
 })

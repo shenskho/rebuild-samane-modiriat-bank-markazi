@@ -2,27 +2,32 @@ import React, { useEffect, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Row } from 'reactstrap'
 import { GetTickets, AnswareTicket, TakeTicket, ReadFile, GetUseretTicket } from '@store/slices/operator'
 import { useDispatch } from 'react-redux'
-
-import DatePicker from 'react-multi-date-picker'
-import persian from 'react-date-object/calendars/persian'
-import persian_fa from 'react-date-object/locales/persian_fa'
-import gregorian from 'react-date-object/calendars/gregorian'
 import UserEditModal from './EditUser'
-import { Flag } from 'react-feather'
+import { MdSupport, MdSupportAgent } from 'react-icons/md'
+import { Download } from 'react-feather'
 
 export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   const [titleName, setTitleName] = useState('')
   const [Invalid, SetInvalid] = useState(false)
   const [isUserEditModal, setIsUserEditModal] = useState(false) // 👈 state برای مودال دوم
   const [userInfo, setUserInfo] = useState(null)
-   const [isAccept, SetisAcceptd] = useState(true)
+  const [isAccept, SetisAcceptd] = useState(true)
+  const [operatorName, setOperatorName] = useState(item?.operatorUserFullname || '')
   const dispatch = useDispatch()
 
-  const toggle = () => SetIsEditModal(!IsEditModal)
+  const toggle = () => {
+    SetIsEditModal(!IsEditModal)
+    if (IsEditModal) {
+      setTitleName('')
+      SetInvalid(false)
+      SetisAcceptd(true)
+    }
+  }
+
   const toggleUserEdit = () => {
     dispatch(GetUseretTicket(item.applicantId)).then((response) => {
       setIsUserEditModal(!isUserEditModal)
-      // 
+      //
       console.log(response.payload.item)
       setUserInfo(response.payload.item)
     })
@@ -56,20 +61,26 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
   }
 
   useEffect(() => {
-    setTitleName(item.title)
-    if(item.operatorUserId != null)
-    {
-      SetisAcceptd(false)
+    if (item) {
+      setTitleName(item.answerDescription || '')
+      setOperatorName(item.operatorUserFullname || '')
+      if (item.operatorUserId !== null) {
+        SetisAcceptd(false)
+      } else {
+        SetisAcceptd(true)
+      }
     }
-  }, [item.title])
+  }, [item])
 
   const handeleAcceptRequest = () => {
-    dispatch(TakeTicket({ ticketId: item.id }).them((response) => {
-      if(response.payload)
-      {
-         SetisAcceptd(false)
+    dispatch(TakeTicket({ ticketId: item.id })).then((response) => {
+      if (response.payload) {
+        SetisAcceptd(false)
+
+        setOperatorName(`${localStorage.getItem("firstName")} - ${localStorage.getItem("lastName")}  `)
+        dispatch(GetTickets())
       }
-    }))
+    })
   }
 
   const handleDownload = () => {
@@ -88,19 +99,33 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
         <ModalHeader toggle={toggle}>پاسخ به تیکت</ModalHeader>
         <ModalBody>
           <Row>
-            {!item.isClosed && (
+            {isAccept ? (
               <Button color='primary' onClick={handeleAcceptRequest}>
                 شروع پشتیبانی
               </Button>
+            ) : (
+              <h5 className='main-color'>
+                <MdSupportAgent size={30} color='#04364a' />
+                {`پشتیبان : ${operatorName}`}
+              </h5>
             )}
           </Row>
-          <h4 className='mt-2'>متن درخواست</h4>
-          <p className='p-1 request-text'>{item.applicantDescription}</p>
+
+          <h5 className='mt-2'>متن درخواست</h5>
+          <p className='p-1 request-text rounded'>{item.applicantDescription}</p>
           <p className='download-text' onClick={handleDownload}>
-            دانلود فایل پیوست
+            دانلود فایل
+            <Download size={20} className='ml-05' />
           </p>
           <Label>پاسخ به تیکت </Label>
-          <Input value={titleName} type='textarea' disabled={!isAccept} invalid={Invalid} placeholder=' ' onChange={CheskInput} />
+          <Input
+            value={titleName}
+            type='textarea'
+            disabled={isAccept}
+            invalid={Invalid}
+            placeholder=' '
+            onChange={CheskInput}
+          />
         </ModalBody>
 
         <Button color='success' className='m-2' onClick={toggleUserEdit}>
@@ -117,8 +142,7 @@ export default function EditModal({ IsEditModal, SetIsEditModal, item }) {
         </ModalFooter>
       </Modal>
 
-      
-        <UserEditModal isOpen={isUserEditModal} toggle={toggleUserEdit} TicketID={item.id}  userInfo={userInfo}/>
-          </>
+      <UserEditModal isOpen={isUserEditModal} toggle={toggleUserEdit} TicketID={item.id} userInfo={userInfo} />
+    </>
   )
 }

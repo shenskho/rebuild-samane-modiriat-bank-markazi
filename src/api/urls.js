@@ -23,7 +23,7 @@ export default {
     removelicense: `${PREFIX}/License/delete-License`
   },
   dustyStatus: {
-    getDutystatus: `${PREFIX}/MilitaryState/get-all-military-states-pagination`,
+    getDutystatus: `${PREFIX}/MilitaryState/get-all-military-states-pagination?PageSize=999999`,
     createDutystatus: `${PREFIX}/MilitaryState/create-military-state`,
     updateDutystatus: `${PREFIX}/MilitaryState/update-military-state`,
     removeDutystatus: `${PREFIX}/MilitaryState/delete-military-state`
@@ -49,31 +49,31 @@ export default {
   },
 
   ActivityScope: {
-    getActivityScope: `${PREFIX}/ActivityScope/get-all-activity-scopes-pagination?PageSize=9999`,
+    getActivityScope: `${PREFIX}/ActivityScope/get-all-activity-scopes-pagination?PageSize=999999`,
     createActivityScope: `${PREFIX}/ActivityScope/create-activity-scope`,
     updateActivityScope: `${PREFIX}/ActivityScope/update-activity-scope`,
     removeActivityScope: `${PREFIX}/ActivityScope/delete-activity-scope`
   },
   Quota: {
-    getQuota: `${PREFIX}/Quota/get-all-quotas-pagination`,
+    getQuota: `${PREFIX}/Quota/get-all-quotas-pagination?PageSize=999999`,
     createQuota: `${PREFIX}/Quota/create-quota`,
     updateQuota: `${PREFIX}/Quota/update-quota`,
     removeQuota: `${PREFIX}/Quota/delete-quota`
   },
   EducationLevel: {
-    getEducationLevel: `${PREFIX}/EducationLevel/get-all-education-levels-pagination`,
+    getEducationLevel: `${PREFIX}/EducationLevel/get-all-education-levels-pagination?PageSize=999999`,
     createEducationLevel: `${PREFIX}/EducationLevel/create-education-level`,
     updateEducationLevel: `${PREFIX}/EducationLevel/update-education-level`,
     removeEducationLevel: `${PREFIX}/EducationLevel/delete-education-level`
   },
   EmploymentType: {
-    getEmploymentType: `${PREFIX}/EmploymentType/get-all-employment-types-pagination`,
+    getEmploymentType: `${PREFIX}/EmploymentType/get-all-employment-types-pagination?PageSize=999999`,
     createEmploymentType: `${PREFIX}/EmploymentType/create-employment-type`,
     updateEmploymentType: `${PREFIX}/EmploymentType/update-employment-type`,
     removeEmploymentType: `${PREFIX}/EmploymentType/delete-employment-type`
   },
   UniversityType: {
-    getUniversityType: `${PREFIX}/UniversityType/get-all-university-types-pagination`,
+    getUniversityType: `${PREFIX}/UniversityType/get-all-university-types-pagination?PageSize=999999`,
     createUniversityType: `${PREFIX}/UniversityType/create-university-type`,
     updateUniversityType: `${PREFIX}/UniversityType/update-university-type`,
     removeUniversityType: `${PREFIX}/UniversityType/delete-university-type`
@@ -85,29 +85,37 @@ export default {
     removeUniversity: `${PREFIX}/University/delete-university`
   },
   Religion: {
-    getReligion: `${PREFIX}/Religion/get-all-religions-pagination`,
+    getReligion: `${PREFIX}/Religion/get-all-religions-pagination?PageSize=999999`,
     createReligion: `${PREFIX}/Religion/create-religion`,
     updateReligion: `${PREFIX}/Religion/update-religion`,
     removeReligion: `${PREFIX}/Religion/delete-religion`
   },
 
   Organization: {
-    getOrganizations: `${PREFIX}/Organization/get-all-organizations-pagination`,
+    getOrganizations: `${PREFIX}/Organization/get-all-organizations-pagination?PageSize=999999`,
     createOrganizations: `${PREFIX}/Organization/create-Organization`,
     updateOrganizations: `${PREFIX}/Organization/update-Organization`,
     removeOrganizations: `${PREFIX}/Organization/delete-Organization`
   },
   Ticket: {
-    getTickets: `${PREFIX}/Ticket/get-all-tickets-pagination?PageSize=99999999`,
+    getTickets: `${PREFIX}/Ticket/get-all-tickets-pagination`,
     answareTicket: `${PREFIX}/Ticket/answer-ticket`,
     takeTicket: `${PREFIX}/Ticket/assign-ticket-operator`,
     getUser: `${PREFIX}/Applicant/get-total-applicant-info?ApplicantId=`,
     editUser: `${PREFIX}/Applicant/edit-total-applicant-info`,
     getTicket:`${PREFIX}/Ticket/get-ticket?Id=`
   },
+  
+    PrintQuarantine: {
+    getQuarantineAllSubSutes: `${PREFIX}/PrintQuarantine/get-quarantine-of-all-sub-sites`,
+    getQuarantineOfSubSite: `${PREFIX}/PrintQuarantine/get-quarantine-of-sub-site`,
+    setPrintQuarantineOfSubSite: `${PREFIX}/PrintQuarantine/set-print-quarantine-of-sub-site`,
+    setRecevierInfo: `${PREFIX}/PrintQuarantine/set-receiver-info`,
+    getRemainingReport: `${PREFIX}/PrintQuarantine/get-remaining-report`
+  },
   ///////////////////////////variableData//////////////////////////
   ScoreRatio: {
-    getScoreRatio: `${PREFIX}/ScoreRatio/get-all-score-ratios-pagination`,
+    getScoreRatio: `${PREFIX}/ScoreRatio/get-all-score-ratios-pagination?PageSize=999999`,
     createScoreRatio: `${PREFIX}/ScoreRatio/create-score-ratio`,
     updateScoreRatio: `${PREFIX}/ScoreRatio/update-score-ratio`,
     removeScoreRatio: `${PREFIX}/ScoreRatio/delete-score-ratio`
@@ -125,7 +133,7 @@ export default {
     removeComplementEvaluationAgency: `${PREFIX}/ComplementEvaluationAgency/delete-complement-evaluation-agency`
   },
   EducationField: {
-    getEducationField: `${PREFIX}/EducationField/get-all-education-fields`,
+    getEducationField: `${PREFIX}/EducationField/get-all-education-fields-pagination?PageSize=999999&EducationLevelId=`,
     createEducationField: `${PREFIX}/EducationField/create-education-field`,
     updateEducationField: `${PREFIX}/EducationField/update-education-field`,
     removeEducationField: `${PREFIX}/EducationField/delete-education-field`
@@ -147,6 +155,12 @@ export default {
     createAgencyCategory: `${PREFIX}/AgencyCategory/create-agency-category`,
     updateAgencyCategory: `${PREFIX}/AgencyCategory/update-agency-category`,
     removeAgencyCategory: `${PREFIX}/AgencyCategory/delete-agency-category`
+  },
+  IntroductionExams:{
+    getIntroductionExams: `${PREFIX}/Exam/get-all-exams`,
+    createIntroductionExams: `${PREFIX}/Exam/create-exam`,
+    updateIntroductionExams: `${PREFIX}/Exam/update-exam`,
+    removeIntroductionExams: `${PREFIX}/Exam/delete-exam`
   },
 
   ExamScopeMain: {

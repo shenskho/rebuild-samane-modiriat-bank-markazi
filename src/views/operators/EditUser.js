@@ -15,14 +15,25 @@ import {
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import DatePicker from 'react-multi-date-picker'
 import persian from 'react-date-object/calendars/persian'
 import persian_fa from 'react-date-object/locales/persian_fa'
 import gregorian from 'react-date-object/calendars/gregorian'
 import DateObject from 'react-date-object'
 import { UploadFile, ReadFile, EditUser } from '@store/slices/operator'
-
+import {
+  GetQuota,
+  GetReligion,
+  GetEducationLevel,
+  GetEducationField,
+  GetDutystatus,
+  getProvince,
+  GetCity,
+  GetVeteran
+} from '@store/slices/fixData'
+import { GetJob } from '@store/slices/variableData'
+import Select from 'react-select'
 // ✅ اسکیما اعتبارسنجی ساده
 const schema = yup.object({
   firstname: yup.string().required('نام الزامی است'),
@@ -40,7 +51,10 @@ const schema = yup.object({
 
 export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
   const dispatch = useDispatch()
-
+  const store = useSelector((state) => state.FixData)
+  console.log('storefixData', store)
+  const storeVariable = useSelector((state) => state.variableData)
+  console.log('storeVariable', storeVariable)
   const {
     control,
     handleSubmit,
@@ -58,11 +72,37 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
       // بقیه فیلدها هم میتونن خالی باشن
     }
   })
+  useEffect(() => {
+    dispatch(GetQuota())
+    dispatch(GetReligion())
+    dispatch(GetEducationLevel()).then(() => dispatch(GetEducationField(userInfo?.educationLevelId)))
+    dispatch(GetDutystatus())
+    dispatch(getProvince())
+    dispatch(GetCity())
+    dispatch(GetVeteran())
+    //////////////////variableData////////////
+    dispatch(GetJob())
+  }, [])
 
   useEffect(() => {
     if (userInfo) {
       reset({
         ...userInfo,
+        religionId: userInfo.religionId || null,
+        quotaId: userInfo.quotaId || null,
+        educationLevelId: userInfo.educationLevelId || null,
+        educationFieldId: userInfo.educationFieldId || null,
+        universityTypeTitle: userInfo.universityTypeTitle || null,
+        militaryStateId: userInfo.militaryStateId || null,
+        selectedProvinceId: userInfo.selectedProvinceId || null,
+        birthCityId: userInfo.birthCityId || null,
+        residenceCityId: userInfo.residenceCityId || null,
+        veteranId: userInfo.veteranId || null,
+        selectedJobId: userInfo.selectedJobId || null,
+        child1BirthCityId: userInfo.child1BirthCityId || null,
+        child2BirthCityId: userInfo.child2BirthCityId || null,
+        child3BirthCityId: userInfo.child3BirthCityId || null,
+        child4BirthCityId: userInfo.child4BirthCityId || null,
         birthDate: userInfo.birthDate
           ? new DateObject({ date: userInfo.birthDate, calendar: gregorian }).convert(persian)
           : null,
@@ -82,12 +122,12 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
   // // ذخیره میلادی به YYYY-MM-DD
   const toIsoYMD = (dateObj) => {
     if (!dateObj) return null
-    return faNumToEn( dateObj.convert(gregorian).format('YYYY-MM-DD'))
+    return faNumToEn(dateObj.convert(gregorian).format('YYYY-MM-DD'))
   }
   const faNumToEn = (faNum) => {
-  if (!faNum) return "";
-  return faNum.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
-}
+    if (!faNum) return ''
+    return faNum.replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+  }
 
   const onSubmit = (data) => {
     const payload = {
@@ -98,6 +138,7 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
       militaryEndDate: toIsoYMD(data.militaryEndDate),
       militaryExemptionDate: toIsoYMD(data.militaryExemptionDate)
     }
+    console.log('send data to edit', payload)
     dispatch(EditUser(payload)).then((response) => {
       if (response.payload) {
         toggle()
@@ -219,7 +260,6 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
               />
               {errors.birthDate && <FormFeedback className='d-block'>{errors.birthDate.message}</FormFeedback>}
             </Col>
-
             <Col lg={6} className='mt-2'>
               <Label>تعداد فرزندان</Label>
               <Controller
@@ -256,27 +296,68 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
                 )}
               />
             </Col>
-
             {/* تحصیلات */}
             <Col lg={6} className='mt-2'>
-              <Label>مقطع تحصیلی</Label>
+              <Label> مقطع تحصیلی</Label>
+
               <Controller
                 name='educationLevelId'
                 control={control}
-                render={({ field }) => <Input type='number' {...field} />}
+                render={({ field }) => {
+                  const options =
+                    store.EducationLevel?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='مقطع تحصیلی '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.educationLevelId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
               />
+
+              {errors.educationLevelId && (
+                <FormFeedback className='d-block'>{errors.educationLevelId.message}</FormFeedback>
+              )}
             </Col>
             <Col lg={6} className='mt-2'>
-              <Label>رشته تحصیلی</Label>
+              <Label> رشته تحصیلی </Label>
+
               <Controller
                 name='educationFieldId'
                 control={control}
-                render={({ field }) => <Input type='number' {...field} />}
+                render={({ field }) => {
+                  const options =
+                    store.EducationField?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='رشته تحصیلی  '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.educationFieldId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
               />
+
+              {errors.educationFieldId && (
+                <FormFeedback className='d-block'>{errors.educationFieldId.message}</FormFeedback>
+              )}
             </Col>
             <Col lg={6} className='mt-2'>
               <Label>نام دانشگاه</Label>
-              <Controller name='universityName' control={control} render={({ field }) => <Input {...field} />} />
+              <Controller name='universityTypeTitle' control={control} render={({ field }) => <Input {...field} />} />
             </Col>
             <Col lg={6} className='mt-2'>
               <Label>معدل</Label>
@@ -302,15 +383,35 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
                 )}
               />
             </Col>
-
             {/* نظام وظیفه */}
             <Col lg={6} className='mt-2'>
-              <Label>وضعیت نظام وظیفه</Label>
+              <Label> وضعیت نظام وظیفه </Label>
+
               <Controller
                 name='militaryStateId'
                 control={control}
-                render={({ field }) => <Input type='number' {...field} />}
+                render={({ field }) => {
+                  const options =
+                    store.dutyStatus?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='وضعیت نظام وظیفه  '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.militaryStateId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
               />
+
+              {errors.militaryStateId && (
+                <FormFeedback className='d-block'>{errors.militaryStateId.message}</FormFeedback>
+              )}
             </Col>
             <Col lg={6} className='mt-2'>
               <Label>مدت خدمت (ماه)</Label>
@@ -352,7 +453,6 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
                 )}
               />
             </Col>
-
             {/* سوابق */}
             <Col lg={6} className='mt-2'>
               <Label>سابقه کار (ماه)</Label>
@@ -360,6 +460,464 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
                 name='workExperienceMonths'
                 control={control}
                 render={({ field }) => <Input type='number' {...field} />}
+              />
+            </Col>
+            <Col lg={6} className='mt-2'>
+              <Label>سابقه کار (ماه)</Label>
+              <Controller
+                name='workExperienceMonths'
+                control={control}
+                render={({ field }) => <Input type='number' {...field} />}
+              />
+            </Col>
+            <Col lg={6} className='mt-2'>
+              <Label> سهمیه</Label>
+
+              <Controller
+                name='quotaId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.Quota?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='انتخاب سهمیه'
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.quotaId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.quotaId && <FormFeedback className='d-block'>{errors.quotaId.message}</FormFeedback>}
+            </Col>
+            <Col lg={6} className='mt-2'>
+              <Label> مذهب</Label>
+
+              <Controller
+                name='religionId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.Religion?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='انتخاب مذهب'
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.religionId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.religionId && <FormFeedback className='d-block'>{errors.religionId.message}</FormFeedback>}
+            </Col>
+            {/* 📌 اطلاعات محل تولد */}
+            <Col lg={6} className='mt-2'>
+              <Label> شهر تولد</Label>
+
+              <Controller
+                name='birthCityId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.City?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='شهر تولد '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.birthCityId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.birthCityId && <FormFeedback className='d-block'>{errors.birthCityId.message}</FormFeedback>}
+            </Col>
+            {/* 📌 اطلاعات تماس و محل سکونت */}
+            <Col lg={6} className='mt-2'>
+              <Label>موبایل اضطراری</Label>
+              <Controller name='emergencyMobile' control={control} render={({ field }) => <Input {...field} />} />
+            </Col>
+            <Col lg={6} className='mt-2'>
+              <Label>کد پستی</Label>
+              <Controller name='postalCode' control={control} render={({ field }) => <Input {...field} />} />
+            </Col>
+            <Col lg={6} className='mt-2'>
+              <Label> شهر محل سکونت</Label>
+
+              <Controller
+                name='residenceCityId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.City?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='شهر محل سکونت'
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.residenceCityId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.residenceCityId && (
+                <FormFeedback className='d-block'>{errors.residenceCityId.message}</FormFeedback>
+              )}
+            </Col>
+            {/* 📌 وضعیت سلامتی و ایثارگری */}
+            <Col lg={6} className='mt-2'>
+              <Label>نوع معلولیت</Label>
+              <Controller name='disabilityType' control={control} render={({ field }) => <Input {...field} />} />
+            </Col>
+            <Col lg={6} className='mt-2'>
+              <Label> ایثارگر </Label>
+
+              <Controller
+                name='veteranId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.Veteran?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='انتخاب ایثارگر  '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.veteranId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.veteranId && <FormFeedback className='d-block'>{errors.veteranId.message}</FormFeedback>}
+            </Col>
+
+            {/* 📌 شغل انتخابی */}
+
+            <Col lg={6} className='mt-2'>
+              <Label> شغل انتخابی </Label>
+
+              <Controller
+                name='selectedJobId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    storeVariable.Job?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='انتخاب شغل انتخابی  '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.selectedJobId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.selectedJobId && <FormFeedback className='d-block'>{errors.selectedJobId.message}</FormFeedback>}
+            </Col>
+            {/* 📌 سابقه کار */}
+            <Col lg={4} className='mt-2'>
+              <Label>سابقه کار دارد؟</Label>
+              <Controller
+                name='hasWorkExperience'
+                control={control}
+                render={({ field }) => (
+                  <Input type='checkbox' checked={field.value} onChange={(e) => field.onChange(e.target.checked)} />
+                )}
+              />
+            </Col>
+
+            <Col lg={4} className='mt-2'>
+              <Label>نیاز به کمک</Label>
+              <Controller
+                name='needAssist'
+                control={control}
+                render={({ field }) => (
+                  <Input type='checkbox' checked={field.value} onChange={(e) => field.onChange(e.target.checked)} />
+                )}
+              />
+            </Col>
+
+            <Col lg={4} className='mt-2'>
+              <Label>بومی استان هستید؟</Label>
+              <Controller
+                name='applicantIsNative'
+                control={control}
+                render={({ field }) => (
+                  <Input type='checkbox' checked={field.value} onChange={(e) => field.onChange(e.target.checked)} />
+                )}
+              />
+            </Col>
+
+            <Col lg={6} className='mt-2'>
+              <Label> استان انتخابی </Label>
+
+              <Controller
+                name='selectedProvinceId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.Province?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='انتخاب استان '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.selectedProvinceId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.selectedProvinceId && (
+                <FormFeedback className='d-block'>{errors.selectedProvinceId.message}</FormFeedback>
+              )}
+            </Col>
+            {/* 📌 فرزندان */}
+
+            <Col lg={6} className='mt-2'>
+              <Label> شهر تولد فرزند ۱ </Label>
+              <Controller
+                name='child1BirthCityId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.City?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='شهر تولد فرزند ۱  '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.child1BirthCityId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.child1BirthCityId && (
+                <FormFeedback className='d-block'>{errors.child1BirthCityId.message}</FormFeedback>
+              )}
+            </Col>
+
+            <Col lg={6} className='mt-2'>
+              <Label>شهر تولد فرزند ۲</Label>
+              <Controller
+                name='child2BirthCityId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.City?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='شهر تولد فرزند ۲ '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.child2BirthCityId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.child2BirthCityId && (
+                <FormFeedback className='d-block'>{errors.child2BirthCityId.message}</FormFeedback>
+              )}
+            </Col>
+
+            <Col lg={6} className='mt-2'>
+              <Label> شهر تولد فرزند ۳ </Label>
+
+              <Controller
+                name='child3BirthCityId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.City?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='شهر تولد فرزند ۳  '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.child3BirthCityId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.child3BirthCityId && (
+                <FormFeedback className='d-block'>{errors.child3BirthCityId.message}</FormFeedback>
+              )}
+            </Col>
+
+            <Col lg={6} className='mt-2'>
+              <Label> شهر تولد فرزند ۴ </Label>
+
+              <Controller
+                name='child4BirthCityId'
+                control={control}
+                render={({ field }) => {
+                  const options =
+                    store.City?.items?.map((org) => ({
+                      value: org.id,
+                      label: org.title
+                    })) || []
+
+                  return (
+                    <Select
+                      placeholder='شهر تولد فرزند ۴  '
+                      options={options}
+                      value={options.find((o) => o.value === field.value) || null}
+                      onChange={(selected) => field.onChange(selected?.value || '')}
+                      className={errors.child4BirthCityId ? 'is-invalid' : ''}
+                    />
+                  )
+                }}
+              />
+
+              {errors.child4BirthCityId && (
+                <FormFeedback className='d-block'>{errors.child4BirthCityId.message}</FormFeedback>
+              )}
+            </Col>
+            {/* {
+            "id": 154,
+            "firstname": "علی بابالو",
+            "lastname": "پیرمحمدaa",
+            "fatherName": "علی",
+            "nationalCode": "0015838791",
+            "shenasnameCode": "2222",
+            "mobile": "+989355986776",
+            "birthDate": "2007-07-27T00:00:00",
+            "birthDateShamsi": "1386/05/05 00:00:00",
+            "birthCityId": 516,
+            "birthCityTitle": "بوشهر",
+            "religionId": 1,
+            "religionTitle": "اسلام(شیعه)",
+            "genderType": 1,
+            "genderTypeTitle": "مرد",
+            "marriageState": 2,
+            "marriageStateTitle": "متاهل",
+            "isRightHand": true,
+            "childrenCount": 2,
+            "child1BirthCityId": 255,
+            "child2BirthCityId": 213,
+            "child3BirthCityId": null,
+            "child4BirthCityId": null,
+            "educationLevelId": 4,
+            "educationLevelTitle": "کارشناسی ارشد",
+            "educationFieldId": 438,
+            "educationFieldTitle": "حسابداری(تمامی گرایش ها)",
+            "universityTypeId": 1,
+            "universityTypeTitle": "دانشگاه آزاد",
+            "universityName": "دارد",
+            "graduationDate": "2025-07-24T00:00:00",
+            "graduationDateShamsi": "1404/05/02 00:00:00",
+            "graduationAverage": 13.2,
+            "lastCertificateImageId": "cccc824a-9b4b-4123-af4f-a360f0e4dc91",
+            "emergencyMobile": "+989355986776",
+            "postalCode": "3166949162",
+            "residenceCityId": 245,
+            "residenceCityTitle": "خدابنده",
+            "address": "ننننننننننننننننننننننننننننننننننننننننننننننننن",
+            "personalImageId": "72749178-8a91-41cd-9f13-aab8fed48fe5",
+            "nationalCardImageId": "504f9cdc-1c57-42d5-b349-051412cc25d8",
+            "shenasnamePage1ImageId": "d94cbccf-2e24-44e1-8a5b-43e83727a62d",
+            "shenasnamePage2ImageId": "f5ef85e6-9e06-4bf4-9fe5-79a3e86f77e4",
+            "shenasnamePage3ImageId": "f7272d3d-2e40-43b8-a574-873c8fa2098c",
+            "shenasnameDescImageId": "392e6863-4261-476f-95d6-ebf5162b10ca",
+            "quotaId": 1,
+            "quotaTitle": "آزاد",
+            "militaryStateId": 2,
+            "militaryStateTitle": "معافیت دائم پزشکی",
+            "militaryMonths": 15,
+            "militaryEndDate": "2025-06-24T00:00:00",
+            "militaryEndDateShamsi": "1404/04/03 00:00:00",
+            "militaryExemptionDate": null,
+            "militaryExemptionDateShamsi": "",
+            "disabilityType": "معلول",
+            "needAssist": false,
+            "veteranId": null,
+            "veteranTitle": "",
+            "hasWorkExperience": true,
+            "workExperienceMonths": 33,
+            "isQuranMemorize": true,
+            "selectedJobId": 62,
+            "selectedJobTitle": "2-تخصصی-حسابداری",
+            "selectedProvinceId": 5,
+            "selectedProvinceTitle": "البرز",
+            "applicantIsNative": false
+        } */}
+            <Col lg={12} className='mt-2'>
+              <Label>آدرس</Label>
+              <Controller
+                name='address'
+                control={control}
+                render={({ field }) => <Input type='textarea' {...field} />}
+              />
+            </Col>
+            <Col lg={6} className='mt-2'>
+              <Label>چپ دست </Label>
+              <Controller
+                name='isRightHand'
+                control={control}
+                render={({ field }) => (
+                  <Input type='checkbox' checked={field.value} onChange={(e) => field.onChange(e.target.checked)} />
+                )}
               />
             </Col>
             <Col lg={6} className='mt-2'>
@@ -372,7 +930,14 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
                 )}
               />
             </Col>
-
+            {/* 📌 تصویر مدرک تحصیلی آخرین مقطع */}
+            <Col lg={6}>
+              <Controller
+                name='lastCertificateImageId'
+                control={control}
+                render={({ field }) => <FileInput field={field} label='تصویر آخرین مدرک تحصیلی' />}
+              />
+            </Col>
             {/* تصاویر */}
             <Col lg={6}>
               <Controller
@@ -416,7 +981,6 @@ export default function UserEditModal({ isOpen, toggle, userInfo, TicketID }) {
                 render={({ field }) => <FileInput field={field} label='پیوست شناسنامه' />}
               />
             </Col>
-
             {/* دکمه ثبت */}
           </Row>
           <Row className='w-100'>

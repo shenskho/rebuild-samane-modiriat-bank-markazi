@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
-import DxDataGrid from '@components/devextreme/DxDataGrid'
+import DxDataGrid from '@components/devextreme/DxDataGrid2'
 import { GetTickets } from '@store/slices/operator'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
@@ -19,28 +19,30 @@ export default function index() {
   const [IsAddModal, SetIsAddModal] = useState(false)
   const [IsEditModal, SetIsEditModal] = useState(false)
   const [IsDeleteModal, SetIsDeleteModal] = useState(false)
-
+  const [pageIndex, setPageIndex] = useState(0)
+  const [pageSize, setPageSize] = useState(10)
   const handeleEditRole = (data) => {
     SetUserItem(data)
     SetIsEditModal(!IsEditModal)
   }
 
-  const handeleDeleteRole = (data) => {
-    SetUserItem(data)
-    SetIsDeleteModal(!IsDeleteModal)
-  }
   const rowsWithIndex = store.tickets.items?.map((item, i) => ({
     ...item,
-    index: i + 1 // ردیف از ۱ شروع بشه
+    index: pageIndex * pageSize + i + 1
   }))
 
   const dataGridData = {
     columns: [
       { dataField: 'index', caption: 'ردیف', width: 'auto', cssClass: 'text-center' },
       { dataField: 'applicantFullName', caption: 'نام و نام خوانوادگی ' },
+      { dataField: 'applicantDescription', caption: 'متن درخواست ' },
       { dataField: 'applicantNationalCode', caption: 'کدملی' },
       { dataField: 'refCode', caption: 'کد پیگیری' },
-      { dataField: 'applicantDescription', caption: 'متن درخواست ' },
+      {
+        dataField: 'isClosed',
+        caption: 'وضعیت درخواست',
+        cellRender: (cellData) => <span>{cellData.value ? 'بسته شده' : 'باز'}</span>
+      },
       {
         caption: 'عملیات ',
         type: 'buttons',
@@ -48,23 +50,30 @@ export default function index() {
         width: 260,
         buttons: [
           {
-            name: 'add',
+            name: 'reply',
             text: 'پاسخ',
             cssClass: 'btn btn-sm btn-primary',
-            onClick: (e) => {
-              handeleEditRole(e.row.data)
-            }
+            // visible: (e) => e.row.data.isClosed === false, // فقط وقتی بازه
+            onClick: (e) => handeleEditRole(e.row.data)
+          },
+          {
+            name: 'reopen',
+            text: 'بازگشایی',
+            cssClass: 'btn btn-sm btn-warning',
+            visible: (e) => e.row.data.isClosed === true, // فقط وقتی بسته است
+            onClick: (e) => handleReopen(e.row.data)
           }
         ]
       }
     ],
     //  rows: []
-    rows: rowsWithIndex
+    rows: rowsWithIndex,
+    totalCount: store.tickets.totalCount || store.tickets.items.length // fallback
   }
 
   useEffect(() => {
-    dispatch(GetTickets())
-  }, [])
+    dispatch(GetTickets({ page: pageIndex + 1, pageSize }))
+  }, [dispatch, pageIndex, pageSize])
   return (
     <Row>
       <Col lg={12} className=' base-data-container'>
@@ -73,18 +82,42 @@ export default function index() {
             <Row>
               <Col lg={12}>
                 <Card id='Home'>
-                  <CardHeader>
-                    <h4>لیست درخواست های کاربران </h4>
+                  <CardHeader className=' w-100 rtl'>
+                    <h4 className='w-100'>لیست درخواست های کاربران </h4>
+                    <Row className='w-100 mt-1'>
+                      <Col lg={4} className='text-center'>
+                        {' '}
+                        <h4 className='color-red'>
+                          درخواست های پاسخ داده نشده :{' '}
+                          <span> {store?.tickets?.items?.filter((item) => !item.isClosed)?.length}</span>{' '}
+                        </h4>
+                      </Col>
+
+                      <Col lg={4} className='text-center'>
+                        {' '}
+                        <h4 className='color-green'>
+                          {' '}
+                          درخواست های پاسخ داده شده :{' '}
+                          <span> {store?.tickets?.items?.filter((item) => item.isClosed)?.length}</span>
+                        </h4>
+                      </Col>
+
+                      <Col lg={4} className='text-center'>
+                        {' '}
+                        <h4 className='color-gray'>
+                          تعداد کل درخواست ها : <span> {store?.tickets?.items?.length}</span>
+                        </h4>
+                      </Col>
+                    </Row>
                   </CardHeader>
 
                   <CardBody>
                     <DxDataGrid
                       data={dataGridData}
-                      paginationSize={10}
-                      editing={{
-                        mode: 'row',
-                        useIcons: false
-                      }}
+                      pagination
+                      paginationSize={pageSize}
+                      onPageSizeChange={(size) => setPageSize(size)}
+                      onPageIndexChange={(index) => setPageIndex(index)}
                     />
                   </CardBody>
                 </Card>

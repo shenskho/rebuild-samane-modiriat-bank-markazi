@@ -44,9 +44,7 @@ axiosInstance.interceptors.response.use(
     // Do something with response data
     NProgress.done()
     const disallowedControllers = ['Emta', 'Login']
-    const disallowedMethods = [
-
-    ]
+    const disallowedMethods = []
     if (
       response.config.method !== 'get' &&
       !disallowedControllers.includes(response.config.url.split('/')[3]) &&
@@ -56,9 +54,10 @@ axiosInstance.interceptors.response.use(
       )
     ) {
       if (response && response.data && response.data.message) {
+  
         const farsiMessage = response.data.message
 
-        toast((t) => <ToastContent t={t} message={farsiMessage  || response.statusText} />, {
+        toast((t) => <ToastContent t={t} message={farsiMessage || response.statusText} />, {
           duration: 5000,
           style: {
             background: 'var(--bs-success)',
@@ -80,7 +79,8 @@ axiosInstance.interceptors.response.use(
       EventBus.dispatch('forceLogout')
     }
     if (error.response?.status === 409) {
-      toast((t) => <ToastContent t={t} message={error.response?.data.message.message} />, {
+ 
+      toast((t) => <ToastContent t={t} message={error.response?.data.message} />, {
         duration: 5000,
         style: {
           background: 'var(--bs-danger)',

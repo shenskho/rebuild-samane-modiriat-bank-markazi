@@ -37,7 +37,8 @@ export async function updateProvince(param) {
   return await axios.post(urls.Province.updateProvince, param)
 }
 export async function removeProvince(param) {
-  return await axios.post(urls.Province.removeProvince, param)}
+  return await axios.post(urls.Province.removeProvince, param)
+}
 /////////////////////EducationLevel///////////
 export async function getEducationLevel() {
   return await axios.get(urls.EducationLevel.getEducationLevel)
@@ -51,7 +52,20 @@ export async function updateEducationLevel(param) {
 export async function removeEducationLevel(param) {
   return await axios.post(urls.EducationLevel.removeEducationLevel, param)
 }
-///////////ًQuota/////////////
+/////////////////////EducationLevel///////////
+export async function getEducationField(param) {
+  return await axios.get(urls.EducationField.getEducationField + param)
+}
+export async function createEducationField(param) {
+  return await axios.post(urls.EducationField.createEducationField, param)
+}
+export async function updateEducationField(param) {
+  return await axios.post(urls.EducationField.updateEducationField, param)
+}
+export async function removeEducationField(param) {
+  return await axios.post(urls.EducationField.removeEducationField, param)
+}
+
 export async function getQuota() {
   return await axios.get(urls.Quota.getQuota)
 }

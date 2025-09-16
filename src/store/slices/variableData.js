@@ -196,7 +196,7 @@ export const addReport = createSlice({
     activitys: [],
     EducationLevel:[],
     Organization:[],
-    UniversityType:[],
+    UniversityType:[]
   },
   reducers: {},
   extraReducers: (builder) => {

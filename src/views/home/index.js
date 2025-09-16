@@ -68,8 +68,8 @@ export default function index() {
     <div className='dashboard'>
       {localStorage.getItem('role') === 'SuperAdmin' ? (
         <>
-         <Operators/>
-          {/* {' '}
+  
+          {' '}
           <ChartsSection />
           <Row className='text-right'>
             <Col lg={9}>
@@ -83,7 +83,8 @@ export default function index() {
             <Col lg={3}>
               <SidebarSection events={events} />
             </Col>
-          </Row> */}
+          </Row>
+          
         </>
       ) : (
      <Operators/>

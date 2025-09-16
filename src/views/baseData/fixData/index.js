@@ -28,7 +28,7 @@ import {
   FaUsersCog,
   FaCity,
   FaWaveSquare,
-  FaHandHoldingHeart,
+  FaHandHoldingHeart
 } from 'react-icons/fa'
 import {
   FaFileCircleExclamation,
@@ -57,30 +57,30 @@ export default function index() {
     { title: 'نوع دانشگاه', icon: <FaUniversity size={40} color='#04364a' />, link: '/UniversityType' },
     { title: 'فهرست شهر ها', icon: <FaCity size={40} color='#04364a' />, link: '/City' },
     { title: 'گستره فعالیت', icon: <FaWaveSquare size={40} color='#04364a' />, link: '/ActivityScope' },
-    { title: 'وضعیت ایثارگری', icon: <FaHandHoldingHeart size={40} color='#04364a' />, link: '/Veteran' },
+    { title: 'وضعیت ایثارگری', icon: <FaHandHoldingHeart size={40} color='#04364a' />, link: '/Veteran' }
   ]
   return (
     <Row>
       <Col lg={12}>
-        <p className='route-base-color'> 
+        <p className='route-base-color'>
           <span className='first-route-selected'>خانه</span> / <span className='route-caption'>اطلاعات پایه</span> /{' '}
           <span className='route-caption'>اطلاعات ثابت</span>
         </p>
       </Col>
-    <div className='base-menu-container'>
-            <Row className='w-100'>
-              {categoryItems.map((item) => {
-                return (
-                  <Col lg={3} md={4}>
-                    <Card className='category-grid__box' onClick={() => navigate(item.link)}>
-                      <div class='category-grid__icon'>{item.icon}</div>
-                      <p class='category-grid__title'>{item.title}</p>
-                    </Card>
-                  </Col>
-                )
-              })}
-            </Row>
-          </div>
+      <div className='base-menu-container'>
+        <Row className='w-100'>
+          {categoryItems.map((item) => {
+            return (
+              <Col lg={3} md={4}>
+                <Card className='category-grid__box' onClick={() => navigate(item.link)}>
+                  <div class='category-grid__icon'>{item.icon}</div>
+                  <p class='category-grid__title'>{item.title}</p>
+                </Card>
+              </Col>
+            )
+          })}
+        </Row>
+      </div>
     </Row>
   )
 }

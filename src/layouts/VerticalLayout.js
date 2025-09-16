@@ -7,7 +7,7 @@ import Layout from '@core/layouts/VerticalLayout'
 
 // ** Menu Items Array
 import navigation from '@src/navigation/vertical'
-
+import operatorNavigation from '@src/navigation/vertical/operatorNavigation'
 // ** Custom VerticalLayout Components
 // import CustomMenu from './vertical/menu'
 import CustomNavbar from './vertical/navbar'
@@ -17,12 +17,7 @@ import { IoIosHome, IoIosList } from 'react-icons/io'
 const VerticalLayout = (props) => {
   return (
     <Layout
-      menuData={ localStorage.getItem("panelTypeTitle") === "SuperAdmin" ? navigation :[ {
-          id: 'admin-home',
-          title: 'لیست درخواست های کاربران',
-          icon: <IoIosList />,
-          navLink: '/'
-        }]} 
+      menuData={localStorage.getItem('panelTypeTitle') === 'SuperAdmin' ? navigation : operatorNavigation}
       // menu={(props) => <CustomMenu {...props} />}
       navbar={(props) => <CustomNavbar {...props} />}
       footer={<CustomFooter />}
