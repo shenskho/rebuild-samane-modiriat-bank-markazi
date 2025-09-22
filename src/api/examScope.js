@@ -30,6 +30,12 @@ export async function getExamScopeSecound() {
   return await axios.get(urls.ExamScopeSecound.getExamScopeSecound)
 }
 
+export async function getExamScopeSecoundList() {
+  return await axios.get(urls.ExamScopeSecound.getExamScopeSecoundList)
+}
+
+
+
 export async function createExamScopeSecound(param) {
   return await axios.post(urls.ExamScopeSecound.createExamScopeSecound, param)
 }

@@ -60,15 +60,19 @@ export default [
     children: [
       { title: 'معرفی آزمون', navLink: './IntroductionExams' },
       { title: 'لیست نفرات' },
-      { title: 'عوامل اجرایی مجری' },
+      { title: 'عوامل اجرایی مجری',navLink:'/executiveAgents' },
       { title: 'حوزه آزمون', navLink: '/examScope' },
       { title: 'حوزه فرعی', navLink: '/examSecoundScope' },
       { title: 'ملزومات چاپی', navLink: '/printRequirement' },
       { title: 'مدیریت حوزه‌های آزمون', navLink: '/examCenter' },
       { title: 'قرنطینه سوال' },
       { title: 'قرنطینه چاپ', navLink: '/printQuarantine' },
-      { title: 'طراح سوال', navLink:'/questionDesigner' },
-      { title: 'تولید دفترچه آزمون' }
+      { title: 'طراح سوال', navLink: '/questionDesigner' },
+      { title: 'تولید دفترچه آزمون' },
+      {
+        title: 'لیست  صورتجلسه ها ',
+        navLink: '/scopeManage'
+      }
     ]
   },
   {

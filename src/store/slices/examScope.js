@@ -2,12 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { examScope as apis } from '@api'
 
-import { getAttendance, getChaireNumber, getMatchImage, getAllScopes } from '@api/examScope'
-
 /////////////////////main/////////////////////
 
 export const GetExamScope = createAsyncThunk('examScope/getExamScope', async () => {
   const response = await apis.getExamScope()
+  return response.data.result
+})
+export const GetExamScopeSecoundList = createAsyncThunk('examScope/getExamScopeSecoundList', async () => {
+  const response = await apis.getExamScopeSecoundList()
   return response.data.result
 })
 
@@ -124,16 +126,15 @@ export const RemoveIntroductionExams = createAsyncThunk('examScope/removeIntrodu
   return response.data.result
 })
 
-
-
 export const examScope = createSlice({
   name: 'examScope',
   initialState: {
     mainScopes: [],
     secoundScopes: [],
+    SecoundScopeList: [],
     citys: [],
     province: [],
-    IntroductionExams:[]
+    IntroductionExams: []
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -153,6 +154,9 @@ export const examScope = createSlice({
       })
       .addCase(GetProvince.fulfilled, (state, action) => {
         state.province = action.payload
+      })
+      .addCase(GetExamScopeSecoundList.fulfilled, (state, action) => {
+        state.SecoundScopeList = action.payload
       })
   }
 })

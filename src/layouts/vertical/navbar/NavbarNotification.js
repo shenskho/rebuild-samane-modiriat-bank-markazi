@@ -1,5 +1,5 @@
 import NotificationDropdown from './NotificationDropdown'
-import rayanLogo from '@assets/images/magfa/rayanLogo.webp'
+import rayanLogo from '@assets/images/rayan/logo2.png'
 
 export default function NavbarNotification() {
   return (

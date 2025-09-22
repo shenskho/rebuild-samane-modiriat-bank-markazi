@@ -6,4 +6,5 @@ import * as license from './license'
 import * as examScope from './examScope'
 import * as operators from './operators'
 import * as examOrganizer from './examOrganizer'
-export { authAPI, dailyReport, fixData, variableData, license, examScope, operators, examOrganizer }
+import * as scopeUser from './scopeUser'
+export { authAPI, dailyReport, fixData, variableData, license, examScope, operators, examOrganizer, scopeUser }

@@ -11,7 +11,7 @@ const Access = lazy(() => import('@views/controlPanel/access'))
 const SetReportToRole = lazy(() => import('@views/controlPanel/SetReportToRole'))
 const SetRoleToUser = lazy(() => import('@views/controlPanel/SetRoleToUser'))
 const CategoryAccess = lazy(() => import('@views/controlPanel/CategoryAccess'))
-
+const ScopeUser = lazy(() => import('@views/controlPanel/scopeUser'))
 const controlPanel = [
   /********************************************************************************************************************************/
   {
@@ -36,6 +36,14 @@ const controlPanel = [
     meta: {
       action: 'read',
       resource: '/user'
+    }
+  },
+   {
+    path: '/scopeUser',
+    element: <ScopeUser />,
+    meta: {
+      action: 'read',
+      resource: '/scopeUser'
     }
   },
   {

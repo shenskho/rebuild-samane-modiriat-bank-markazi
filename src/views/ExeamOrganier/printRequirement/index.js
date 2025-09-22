@@ -31,29 +31,30 @@ export default function index() {
   const [isLoadingAnsware, setIsLoadingAnsware] = useState(false)
   const [isLoadingfinalExam, setIsLoadingfinalExam] = useState(false)
   const handeleGetAttendance = (scope) => {
-    dispatch(GetAttendance(`?ExamId=1&SubSiteId=${scope}`)).then((response) => {
-      const data = response.payload
-      console.log('fileResponse', response)
-
-      // ساختن تاریخ و زمان برای اسم فایل
-      const now = new Date()
-      const timestamp = now.toISOString().substring(0, 10)
-      // مثلا: 2025-09-05T14-22-33-123Z
-
-      // ساختن یک blob از داده‌ها
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-
-      // ساختن لینک برای دانلود
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = `attendance_${timestamp}.json` // اسم فایل خروجی
-      link.click()
-
-      // آزاد کردن URL از حافظه
-      URL.revokeObjectURL(url)
-    })
-  }
+     dispatch(GetAttendance(`?ExamId=1&SubSiteId=${scope}`)).then((response) => {
+       const data = response.payload
+       console.log('fileResponse', response)
+ 
+       // ساختن تاریخ و زمان برای اسم فایل
+       const now = new Date()
+       const timestamp = now.toISOString().substring(0, 10)
+       // مثلا: 2025-09-05T14-22-33-123Z
+ 
+       // ساختن یک blob از داده‌ها
+    // ساختن یک blob از داده‌ها (فرض: سرور مستقیماً باینری PDF برمی‌گردونه)
+     const blob = new Blob([data], { type: 'application/pdf' })
+ 
+     // ساختن لینک دانلود
+     const url = URL.createObjectURL(blob)
+     const link = document.createElement('a')
+     link.href = url
+     link.download = `Attendance_${timestamp}.pdf` // تغییر پسوند به pdf
+     link.click()
+ 
+       // آزاد کردن URL از حافظه
+       URL.revokeObjectURL(url)
+     })
+   }
   const handeleGetChaireNumber = (scope) => {
     dispatch(GetChaireNumber(`?ExamId=1&SubSiteId=${scope}`)).then((response) => {
       const data = response.payload
@@ -65,44 +66,44 @@ export default function index() {
       // مثلا: 2025-09-05T14-22-33-123Z
 
       // ساختن یک blob از داده‌ها
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+   // ساختن یک blob از داده‌ها (فرض: سرور مستقیماً باینری PDF برمی‌گردونه)
+    const blob = new Blob([data], { type: 'application/pdf' })
 
-      // ساختن لینک برای دانلود
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = `chaire_number_${timestamp}.json` // اسم فایل خروجی
-      link.click()
+    // ساختن لینک دانلود
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `seat_number_${timestamp}.pdf` // تغییر پسوند به pdf
+    link.click()
 
       // آزاد کردن URL از حافظه
       URL.revokeObjectURL(url)
     })
   }
   const handeleGetMatchImage = (scope) => {
-    dispatch(GetMatchImage(`?ExamId=1&SubSiteId=${scope}`)).then((response) => {
-      const data = response.payload
-      console.log('fileResponse', response)
+ dispatch(GetMatchImage(`?ExamId=1&SubSiteId=${scope}`)).then((response) => {
+    const data = response.payload
+    console.log('fileResponse', response)
 
-      // ساختن تاریخ و زمان برای اسم فایل
-      const now = new Date()
-      const timestamp = now.toISOString().substring(0, 10)
-      // مثلا: 2025-09-05T14-22-33-123Z
+    // ساختن تاریخ برای اسم فایل
+    const now = new Date()
+    const timestamp = now.toISOString().substring(0, 10)
 
-      // ساختن یک blob از داده‌ها
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    // ساختن یک blob از داده‌ها (فرض: سرور مستقیماً باینری PDF برمی‌گردونه)
+    const blob = new Blob([data], { type: 'application/pdf' })
 
-      // ساختن لینک برای دانلود
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = `match_image_${timestamp}.json` // اسم فایل خروجی
-      link.click()
+    // ساختن لینک دانلود
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `match_image_${timestamp}.pdf` // تغییر پسوند به pdf
+    link.click()
 
-      // آزاد کردن URL از حافظه
-      URL.revokeObjectURL(url)
-    })
+    // آزاد کردن URL از حافظه
+    URL.revokeObjectURL(url)
+  })
   }
-  const handeleGetPersonalAnswer = (scope) => {
+const handeleGetPersonalAnswer = (scope) => {
     dispatch(GetPersonalAnswer(`?ExamId=1&SubSiteId=${scope}`)).then((response) => {
       const data = response.payload
       console.log('fileResponse', response)
@@ -112,32 +113,38 @@ export default function index() {
       const timestamp = now.toISOString().substring(0, 10)
       // مثلا: 2025-09-05T14-22-33-123Z
 
-      // ساختن یک blob از داده‌ها
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+       // ساختن یک blob از داده‌ها (فرض: سرور مستقیماً باینری PDF برمی‌گردونه)
+    const blob = new Blob([data], { type: 'application/pdf' })
 
-      // ساختن لینک برای دانلود
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = `personal_answer_${timestamp}.json` // اسم فایل خروجی
-      link.click()
+    // ساختن لینک دانلود
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `Answer_${timestamp}.pdf` // تغییر پسوند به pdf
+    link.click()
+
 
       // آزاد کردن URL از حافظه
       URL.revokeObjectURL(url)
     })
   }
-  const handeleGetSubsiteHelp = (scope) => {
+    const handeleGetSubsiteHelp = (scope) => {
     dispatch(GetSubsiteHelp(`?ExamId=1&SubSiteId=${scope}`)).then((response) => {
-      const blob = response.payload // مستقیم Blob
+      const blob = response.payload // مستقیم Blob از سرور
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
+  
+      // تاریخ برای اسم فایل
       const timestamp = new Date().toISOString().substring(0, 10)
-      link.download = `sub_site_help_${scope}_${timestamp}.xlsx`
+  
+      // تغییر پسوند به pdf
+      link.download = `sub_site_help_${scope}_${timestamp}.pdf`
+  
       link.click()
       URL.revokeObjectURL(url)
     })
-  }
+    }
 
   const handeleGetAllScopes = () => {
     setIsLoading(true)

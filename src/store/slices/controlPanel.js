@@ -14,7 +14,10 @@ import {
   getReportPermissionsToCategory,
   setReportPermissionsToCategory,
   getAllCategory,
-  createUser
+  createUser,
+  removeUser,
+  updateUserPanel
+
 } from '@api/controlPanel'
 
 import { signUp } from '@api/auth'
@@ -31,6 +34,18 @@ export const ReadUsers = createAsyncThunk('controlPanel/readUsers', async () => 
 })
 export const CreateUser = createAsyncThunk('controlPanel/createUser', async (param) => {
   const response = await createUser(param)
+
+  return response.data.result
+})
+
+export const UpdateUserPanel = createAsyncThunk('controlPanel/updateUserPanel', async (param) => {
+  const response = await updateUserPanel(param)
+
+  return response.data.result
+})
+
+export const RemoveUser = createAsyncThunk('controlPanel/removeUser', async (param) => {
+  const response = await removeUser(param)
 
   return response.data.result
 })

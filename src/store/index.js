@@ -17,6 +17,7 @@ import variableData from './slices/variableData'
 import operator from './slices/operator'
 import examScope from './slices/examScope'
 import examOrganizer from './slices/examOrganizer'
+import scopeUser from './slices/scopeUser'
 
 const configs = {
   key: 'root',
@@ -24,7 +25,7 @@ const configs = {
   stateReconciler: autoMergeLevel2,
   whitelist: ['eightStep']
 }
-//
+
 const appReducer = combineReducers({
   common,
   layout,
@@ -38,7 +39,8 @@ const appReducer = combineReducers({
   License,
   examScope,
   operator,
-  examOrganizer
+  examOrganizer,
+  scopeUser
 })
 
 const rootReducer = (state, action) => {

@@ -59,7 +59,7 @@ export default function ExamSettingsModal({ IsReciveModal, SetIsReciveModal }) {
     resolver: yupResolver(schema),
     defaultValues: {
       examId: 1,
-      subSiteId: 0,
+      subSiteId: localStorage.getItem("subSiteIds"),
       receiverFirstname: '',
       receiverLastname: '',
       receiverNationalCode: '',

@@ -1,4 +1,4 @@
-import logo from '@src/assets/images/magfa/rayanLogo.webp'
+import logo from '@src/assets/images/rayan/logo2.png'
 
 const Spinner = () => {
   return (

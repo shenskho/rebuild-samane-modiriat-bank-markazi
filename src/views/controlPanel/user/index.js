@@ -3,7 +3,8 @@ import '@core/scss/react/pages/page-authentication.scss'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { CreateUser, ReadUsers } from '@store/slices/controlPanel'
+import { CreateUser, ReadUsers, RemoveUser, UpdateUserPanel } from '@store/slices/controlPanel'
+import { GetExamScopeSecoundList } from '@store/slices/examScope'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
@@ -12,14 +13,17 @@ import toast from 'react-hot-toast'
 import ToastContent from '@src/components/theme/toast/SimpleToastContent'
 import { useNavigate } from 'react-router-dom'
 import InputPasswordToggle from '@core/components/input-password-toggle'
-
+import DeleteModal from './DeleteModal'
+import EditUserModal from './EditModal'
 export default function index() {
   const store = useSelector((state) => state.controlPanel)
-
+  const examScope = useSelector((state) => state.examScope)
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [possitionList, SetPossitionList] = useState([])
-
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null)
+  const [userNameID, SetuserNameID] = useState('')
+  const [IsDeleteModal, SetIsDeleteModal] = useState(false)
+ 
   const schema = yup.object({
     userName: yup.string().required('(الزامی)'),
     password: yup
@@ -36,7 +40,8 @@ export default function index() {
       .matches(/^(?=.*[a-z])(?=.*[0-9])/, 'باید تلفیقی از حروف انگلیسی و اعداد باشد'),
     email: yup.string().email('ایمیل معتبر نمی باشد').required('(الزامی)'),
     firstname: yup.string().required('(الزامی)'),
-    lastname: yup.string().required('(الزامی)')
+    lastname: yup.string().required('(الزامی)'),
+    subSiteIds: yup.array().min(1, '(حداقل یک زیرسایت انتخاب کنید)').required('(الزامی)')
   })
 
   const {
@@ -56,34 +61,40 @@ export default function index() {
 
       { dataField: 'firstName', caption: 'نام' },
       { dataField: 'lastName', caption: 'نام خوانوادگی' },
-      { dataField: 'email', caption: 'ایمیل' }
-      // {
-      //   caption: 'تخصیص نقش',
-      //   type: 'buttons',
-      //   cssClass: 'operationColumn',
-      //   width: 160,
-      //   buttons: [
-      //     {
-      //       name: 'add',
-      //       text: 'ویرایش',
-      //       cssClass: 'btn btn-sm btn-primary',
-      //       onClick: (e) => {
-      //         let roles = []
-      //         e.row.data.roles.map((item) => {
-      //           roles.push({ value: item, label: item })
-      //         })
-      //         SetuserName(e.row.data.username)
-      //         toggle(roles)
-      //       }
-      //     }
-      //   ]
-      // }
+      { dataField: 'email', caption: 'ایمیل' },
+      {
+        caption: 'عملیات',
+        type: 'buttons',
+        cssClass: 'operationColumn',
+        width: 160,
+        buttons: [
+          {
+            name: 'del',
+            text: 'حذف',
+            cssClass: 'btn btn-sm btn-danger',
+            onClick: (e) => {
+              setSelectedUser(e.row.data.userName)
+              SetIsDeleteModal(!IsDeleteModal)
+            }
+          },
+           {
+            name: 'ed',
+            text: 'ویرایش',
+            cssClass: 'btn btn-sm btn-warning',
+            onClick: (e) => {
+              console.log(e.row.data)
+              setSelectedUser(e.row.data)
+              setIsEditModalOpen(!isEditModalOpen)
+            }
+          }
+        ]
+      }
     ],
-    rows: store.userList?.items
+    rows: store.userList?.items?.filter((item) => item.roleName === 'operator')
   }
 
   const onSubmit = async (data) => {
-    if (data.password == data.rePassWord) {
+    if (data.password === data.rePassWord) {
       dispatch(
         CreateUser({
           'roleName': 'operator',
@@ -91,7 +102,8 @@ export default function index() {
           'password': data.password,
           'email': data.email,
           'firstname': data.firstname,
-          'lastname': data.lastname
+          'lastname': data.lastname,
+          'subSiteIds': data.subSiteIds // اینجا از فرم میاد
         })
       ).then(() => {
         dispatch(ReadUsers())
@@ -120,6 +132,10 @@ export default function index() {
     }
     fetchData()
   }, [])
+  useEffect(() => {
+    dispatch(GetExamScopeSecoundList())
+    dispatch(ReadUsers())
+  }, [dispatch])
 
   return (
     <Card className='mb-2'>
@@ -147,11 +163,11 @@ export default function index() {
                 />
               </div>
             </Col>
-               <Col lg={6}>
+            <Col lg={6}>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
                   <Label for='firstname'>
-                    نام  <span className='text-danger'>*</span>{' '}
+                    نام <span className='text-danger'>*</span>{' '}
                     {errors.firstname && (
                       <FormFeedback tag='span' className='d-inline'>
                         {errors.firstname.message}
@@ -168,11 +184,11 @@ export default function index() {
                 />
               </div>
             </Col>
-                <Col lg={6}>
+            <Col lg={6}>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
                   <Label for='lastname'>
-                    نام خوانوادگی  <span className='text-danger'>*</span>{' '}
+                    نام خوانوادگی <span className='text-danger'>*</span>{' '}
                     {errors.lastname && (
                       <FormFeedback tag='span' className='d-inline'>
                         {errors.lastname.message}
@@ -189,7 +205,7 @@ export default function index() {
                 />
               </div>
             </Col>
-               
+
             <Col lg={6}>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
@@ -265,6 +281,37 @@ export default function index() {
               </div>
             </Col>
             <Col lg={12}>
+              <div className='mb-1'>
+                <div className='d-flex justify-content-between'>
+                  <Label for='subSiteIds'>انتخاب حوزه ها</Label>
+                </div>
+                <Controller
+                  name='subSiteIds'
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      inputId='subSiteIds'
+                      isMulti
+                      options={examScope.SecoundScopeList.items?.map((item) => ({
+                        value: item.id,
+                      label:`${item.title} - ${item.provinceTitle} - ${item.mainSiteTitle} - ${item.genderTitle}` 
+                      }))}
+                      placeholder='انتخاب زیرسایت...'
+                      // مقدار انتخاب شده باید به صورت object باشه
+                      value={field.value?.map((id) =>
+                        examScope.SecoundScopeList.items
+                          ?.map((item) => ({ value: item.id, label: `${item.title}-${item.provinceTitle}-${item.mainSiteId}-${item.genderTitle}`  }))
+                          .find((option) => option.value === id)
+                      )}
+                      onChange={(selected) => field.onChange(selected?.map((s) => s.value))}
+                    />
+                  )}
+                  
+                />
+              </div>
+            </Col>
+            <Col lg={12}>
               <Button color='primary' type='submit' block disabled={!isValid}>
                 ثبت
               </Button>
@@ -274,7 +321,7 @@ export default function index() {
             <Col lg={12}>
               <Card id='Home'>
                 <CardHeader>
-                  <h4>لیست کاربران</h4>
+                  <h4>لیست پشتیبان</h4>
                 </CardHeader>
                 <CardBody>
                   <DxDataGrid
@@ -291,6 +338,20 @@ export default function index() {
           </Row>
         </Form>
       </CardBody>
+      <EditUserModal
+        isOpen={isEditModalOpen}
+        toggle={() => setIsEditModalOpen(!isEditModalOpen)}
+        examScope={examScope}
+        initialValues={selectedUser}
+        onSubmit={(data) => {
+          console.log("awedawe",data)
+          dispatch(UpdateUserPanel(data)).then(() => {
+            dispatch(ReadUsers())
+            setIsEditModalOpen(false)
+          })
+        }}
+      />
+      <DeleteModal SetIsDeleteModal={SetIsDeleteModal} IsDeleteModal={IsDeleteModal} userName={userNameID} />
     </Card>
   )
 }

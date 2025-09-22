@@ -17,15 +17,16 @@ export default function index() {
           </CardHeader>
         </Card>
       </Col>
-{/* 
-      <Col lg={4}>
-        <Card style={{ backgroundColor: '#f9844a' }} className='panel-card' onClick={() => navigate('/role')}>
+         <Col lg={4}>
+        <Card style={{ backgroundColor: '#f9844a' }} className='panel-card' onClick={() => navigate('/scopeUser')}>
           <CardHeader className='d-flex justify-content-between '>
-            <h4 className='panel-title'>تعیین نقش</h4>
+            <h4 className='panel-title'> ثبت کاربر حوزه و تعیین نقش </h4>
             <img src={role} width={60} height={60} />
           </CardHeader>
         </Card>
       </Col>
+{/* 
+   
 
       <Col lg={4}>
         <Card style={{ backgroundColor: '#4aa8f9' }} className='panel-card' onClick={() => navigate('/Access')}>

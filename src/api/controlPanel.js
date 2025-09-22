@@ -1,12 +1,9 @@
 import axios from '@configs/axios'
 import urls from './urls'
 
-
-
 export async function readTypes() {
   return await axios.get(urls.panelType.readTypes)
 }
-
 
 ////////////UseMannager
 export async function readUsers() {
@@ -14,6 +11,15 @@ export async function readUsers() {
 }
 export async function createUser(param) {
   return await axios.post(urls.userManager.createUser, param)
+
+}
+export async function removeUser(param) {
+  return await axios.post(urls.userManager.removeUser, param)
+
+}
+  export async function updateUserPanel(param) {
+  return await axios.post(urls.userManager.updateUserPanel, param)
+
 }
 
 
@@ -40,15 +46,15 @@ export async function getReportPermissionsOfRole(data) {
 }
 
 export async function setReportPermissionsToRole(data) {
-  return await axios.post(urls.ReportPermission.setReportPermissionsToRole , data)
+  return await axios.post(urls.ReportPermission.setReportPermissionsToRole, data)
 }
 
 export async function addRoleToUser(data) {
-  return await axios.post(urls.userManager.addRoleToUser , data)
+  return await axios.post(urls.userManager.addRoleToUser, data)
 }
 
 export async function readUserRole(data) {
-  return await axios.post(urls.userManager.readUserRole , data)
+  return await axios.post(urls.userManager.readUserRole, data)
 }
 
 export async function getReportPermissionsToCategory(data) {
@@ -56,15 +62,9 @@ export async function getReportPermissionsToCategory(data) {
 }
 
 export async function setReportPermissionsToCategory(data) {
-  return await axios.post(urls.ReportPermission.setReportPermissionsToCategory,data )
+  return await axios.post(urls.ReportPermission.setReportPermissionsToCategory, data)
 }
 
 export async function getAllCategory() {
-  return await axios.get(urls.category.getAllCategory )
+  return await axios.get(urls.category.getAllCategory)
 }
-
-
-
-
-
-

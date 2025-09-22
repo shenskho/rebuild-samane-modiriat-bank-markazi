@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
-import DxDataGrid from '@components/devextreme/DxDataGrid2'
-import { GetTickets } from '@store/slices/operator'
+import DxDataGrid from '@components/devextreme/DxDataGrid'
+import { GetTickets, GetApplicantChanges } from '@store/slices/operator'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
-//import AddModal from './AddModal'
+import UserChangeDetailsModal from './UserChangeDetailsModal'
 import EditModal from './EditModal'
 // import DeleteModal from './DeleteModal'
 
@@ -18,18 +18,32 @@ export default function index() {
   const [userItem, SetUserItem] = useState([])
   const [IsAddModal, SetIsAddModal] = useState(false)
   const [IsEditModal, SetIsEditModal] = useState(false)
-  const [IsDeleteModal, SetIsDeleteModal] = useState(false)
-  const [pageIndex, setPageIndex] = useState(0)
-  const [pageSize, setPageSize] = useState(10)
+  const [IsShowChanges, SetIsShowChanges] = useState(false)
+
   const handeleEditRole = (data) => {
     SetUserItem(data)
     SetIsEditModal(!IsEditModal)
   }
 
-  const rowsWithIndex = store.tickets.items?.map((item, i) => ({
-    ...item,
-    index: pageIndex * pageSize + i + 1
-  }))
+  const handleReopen = (data) => {
+    dispatch(GetApplicantChanges(`?TicketRefCode=${data.refCode}`)).then((response) => {
+      console.log(response.payload.item)
+      if(response.payload.item)
+      {
+    SetUserItem(data)
+      SetIsShowChanges(!IsShowChanges)
+      }
+  
+    })
+  }
+
+  const rowsWithIndex = store.tickets.items
+    ?.slice() // make a shallow copy (so we don’t mutate the original)
+    .reverse()
+    .map((item, i) => ({
+      ...item,
+      index: i + 1 // index starts from 1 in reversed list
+    }))
 
   const dataGridData = {
     columns: [
@@ -67,13 +81,21 @@ export default function index() {
       }
     ],
     //  rows: []
-    rows: rowsWithIndex,
-    totalCount: store.tickets.totalCount || store.tickets.items.length // fallback
+    rows: rowsWithIndex
   }
 
   useEffect(() => {
-    dispatch(GetTickets({ page: pageIndex + 1, pageSize }))
-  }, [dispatch, pageIndex, pageSize])
+    // اولین بار صدا زده بشه
+    dispatch(GetTickets())
+
+    // هر 5 ثانیه یک بار رفرش
+    const interval = setInterval(() => {
+      dispatch(GetTickets())
+    }, 120000)
+
+    // وقتی کامپوننت unmount شد تایمر رو پاک کن
+    return () => clearInterval(interval)
+  }, [dispatch])
   return (
     <Row>
       <Col lg={12} className=' base-data-container'>
@@ -114,10 +136,11 @@ export default function index() {
                   <CardBody>
                     <DxDataGrid
                       data={dataGridData}
-                      pagination
-                      paginationSize={pageSize}
-                      onPageSizeChange={(size) => setPageSize(size)}
-                      onPageIndexChange={(index) => setPageIndex(index)}
+                      paginationSize={10}
+                      editing={{
+                        mode: 'row',
+                        useIcons: false
+                      }}
                     />
                   </CardBody>
                 </Card>
@@ -126,6 +149,9 @@ export default function index() {
           </CardBody>
 
           <EditModal IsEditModal={IsEditModal} SetIsEditModal={SetIsEditModal} item={userItem} />
+
+        <UserChangeDetailsModal IsShowChanges={IsShowChanges} SetIsShowChanges={SetIsShowChanges}  />
+
         </Card>
       </Col>
     </Row>

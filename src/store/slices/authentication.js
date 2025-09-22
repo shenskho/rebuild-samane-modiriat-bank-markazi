@@ -69,7 +69,7 @@ export const Extralogin = createAsyncThunk('authentication/login', async (arg) =
     localStorage.setItem('firstName', result.firstName)
     localStorage.setItem('lastName',  result.lastName)
     localStorage.setItem('panelTypeTitle', result.roleName)
-
+    localStorage.setItem('subSiteIds', result.subSiteIds)
   
   
       // localStorage.setItem('token', result.token)
@@ -98,6 +98,7 @@ export const login = createAsyncThunk('authentication/login', async (loginRespon
       localStorage.setItem('lastName', `(${result.postTitle})`)
 
       localStorage.setItem('panelTypeTitle', result.panelTypeTitle)
+          localStorage.setItem('subSiteIds', result.subSiteIds)
     }
   }
   return loginResponse.data
@@ -138,6 +139,7 @@ export const authenticationSlice = createSlice({
       localStorage.removeItem('lastName')
 
       localStorage.removeItem('panelTypeTitle')
+          localStorage.removeItem('subSiteIds')
     }
   },
   extraReducers: (builder) => {
@@ -155,7 +157,7 @@ export const authenticationSlice = createSlice({
             state.userData = data.result.username
             state.firstName = data.result.userFullname
             state.lastName = `(${data.result.postTitle})`
-
+ state.subSiteIds = data.result.subSiteIds
             state.panelTypeTitle = data.result.panelTypeTitle
           }
         }
@@ -180,6 +182,7 @@ export const authenticationSlice = createSlice({
           localStorage.removeItem('firstName')
           localStorage.removeItem('lastName')
 
+     localStorage.removeItem('subSiteIds')
           localStorage.removeItem('panelTypeTitle')
         }
       })

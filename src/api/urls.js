@@ -14,6 +14,7 @@ export default {
   },
   file: {
     uploadFile: `${PREFIX}/File/upload-base64-doc`,
+    uploadLargeFile: `${PREFIX}/File/upload-large-base64-doc`,
     readFile: `${PREFIX}/File/get-base64-doc?DocumentId=`
   },
   license: {
@@ -97,22 +98,41 @@ export default {
     updateOrganizations: `${PREFIX}/Organization/update-Organization`,
     removeOrganizations: `${PREFIX}/Organization/delete-Organization`
   },
+
   Ticket: {
-    getTickets: `${PREFIX}/Ticket/get-all-tickets-pagination`,
+    getTickets: `${PREFIX}/Ticket/get-all-tickets-pagination?PageSize=999999`,
     answareTicket: `${PREFIX}/Ticket/answer-ticket`,
     takeTicket: `${PREFIX}/Ticket/assign-ticket-operator`,
     getUser: `${PREFIX}/Applicant/get-total-applicant-info?ApplicantId=`,
     editUser: `${PREFIX}/Applicant/edit-total-applicant-info`,
-    getTicket:`${PREFIX}/Ticket/get-ticket?Id=`
+    getTicket: `${PREFIX}/Ticket/get-ticket?Id=`,
+    createScopeTicket: `${PREFIX}/Ticket/create-hoze-ticket`,
+    getScopeTicket: `${PREFIX}/Ticket/get-all-hoze-tickets-pagination`,
+    getScopeusers: `${PREFIX}/Applicant/get-applicants-of-hoze-panel?ExamId=1&PageSize=99999999`,
+    getApplicantChanges: `${PREFIX}/Applicant/get-applicant-changed-Fields`
   },
-  
-    PrintQuarantine: {
+
+  PrintQuarantine: {
     getQuarantineAllSubSutes: `${PREFIX}/PrintQuarantine/get-quarantine-of-all-sub-sites`,
     getQuarantineOfSubSite: `${PREFIX}/PrintQuarantine/get-quarantine-of-sub-site`,
     setPrintQuarantineOfSubSite: `${PREFIX}/PrintQuarantine/set-print-quarantine-of-sub-site`,
     setRecevierInfo: `${PREFIX}/PrintQuarantine/set-receiver-info`,
     getRemainingReport: `${PREFIX}/PrintQuarantine/get-remaining-report`
   },
+  MeetingRecordType: {
+    getMeetingRecordType: `${PREFIX}/MeetingRecordType/get-all-meeting-record-types`,
+    createMeetingRecordType: `${PREFIX}/MeetingRecordType/create-meeting-record-type`,
+    updateMeetingRecordType: `${PREFIX}/MeetingRecordType/update-meeting-record-type`,
+    removeMeetingRecordType: `${PREFIX}/MeetingRecordType/delete-meeting-record-type`
+  },
+  MeetingRecord: {
+    getMeetingRecord: `${PREFIX}/MeetingRecord/get-all-meeting-records-pagination`,
+    createMeetingRecord: `${PREFIX}/MeetingRecord/create-meeting-record`,
+    updateMeetingRecord: `${PREFIX}/MeetingRecord/update-meeting-record`,
+    removeMeetingRecord: `${PREFIX}/MeetingRecord/delete-meeting-record`,
+    getMeetingRecordReport: `${PREFIX}/MeetingRecord/get-meeting-record-report?ExamId=1`
+  },
+
   ///////////////////////////variableData//////////////////////////
   ScoreRatio: {
     getScoreRatio: `${PREFIX}/ScoreRatio/get-all-score-ratios-pagination?PageSize=999999`,
@@ -156,7 +176,7 @@ export default {
     updateAgencyCategory: `${PREFIX}/AgencyCategory/update-agency-category`,
     removeAgencyCategory: `${PREFIX}/AgencyCategory/delete-agency-category`
   },
-  IntroductionExams:{
+  IntroductionExams: {
     getIntroductionExams: `${PREFIX}/Exam/get-all-exams`,
     createIntroductionExams: `${PREFIX}/Exam/create-exam`,
     updateIntroductionExams: `${PREFIX}/Exam/update-exam`,
@@ -171,6 +191,7 @@ export default {
   },
   ExamScopeSecound: {
     getExamScopeSecound: `${PREFIX}/SubSite/get-all-sub-sites-pagination?Page=1&PageSize=999999`,
+    getExamScopeSecoundList: `${PREFIX}/SubSite/get-all-sub-sites`,
     createExamScopeSecound: `${PREFIX}/SubSite/create-sub-site`,
     updateExamScopeSecound: `${PREFIX}/SubSite/update-sub-site`,
     removeExamScopeSecound: `${PREFIX}/SubSite/delete-sub-site`
@@ -210,9 +231,11 @@ export default {
   userManager: {
     readUsers: `${PREFIX}/UserManager/read-user`,
     setUserPanelType: `${PREFIX}/UserManager/set-user-panel-type`,
+    updateUserPanel: `${PREFIX}/UserManager/update-user`,
     addRoleToUser: `${PREFIX}/UserManager/add-role-to-user`,
     readUserRole: `${PREFIX}/UserManager/read-user-role`,
-    createUser: `${PREFIX}/UserManager/create-user`
+    createUser: `${PREFIX}/UserManager/create-user`,
+    removeUser: `${PREFIX}/UserManager/delete-user`
   },
   panelType: {
     readTypes: `${PREFIX}/PanelType/get-all-panel-types`

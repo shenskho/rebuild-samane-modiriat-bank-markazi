@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { recruitmentData } from './data'
 import { Col, Row } from 'reactstrap'
 import Operators from '../operators'
+import Scope from '../ScopeManage'
 export default function index() {
   // useAuth().panelTypeTitle
   // const navigate = useNavigate()
@@ -64,11 +65,10 @@ export default function index() {
     setEvents(events.filter((event) => event.id !== eventId))
   }
 
-  return (
-    <div className='dashboard'>
-      {localStorage.getItem('role') === 'SuperAdmin' ? (
+  if (localStorage.getItem('role') === 'SuperAdmin') {
+    return (
+      <div className='dashboard'>
         <>
-  
           {' '}
           <ChartsSection />
           <Row className='text-right'>
@@ -84,11 +84,22 @@ export default function index() {
               <SidebarSection events={events} />
             </Col>
           </Row>
-          
         </>
-      ) : (
-     <Operators/>
-      )}
-    </div>
-  )
+
+      
+      </div>
+    )
+  } else if (localStorage.getItem('role') === 'operator') {
+    return (
+      <div className='dashboard'>
+        <Operators />
+      </div>
+    )
+  } else if (localStorage.getItem('role') === 'scope') {
+    return (
+      <div className='dashboard'>
+        <Scope />
+      </div>
+    )
+  }
 }

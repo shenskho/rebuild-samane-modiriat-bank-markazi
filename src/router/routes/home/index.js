@@ -8,7 +8,7 @@ const FixData = lazy(() => import('@views/baseData/fixData'))
 
 const DutyStatus = lazy(() => import('@views/baseData/fixData/dutyStatus'))
 const Organization = lazy(() => import('@views/baseData/fixData/organization'))
-const City = lazy(()=>import('@views/baseData/fixData/City'))
+const City = lazy(() => import('@views/baseData/fixData/City'))
 const Province = lazy(() => import('@views/baseData/fixData/Province'))
 const EducationLevel = lazy(() => import('@views/baseData/fixData/EducationLevel'))
 const Quota = lazy(() => import('@views/baseData/fixData/Quota'))
@@ -29,11 +29,23 @@ const RequestLicense = lazy(() => import('@views/license/RequestLicense'))
 const ExamCenter = lazy(() => import('@views/ExeamOrganier/examCenter'))
 const ExamScope = lazy(() => import('@views/ExeamOrganier/examScope'))
 const ExamSecoundScope = lazy(() => import('@views/ExeamOrganier/examSecoundScope'))
-const PrintRequirement = lazy(() => import('@views/ExeamOrganier/printRequirement'))
+const PrintRequirement = lazy(() => import('@views/ExeamOrganier/PrintRequirement'))
 const ActivityScope = lazy(() => import('@views/baseData/fixData/ActivityScope'))
 const Veteran = lazy(() => import('@views/baseData/fixData/Veteran'))
 const IntroductionExams = lazy(() => import('@views/ExeamOrganier/IntroductionExams'))
-const questionDesigner = lazy(() => import('@views/ExeamOrganier/questionDesigner'))
+const PrintQuarantine = lazy(() => import('@views/ExeamOrganier/PrintQuarantine'))
+
+const ScopeManage = lazy(() => import('@views/ExeamOrganier/scopeManage'))
+const OperatorScopeManage = lazy(() => import('@views/operators/operatorRecords'))
+const QuestionDesigner = lazy(() => import('@views/ExeamOrganier/questionDesigner'))
+const ExecutiveAgents = lazy(() => import('@views/ExeamOrganier/executiveAgents'))
+const ScopeUsers = lazy(() => import('@views/ScopeManage/scopeUsers'))
+const ScopeTicket = lazy(() => import('@views/ScopeManage/ScopeTicket'))
+
+const ScopeprintRequirement = lazy(() => import('@views/ScopeManage/scopeprintRequirement'))
+const OperatorTicket = lazy(() => import('@views/operators/operatorTicket'))
+
+const ChartReport = lazy(() => import('@views/operators/chartReport'))
 const AdminRoutes = [
   {
     path: '/home',
@@ -59,13 +71,31 @@ const AdminRoutes = [
       resource: '/variableData'
     }
   },
- 
+
   {
     path: '/IntroductionExams',
     element: <IntroductionExams />,
     meta: {
       action: 'read',
       resource: '/IntroductionExams'
+    }
+  },
+
+
+  {
+    path: '/QuestionDesigner',
+    element: <QuestionDesigner />,
+    meta: {
+      action: 'read',
+      resource: '/QuestionDesigner'
+    }
+  },
+  {
+    path: '/ExecutiveAgents',
+    element: <ExecutiveAgents />,
+    meta: {
+      action: 'read',
+      resource: '/ExecutiveAgents'
     }
   },
   {
@@ -75,8 +105,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/City'
     }
-  }
- ,
+  },
   {
     path: '/Veteran',
     element: <Veteran />,
@@ -84,8 +113,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/Veteran'
     }
-  }
- ,
+  },
   {
     path: '/ActivityScope',
     element: <ActivityScope />,
@@ -93,8 +121,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/ActivityScope'
     }
-  }
-  ,
+  },
   {
     path: '/University',
     element: <University />,
@@ -102,8 +129,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/University'
     }
-  }
-  ,
+  },
   {
     path: '/SelectionState',
     element: <SelectionState />,
@@ -249,7 +275,7 @@ const AdminRoutes = [
       resource: '/requestLicense'
     }
   },
-    {
+  {
     path: '/examCenter',
     element: <ExamCenter />,
     meta: {
@@ -280,9 +306,75 @@ const AdminRoutes = [
       action: 'read',
       resource: '/printRequirement'
     }
+  },
+  {
+    path: '/printQuarantine',
+    element: <PrintQuarantine />,
+    meta: {
+      action: 'read',
+      resource: '/printQuarantine'
+    }
+  },
+  {
+    path: '/scopeUsers',
+    element: <ScopeUsers />,
+    meta: {
+      action: 'read',
+      resource: '/scopeUsers'
+    }
+  },
+  {
+    path: '/scopeTicket',
+    element: <ScopeTicket />,
+    meta: {
+      action: 'read',
+      resource: '/scopeTicket'
+    }
+  },
+
+  {
+    path: '/scopeManage',
+    element: <ScopeManage />,
+    meta: {
+      action: 'read',
+      resource: '/scopeManage'
+    }
+  },
+
+  {
+    path: '/operatorScopeManage',
+    element: <OperatorScopeManage />,
+    meta: {
+      action: 'read',
+      resource: '/operatorScopeManage'
+    }
+  },
+
+  {
+    path: '/scopePrintRequirement',
+    element: <ScopeprintRequirement />,
+    meta: {
+      action: 'read',
+      resource: '/scopePrintRequirement'
+    }
+  },
+  {
+    path: '/operatorTicket',
+    element: <OperatorTicket />,
+    meta: {
+      action: 'read',
+      resource: '/operatorTicket'
+    }
+  },
+  {
+    path: '/chartReport',
+    element: <ChartReport />,
+    meta: {
+      action: 'read',
+      resource: '/chartReport'
+    }
   }
+
 ]
-
-
 
 export default AdminRoutes
