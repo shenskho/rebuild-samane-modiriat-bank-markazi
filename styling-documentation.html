@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>راهنمای کامل استایل‌دهی پروژه Vuexy React Admin</title>
+    <style>
+        /* استایل‌های پایه برای داکیومنت */
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* استایل‌های هدر */
+        .header {
+            background: linear-gradient(135deg, #04364a, #0a5c7a);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(4, 54, 74, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* استایل‌های فهرست مطالب */
+        .toc {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .toc h2 {
+            color: #04364a;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #04364a;
+            padding-bottom: 10px;
+        }
+        
+        .toc ul {
+            list-style: none;
+        }
+        
+        .toc li {
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .toc a {
+            text-decoration: none;
+            color: #04364a;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #e55604;
+        }
+        
+        /* استایل‌های بخش‌ها */
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #04364a;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #e55604;
+            padding-bottom: 10px;
+        }
+        
+        .section h3 {
+            color: #04364a;
+            font-size: 1.5rem;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+        
+        .section h4 {
+            color: #666;
+            font-size: 1.2rem;
+            margin: 20px 0 10px 0;
+            font-weight: 500;
+        }
+        
+        /* استایل‌های کد */
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+        }
+        
+        .code-inline {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e55604;
+            font-size: 0.9em;
+        }
+        
+        /* استایل‌های نمونه‌های بصری */
+        .visual-example {
+            border: 2px solid #04364a;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .example-header {
+            background: #04364a;
+            color: white;
+            padding: 10px 15px;
+            font-weight: 600;
+        }
+        
+        .example-content {
+            padding: 20px;
+            background: white;
+        }
+        
+        /* استایل‌های کامپوننت‌های نمونه */
+        .sample-button {
+            background-color: #04364a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Vazirmatn', Arial, sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .sample-button:hover {
+            background-color: #032a3a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(4, 54, 74, 0.3);
+        }
+        
+        .sample-button.secondary {
+            background-color: #e55604;
+        }
+        
+        .sample-button.secondary:hover {
+            background-color: #cc4d04;
+        }
+        
+        .sample-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 15px 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .sample-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Vazirmatn', Arial, sans-serif;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        
+        .sample-input:focus {
+            outline: none;
+            border-color: #04364a;
+            box-shadow: 0 0 0 3px rgba(4, 54, 74, 0.1);
+        }
+        
+        /* استایل‌های جدول */
+        .sample-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sample-table th {
+            background: #04364a;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .sample-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .sample-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        /* استایل‌های نوار ناوبری */
+        .sample-navbar {
+            background: #04364a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .navbar-nav {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        
+        .navbar-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .navbar-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* استایل‌های کارت */
+        .sample-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .panel-box {
+            box-shadow: 0px 0px 3px rgb(142, 172, 253);
+            border-radius: 5px;
+            background-color: #f0f4ff56;
+            padding: 15px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .panel-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(142, 172, 253, 0.3);
+        }
+        
+        /* استایل‌های فرم */
+        .sample-form {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            margin: 20px 0;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        /* استایل‌های رنگ‌ها */
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .color-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .color-primary { background: #04364a; }
+        .color-secondary { background: #e55604; }
+        .color-warning { background: #ffd700; color: #333; }
+        .color-success { background: #03A791; }
+        .color-danger { background: #FE4F2D; }
+        .color-info { background: #4cc9f0; }
+        .color-gray { background: #6c757d; }
+        
+        /* استایل‌های واکنش‌گرا */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .sample-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .sample-navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .navbar-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        
+        /* استایل‌های چاپ */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+            
+            .visual-example {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- هدر اصلی -->
+        <header class="header">
+            <h1>راهنمای کامل استایل‌دهی</h1>
+            <p>پروژه Vuexy React Admin Dashboard</p>
+            <small>نسخه 9.0.0 - پشتیبانی کامل از RTL و فارسی</small>
+        </header>
+
+        <!-- فهرست مطالب -->
+        <div class="toc">
+            <h2>فهرست مطالب</h2>
+            <ul>
+                <li><a href="#overview">۱. نمای کلی پروژه</a></li>
+                <li><a href="#structure">۲. ساختار فایل‌های استایل</a></li>
+                <li><a href="#variables">۳. متغیرهای رنگ و طراحی</a></li>
+                <li><a href="#components">۴. کامپوننت‌های اصلی</a></li>
+                <li><a href="#layouts">۵. طرح‌بندی و لایوت</a></li>
+                <li><a href="#rtl-support">۶. پشتیبانی از RTL</a></li>
+                <li><a href="#customization">۷. سفارشی‌سازی</a></li>
+                <li><a href="#responsive">۸. طراحی واکنش‌گرا</a></li>
+                <li><a href="#best-practices">۹. بهترین روش‌ها</a></li>
+            </ul>
+        </div>
+
+        <!-- بخش ۱: نمای کلی -->
+        <section id="overview" class="section">
+            <h2>۱. نمای کلی پروژه</h2>
+            
+            <h3>تکنولوژی‌های استفاده شده</h3>
+            <ul>
+                <li><strong>React:</strong> نسخه 18.2.0</li>
+                <li><strong>SCSS/Sass:</strong> برای نوشتن استایل‌های پیشرفته</li>
+                <li><strong>Bootstrap 5:</strong> فریمورک CSS پایه</li>
+                <li><strong>Reactstrap:</strong> کامپوننت‌های Bootstrap برای React</li>
+                <li><strong>DevExtreme:</strong> کامپوننت‌های پیشرفته جدول و نمودار</li>
+                <li><strong>Vite:</strong> ابزار ساخت و توسعه</li>
+            </ul>
+
+            <h3>ویژگی‌های کلیدی</h3>
+            <div class="visual-example">
+                <div class="example-header">ویژگی‌های طراحی</div>
+                <div class="example-content">
+                    <div class="sample-cards">
+                        <div class="panel-box">
+                            <h4>پشتیبانی کامل از RTL</h4>
+                            <p>طراحی شده برای زبان‌های راست به چپ مثل فارسی و عربی</p>
+                        </div>
+                        <div class="panel-box">
+                            <h4>طراحی واکنش‌گرا</h4>
+                            <p>سازگار با تمام اندازه‌های صفحه نمایش</p>
+                        </div>
+                        <div class="panel-box">
+                            <h4>تم‌های متنوع</h4>
+                            <p>حالت روشن، تیره، نیمه‌تیره و حاشیه‌دار</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>فونت اصلی پروژه</h3>
+            <p>پروژه از فونت <span class="code-inline">Vazirmatn</span> استفاده می‌کند که یک فونت مدرن و زیبا برای زبان فارسی است.</p>
+            
+            <div class="code-block">
+/* تنظیم فونت برای زبان‌های مختلف */
+:not(i, [class^='dx-']) {
+  html[lang='en'] & {
+    font-family: 'Vazirmatn-RD-UI' !important;
+  }
+  html[lang='fa'] & {
+    font-family: 'Vazirmatn-RD-UI-FD' !important;
+  }
+}
+            </div>
+        </section>
+
+        <!-- بخش ۲: ساختار فایل‌ها -->
+        <section id="structure" class="section">
+            <h2>۲. ساختار فایل‌های استایل</h2>
+            
+            <h3>ساختار اصلی</h3>
+            <div class="code-block">
+src/
+├── @core/
+│   └── scss/
+│       ├── core.scss                 # فایل اصلی Core
+│       ├── base/                     # استایل‌های پایه
+│       │   ├── bootstrap.scss
+│       │   ├── colors.scss
+│       │   └── components.scss
+│       └── react/                    # استایل‌های React
+│           ├── _index.scss
+│           ├── libs/                 # کتابخانه‌ها
+│           └── apps/                 # اپلیکیشن‌ها
+├── assets/
+│   └── scss/
+│       ├── style.scss               # فایل اصلی استایل
+│       └── variables/               # متغیرها
+│           ├── _variables.scss
+│           ├── main.scss
+│           └── ...
+└── index.scss                       # نقطه ورود اصلی
+            </div>
+
+            <h3>نحوه بارگذاری استایل‌ها</h3>
+            <p>استایل‌ها به ترتیب زیر بارگذاری می‌شوند:</p>
+            
+            <div class="visual-example">
+                <div class="example-header">ترتیب بارگذاری فایل‌های CSS</div>
+                <div class="example-content">
+                    <ol>
+                        <li><strong>index.scss</strong> - نقطه ورود اصلی</li>
+                        <li><strong>@core/scss/core.scss</strong> - استایل‌های پایه</li>
+                        <li><strong>assets/scss/style.scss</strong> - استایل‌های سفارشی</li>
+                        <li><strong>Variables</strong> - متغیرهای رنگ و اندازه</li>
+                        <li><strong>Components</strong> - استایل‌های کامپوننت‌ها</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش ۳: متغیرهای رنگ -->
+        <section id="variables" class="section">
+            <h2>۳. متغیرهای رنگ و طراحی</h2>
+            
+            <h3>رنگ‌های اصلی پروژه</h3>
+            <div class="color-palette">
+                <div class="color-item color-primary">
+                    <strong>Primary</strong><br>
+                    #04364a
+                </div>
+                <div class="color-item color-secondary">
+                    <strong>Secondary</strong><br>
+                    #e55604
+                </div>
+                <div class="color-item color-warning">
+                    <strong>Warning</strong><br>
+                    #ffd700
+                </div>
+                <div class="color-item color-success">
+                    <strong>Success</strong><br>
+                    #03A791
+                </div>
+                <div class="color-item color-danger">
+                    <strong>Danger</strong><br>
+                    #FE4F2D
+                </div>
+                <div class="color-item color-info">
+                    <strong>Info</strong><br>
+                    #4cc9f0
+                </div>
+            </div>
+
+            <h3>تعریف متغیرهای SCSS</h3>
+            <div class="code-block">
+// فایل: src/assets/scss/variables/_variables.scss
+$primary: #04364a;
+$warning: #ffd700;
+
+// استفاده در استایل‌ها
+.custom-button {
+  background-color: $primary;
+  border-color: $primary;
+  
+  &:hover {
+    background-color: darken($primary, 10%);
+  }
+}
+            </div>
+
+            <h3>رنگ‌های سفارشی اضافی</h3>
+            <div class="code-block">
+// رنگ‌های تعریف شده در main.scss
+.font-color { color: #04364a; }
+.gray-color { color: #525252; }
+.main-color { color: #04364a !important; }
+.text-gray { color: #8d8d8d; }
+
+// کلاس‌های پس‌زمینه رنگی
+.color-red { background-color: #FE4F2D; }
+.color-green { background-color: #03A791; }
+.color-gray { background-color: rgb(78, 78, 78); }
+            </div>
+        </section>
+
+        <!-- بخش ۴: کامپوننت‌های اصلی -->
+        <section id="components" class="section">
+            <h2>۴. کامپوننت‌های اصلی</h2>
+            
+            <h3>دکمه‌ها (Buttons)</h3>
+            <div class="visual-example">
+                <div class="example-header">نمونه‌های دکمه</div>
+                <div class="example-content">
+                    <button class="sample-button">دکمه اصلی</button>
+                    <button class="sample-button secondary">دکمه ثانویه</button>
+                    <button class="sample-button" style="background: #03A791;">دکمه موفقیت</button>
+                    <button class="sample-button" style="background: #FE4F2D;">دکمه خطر</button>
+                </div>
+            </div>
+
+            <div class="code-block">
+/* استایل دکمه سفارشی */
+.custom-download-btn {
+  background-color: #04364a !important;
+  border-color: #04364a !important;
+  color: white !important;
+  
+  &:hover {
+    background-color: #032a3a !important;
+    border-color: #032a3a !important;
+    transform: translateY(-2px);
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(4, 54, 74, 0.25) !important;
+  }
+}
+            </div>
+
+            <h3>کارت‌ها (Cards)</h3>
+            <div class="visual-example">
+                <div class="example-header">نمونه کارت‌های مختلف</div>
+                <div class="example-content">
+                    <div class="sample-cards">
+                        <div class="panel-box">
+                            <h4>کارت استاندارد</h4>
+                            <p>این یک نمونه کارت با استایل panel-box است که در پروژه استفاده می‌شود.</p>
+                        </div>
+                        <div class="sample-card">
+                            <h4>کارت ساده</h4>
+                            <p>کارت با سایه و حاشیه ساده برای نمایش محتوای مختلف.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block">
+/* استایل کارت panel-box */
+.panel-box {
+  box-shadow: 0px 0px 3px rgb(142, 172, 253);
+  border-radius: 5px;
+  background-color: #f0f4ff56;
+  padding: 15px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(142, 172, 253, 0.3);
+  }
+}
+            </div>
+
+            <h3>فرم‌ها و ورودی‌ها</h3>
+            <div class="visual-example">
+                <div class="example-header">نمونه فرم</div>
+                <div class="example-content">
+                    <div class="sample-form">
+                        <div class="form-group">
+                            <label class="form-label">نام کاربری</label>
+                            <input type="text" class="sample-input" placeholder="نام کاربری خود را وارد کنید">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ایمیل</label>
+                            <input type="email" class="sample-input" placeholder="example@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <button class="sample-button">ارسال</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>جدول‌ها</h3>
+            <div class="visual-example">
+                <div class="example-header">نمونه جدول با استایل DevExtreme</div>
+                <div class="example-content">
+                    <table class="sample-table">
+                        <thead>
+                            <tr>
+                                <th>ردیف</th>
+                                <th>نام</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>کاربر نمونه</td>
+                                <td><span style="color: #03A791; font-weight: bold;">فعال</span></td>
+                                <td><button class="sample-button" style="padding: 5px 10px; font-size: 12px;">ویرایش</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>کاربر دوم</td>
+                                <td><span style="color: #FE4F2D; font-weight: bold;">غیرفعال</span></td>
+                                <td><button class="sample-button" style="padding: 5px 10px; font-size: 12px;">ویرایش</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="code-block">
+/* استایل هدر جدول DevExtreme */
+.dx-datagrid-headers {
+  background-color: #04364a;
+  color: white;
+  text-align: center !important;
+}
+
+/* استایل سفارشی برای ردیف‌های جدول */
+.custom-row-height {
+  height: 30px;
+  font-size: 1.2rem;
+}
+            </div>
+        </section>
+
+        <!-- بخش ۵: طرح‌بندی و لایوت -->
+        <section id="layouts" class="section">
+            <h2>۵. طرح‌بندی و لایوت</h2>
+            
+            <h3>تنظیمات لایوت اصلی</h3>
+            <p>پروژه از فایل <span class="code-inline">themeConfig.js</span> برای تنظیم لایوت استفاده می‌کند:</p>
+            
+            <div class="code-block">
+// فایل: src/configs/themeConfig.js
+const themeConfig = {
+  layout: {
+    isRTL: true,                    // فعال‌سازی RTL
+    skin: 'semi-dark',              // تم: light, dark, bordered, semi-dark
+    type: 'vertical',               // نوع: vertical, horizontal
+    contentWidth: 'full',           // عرض: full, boxed
+    menu: {
+      isHidden: false,              // مخفی کردن منو
+      isCollapsed: false            // جمع کردن منو
+    },
+    navbar: {
+      type: 'sticky',               // نوع نوار: static, sticky, floating, hidden
+      backgroundColor: 'white'       // رنگ پس‌زمینه
+    },
+    footer: {
+      type: 'static'                // نوع فوتر: static, sticky, hidden
+    }
+  }
+}
+            </div>
+
+            <h3>نوار ناوبری (Navbar)</h3>
+            <div class="visual-example">
+                <div class="example-header">نمونه نوار ناوبری</div>
+                <div class="example-content">
+                    <div class="sample-navbar">
+                        <div class="navbar-brand">نام پروژه</div>
+                        <ul class="navbar-nav">
+                            <li><a href="#">خانه</a></li>
+                            <li><a href="#">داشبورد</a></li>
+                            <li><a href="#">گزارشات</a></li>
+                            <li><a href="#">تنظیمات</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block">
+/* استایل نوار ناوبری اصلی */
+.main-menu {
+  .navbar-header .navbar-brand .brand-text {
+    color: $white;
+  }
+  
+  /* پس‌زمینه برای آیتم فعال منو */
+  &.menu-dark .navigation > li a.active {
+    background: linear-gradient(118deg, #04364a, #04364a) !important;
+  }
+}
+
+/* تغییر رنگ آیتم‌های منو در حالت semi-dark */
+.semi-dark-layout .main-menu-content .navigation-main .nav-item a {
+  color: $white !important;
+  
+  &.active {
+    box-shadow: none !important;
+    background-color: $white !important;
+  }
+}
+            </div>
+
+            <h3>فوتر</h3>
+            <div class="code-block">
+/* استایل فوتر */
+.footer {
+  background-color: #e0e0e0;
+  margin: 0 !important;
+}
+
+/* پس‌زمینه اصلی صفحه */
+.wrapper {
+  background-color: #eef3f2 !important;
+}
+            </div>
+        </section>
+
+        <!-- بخش ۶: پشتیبانی از RTL -->
+        <section id="rtl-support" class="section">
+            <h2>۶. پشتیبانی از RTL</h2>
+            
+            <h3>تنظیمات RTL</h3>
+            <p>پروژه پشتیبانی کاملی از جهت راست به چپ دارد:</p>
+            
+            <div class="code-block">
+/* کلاس‌های جهت */
+.ltr { direction: ltr; }
+.rtl { direction: rtl; }
+
+/* تنظیم فونت بر اساس زبان */
+html[lang='fa'] {
+  direction: rtl;
+  font-family: 'Vazirmatn-RD-UI-FD' !important;
+}
+
+html[lang='en'] {
+  direction: ltr;
+  font-family: 'Vazirmatn-RD-UI' !important;
+}
+            </div>
+
+            <h3>کلاس‌های مارجین و پدینگ RTL</h3>
+            <div class="visual-example">
+                <div class="example-header">کلاس‌های فاصله‌گذاری</div>
+                <div class="example-content">
+                    <p>پروژه کلاس‌های مخصوص RTL برای مارجین تعریف کرده:</p>
+                    <div style="background: #f8f9fa; padding: 10px; margin: 10px 0;">
+                        <div class="mr-1" style="background: #e55604; color: white; padding: 5px; display: inline-block;">مارجین راست 1rem</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 10px; margin: 10px 0;">
+                        <div class="ml-2" style="background: #04364a; color: white; padding: 5px; display: inline-block;">مارجین چپ 2rem</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block">
+/* کلاس‌های مارجین سفارشی */
+.mr-1 { margin-right: 1rem !important; }
+.mr-2 { margin-right: 2rem !important; }
+.mr-3 { margin-right: 3rem !important; }
+.mr-4 { margin-right: 4rem !important; }
+.mr-5 { margin-right: 5rem !important; }
+
+.ml-1 { margin-left: 1rem !important; }
+.ml-2 { margin-left: 2rem !important; }
+.ml-3 { margin-left: 3rem !important; }
+.ml-4 { margin-left: 4rem !important; }
+.ml-5 { margin-left: 5rem !important; }
+
+/* کلاس‌های کمکی */
+.text-right { text-align: left; }  /* معکوس برای RTL */
+.text-justify { text-align: justify; }
+.float-left { float: right !important; }  /* معکوس برای RTL */
+            </div>
+
+            <h3>آیکون‌ها و نمادها در RTL</h3>
+            <div class="code-block">
+/* تنظیم آیکون chevron برای RTL */
+.vertical-layout .main-menu .navigation li.has-sub > a:after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+            </div>
+        </section>
+
+        <!-- بخش ۷: سفارشی‌سازی -->
+        <section id="customization" class="section">
+            <h2>۷. سفارشی‌سازی</h2>
+            
+            <h3>نحوه اضافه کردن استایل‌های سفارشی</h3>
+            <p>بهترین مکان برای اضافه کردن استایل‌های سفارشی فایل <span class="code-inline">src/assets/scss/style.scss</span> است:</p>
+            
+            <div class="code-block">
+/* فایل: src/assets/scss/style.scss */
+
+/* اضافه کردن کلاس‌های سفارشی */
+.my-custom-button {
+  background: linear-gradient(45deg, #04364a, #0a5c7a);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(4, 54, 74, 0.3);
+  }
+}
+
+/* کلاس‌های کمکی سفارشی */
+.text-gradient {
+  background: linear-gradient(45deg, #04364a, #e55604);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-custom {
+  box-shadow: 0 4px 15px rgba(4, 54, 74, 0.2);
+}
+            </div>
+
+            <h3>تغییر رنگ‌های اصلی</h3>
+            <p>برای تغییر رنگ‌های اصلی، فایل <span class="code-inline">_variables.scss</span> را ویرایش کنید:</p>
+            
+            <div class="code-block">
+/* فایل: src/assets/scss/variables/_variables.scss */
+
+/* رنگ‌های اصلی قابل تغییر */
+$primary: #your-new-primary-color;
+$secondary: #your-new-secondary-color;
+$warning: #your-new-warning-color;
+
+/* رنگ‌های اضافی */
+$success: #your-success-color;
+$danger: #your-danger-color;
+$info: #your-info-color;
+            </div>
+
+            <h3>سفارشی‌سازی کامپوننت‌های DevExtreme</h3>
+            <div class="code-block">
+/* سفارشی‌سازی جداول DevExtreme */
+.dx-datagrid {
+  .dx-datagrid-headers {
+    background-color: $primary;
+    color: white;
+  }
+  
+  .dx-datagrid-rowsview .dx-row:hover {
+    background-color: lighten($primary, 45%);
+  }
+  
+  .dx-datagrid-pager {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+}
+
+/* سفارشی‌سازی TreeView */
+.dx-treeview {
+  .dx-treeview-item {
+    padding: 8px 12px;
+    
+    &:hover {
+      background-color: lighten($primary, 50%);
+    }
+  }
+}
+            </div>
+        </section>
+
+        <!-- بخش ۸: طراحی واکنش‌گرا -->
+        <section id="responsive" class="section">
+            <h2>۸. طراحی واکنش‌گرا</h2>
+            
+            <h3>نقاط شکست (Breakpoints)</h3>
+            <p>پروژه از نقاط شکست استاندارد Bootstrap استفاده می‌کند:</p>
+            
+            <div class="code-block">
+/* نقاط شکست استاندارد */
+// xs: 0px
+// sm: 576px
+// md: 768px
+// lg: 992px
+// xl: 1200px
+// xxl: 1400px
+
+/* مثال استفاده */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none;
+  }
+  
+  .container {
+    padding: 10px;
+  }
+}
+
+@media (min-width: 993px) {
+  .desktop-only {
+    display: block;
+  }
+  
+  .base-menu-container {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+  }
+}
+            </div>
+
+            <h3>کلاس‌های واکنش‌گرای سفارشی</h3>
+            <div class="visual-example">
+                <div class="example-header">نمونه طراحی واکنش‌گرا</div>
+                <div class="example-content">
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                        <p><strong>در صفحات بزرگ:</strong> منو کناری نمایش داده می‌شود</p>
+                        <p><strong>در صفحات کوچک:</strong> منو به حالت همبرگری تبدیل می‌شود</p>
+                        <p><strong>در تبلت:</strong> کارت‌ها در دو ستون نمایش داده می‌شوند</p>
+                        <p><strong>در موبایل:</strong> کارت‌ها در یک ستون نمایش داده می‌شوند</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block">
+/* استایل‌های واکنش‌گرای سفارشی */
+.executive-sort-row {
+  .sub-sort-filter {
+    width: auto;
+    font-size: 0.85rem;
+    height: 28px;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  
+  /* تنظیم فاصله ستون‌ها */
+  > [class*='col'] {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
+/* دکمه فیلتر واکنش‌گرا */
+@media (min-width: 993px) {
+  .filter-button {
+    float: right;
+    padding-right: 15px !important;
+  }
+  
+  .filter-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .filter-button {
+    margin-top: 31px;
+    text-align: center;
+    width: 100%;
+    max-height: 37px;
+  }
+}
+            </div>
+        </section>
+
+        <!-- بخش ۹: بهترین روش‌ها -->
+        <section id="best-practices" class="section">
+            <h2>۹. بهترین روش‌ها</h2>
+            
+            <h3>نکات مهم استایل‌نویسی</h3>
+            <div class="visual-example">
+                <div class="example-header">توصیه‌های مهم</div>
+                <div class="example-content">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li style="padding: 10px; margin: 5px 0; background: #e8f5e8; border-radius: 5px; border-right: 4px solid #03A791;">
+                            ✅ همیشه از متغیرهای SCSS برای رنگ‌ها استفاده کنید
+                        </li>
+                        <li style="padding: 10px; margin: 5px 0; background: #e8f5e8; border-radius: 5px; border-right: 4px solid #03A791;">
+                            ✅ استایل‌های سفارشی را در فایل style.scss اضافه کنید
+                        </li>
+                        <li style="padding: 10px; margin: 5px 0; background: #e8f5e8; border-radius: 5px; border-right: 4px solid #03A791;">
+                            ✅ از BEM methodology برای نام‌گذاری کلاس‌ها استفاده کنید
+                        </li>
+                        <li style="padding: 10px; margin: 5px 0; background: #ffe8e8; border-radius: 5px; border-right: 4px solid #FE4F2D;">
+                            ❌ مستقیماً فایل‌های core را تغییر ندهید
+                        </li>
+                        <li style="padding: 10px; margin: 5px 0; background: #ffe8e8; border-radius: 5px; border-right: 4px solid #FE4F2D;">
+                            ❌ از !important بیش از حد استفاده نکنید
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>ساختار پیشنهادی برای کامپوننت‌های جدید</h3>
+            <div class="code-block">
+/* ساختار پیشنهادی برای کامپوننت جدید */
+.my-component {
+  /* استایل‌های اصلی */
+  background-color: $white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  
+  /* عناصر فرزند */
+  &__header {
+    background-color: $primary;
+    color: $white;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    margin: -20px -20px 20px -20px;
+  }
+  
+  &__body {
+    padding: 0;
+  }
+  
+  &__footer {
+    border-top: 1px solid #dee2e6;
+    padding-top: 15px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* حالت‌های مختلف */
+  &--primary {
+    border-right: 4px solid $primary;
+  }
+  
+  &--success {
+    border-right: 4px solid $success;
+  }
+  
+  /* حالت hover */
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  
+  /* واکنش‌گرا */
+  @media (max-width: 768px) {
+    padding: 15px;
+    
+    &__header {
+      margin: -15px -15px 15px -15px;
+      padding: 12px;
+    }
+  }
+}
+            </div>
+
+            <h3>چک‌لیست کیفیت کد</h3>
+            <div class="visual-example">
+                <div class="example-header">چک‌لیست قبل از ارسال کد</div>
+                <div class="example-content">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                            <h4>کیفیت کد</h4>
+                            <ul style="font-size: 14px;">
+                                <li>استفاده از متغیرهای SCSS</li>
+                                <li>نام‌گذاری مناسب کلاس‌ها</li>
+                                <li>کامنت‌گذاری مناسب</li>
+                                <li>حذف کدهای اضافی</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                            <h4>واکنش‌گرایی</h4>
+                            <ul style="font-size: 14px;">
+                                <li>تست در اندازه‌های مختلف</li>
+                                <li>استفاده از Grid و Flexbox</li>
+                                <li>بهینه‌سازی برای موبایل</li>
+                                <li>تست در مرورگرهای مختلف</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                            <h4>دسترسی</h4>
+                            <ul style="font-size: 14px;">
+                                <li>کنتراست رنگ مناسب</li>
+                                <li>سایز فونت قابل خواندن</li>
+                                <li>فوکوس مناسب عناصر</li>
+                                <li>پشتیبانی از screen reader</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>ابزارهای توسعه پیشنهادی</h3>
+            <div class="code-block">
+/* ابزارهای مفید برای توسعه */
+
+// 1. SCSS Linter - بررسی کیفیت کد SCSS
+npm install --save-dev stylelint stylelint-scss
+
+// 2. Prettier - فرمت کردن خودکار کد
+npm install --save-dev prettier
+
+// 3. PostCSS - پردازش CSS
+npm install --save-dev postcss postcss-rtl
+
+// 4. Autoprefixer - اضافه کردن خودکار prefix
+npm install --save-dev autoprefixer
+            </code>
+
+            <h3>منابع مفید</h3>
+            <div class="visual-example">
+                <div class="example-header">لینک‌های مفید</div>
+                <div class="example-content">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                            <strong>Bootstrap 5:</strong> https://getbootstrap.com/docs/5.0/
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                            <strong>SCSS Guide:</strong> https://sass-lang.com/guide
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                            <strong>DevExtreme:</strong> https://js.devexpress.com/Documentation/
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                            <strong>Reactstrap:</strong> https://reactstrap.github.io/
+                        </li>
+                        <li style="padding: 8px 0;">
+                            <strong>Vazirmatn Font:</strong> https://github.com/rastikerdar/vazirmatn
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- فوتر -->
+        <footer style="background: #04364a; color: white; padding: 30px; text-align: center; border-radius: 10px; margin-top: 40px;">
+            <h3>پایان راهنما</h3>
+            <p>این راهنما شامل تمام اطلاعات لازم برای استایل‌دهی در پروژه Vuexy React Admin است.</p>
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">
+                تاریخ ایجاد: ۴ دی ۱۴۰۳ | نسخه: 1.0.0
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
