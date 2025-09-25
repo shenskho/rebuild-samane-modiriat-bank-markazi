@@ -18,6 +18,7 @@ import operator from './slices/operator'
 import examScope from './slices/examScope'
 import examOrganizer from './slices/examOrganizer'
 import scopeUser from './slices/scopeUser'
+import booklet from './slices/Booklet'
 
 const configs = {
   key: 'root',
@@ -40,7 +41,8 @@ const appReducer = combineReducers({
   examScope,
   operator,
   examOrganizer,
-  scopeUser
+  scopeUser,
+  booklet
 })
 
 const rootReducer = (state, action) => {

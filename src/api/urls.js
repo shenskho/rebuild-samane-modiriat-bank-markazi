@@ -211,6 +211,44 @@ export default {
     getAllfinalExam: `${PREFIX}/Report/get-final-excel`
   },
 
+  Booklet: {
+   uploadAnswerKeys: (examId) => `${PREFIX}/Booklet/${examId}/upload-answer-keys`,
+    getAnswareKeyStatus: `${PREFIX}/Booklet/upload-answer-keys-status/`,
+    processAnswerKeys: `${PREFIX}/Booklet/process-answer-keys?id=`,
+    processAnswerKeysStatus: `${PREFIX}/   Booklet/process-answer-keys-status?trackingId=`
+  },
+  BookletKeys: {
+    getallBookletKeys: `${PREFIX}/BookletAnswerKey/get-all-booklet-answer-keys-pagination?ExamId=1&PageSize=999999`,
+    getBookletAnswareKeys: `${PREFIX}/BookletAnswerKey/get-booklet-answer-key?Id=`,
+    getBookletKeys: `${PREFIX}/BookletAnswerKey/get-booklet-answer-key?Id=`,
+    createBookKetAnswareKey: `${PREFIX}/BookletAnswerKey/create-booklet-answer-key`,
+    removerAnswareKey: `${PREFIX}/BookletAnswerKey/delete-booklet-answer-key`,
+    updateAnswareKey: `${PREFIX}/BookletAnswerKey/update-booklet-answer-key`
+  },
+  BookletJob: {
+    getAllBookletJobs: `${PREFIX}/BookletJob/get-all-booklet-jobs`,
+    getAllBookletJobsPagination: `${PREFIX}/BookletJob/get-all-booklet-jobs-pagination?PageSize=999999`,
+    getBookletJobId: `${PREFIX}/BookletJob/get-booklet-job?Id=`,
+    createBookletJob: `${PREFIX}/BookletJob/create-booklet-job`,
+    updateBookletJob: `${PREFIX}/BookletJob/update-booklet-job`,
+    deleteBookletJob: `${PREFIX}/BookletJob/delete-booklet-job`
+  },
+  BookletQuestion: {
+    getAllBookletQuestions: `${PREFIX}/BookletQuestion/get-all-booklet-questions`,
+    getAllBookletQuestionsPagination: `${PREFIX}/BookletQuestion/get-all-booklet-questions-pagination?PageSize=999999999999`,
+    getBookletQuestionId: `${PREFIX}/BookletQuestion/get-booklet-question?Id=`,
+    createBookletQuestion: `${PREFIX}/BookletQuestion/create-booklet-question`,
+    updateBookletQuestion: `${PREFIX}/BookletQuestion/update-booklet-question`,
+    deleteBookletQuestion: `${PREFIX}/BookletQuestion/delete-booklet-question`
+  },
+  BookletQuestionSection: {
+    getAllBookletQuestionsSection: `${PREFIX}/BookletQuestionSection/get-all-booklet-question-sections`,
+    getAllBookletQuestionSectionPagination: `${PREFIX}/BookletQuestionSection/get-all-booklet-question-sections-pagination?PageSize=9999999999`,
+    getAllBookletQuestionSectionId: `${PREFIX}/BookletQuestionSection/get-booklet-question-section?Id=`,
+    createBookletQuestionSection: `${PREFIX}/BookletQuestionSection/create-booklet-question-section`,
+    updateBookletQuestionSection: `${PREFIX}/BookletQuestionSection/update-booklet-question-section`,
+    deleteBookletQuestionSection: `${PREFIX}/BookletQuestionSection/delete-booklet-question-section`
+  },
   /*************************************************************smaple*******************************************************************/ report:
     {
       createReport: `${PREFIX}/Report/create-report`,

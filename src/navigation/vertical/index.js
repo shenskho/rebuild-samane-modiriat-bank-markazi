@@ -7,11 +7,14 @@ import {
   FaChartBar,
   FaUserCheck,
   FaLock,
-  FaSyncAlt
+  FaSyncAlt,
+  FaQuestion
 } from 'react-icons/fa'
 
 import { IoDocuments } from 'react-icons/io5'
 import { IoIosHome } from 'react-icons/io'
+import { AnswareTicket } from '@store/slices/operator'
+import { MdOutlineViewList, MdQueryStats, MdQuestionAnswer } from 'react-icons/md'
 
 export default [
   {
@@ -51,7 +54,7 @@ export default [
     id: 'admin-home6',
     title: 'آزمون‌های استخدامی',
     icon: <FaClipboardList />,
-    children: [{ title: 'مدیریت آزمون' }, { title: 'تخصیص مجوز به آزمون' }, { title: 'نتایج آزمون' }]
+    children: [{ title: 'مدیریت آزمون', navLink:'/managementExam' }, { title: 'تخصیص مجوز به آزمون' }, { title: 'نتایج آزمون', navLink:'/resultsExam' }]
   },
   {
     id: 'admin-home7',
@@ -59,8 +62,8 @@ export default [
     icon: <FaUsersCog />,
     children: [
       { title: 'معرفی آزمون', navLink: './IntroductionExams' },
-      { title: 'لیست نفرات' },
-      { title: 'عوامل اجرایی مجری',navLink:'/executiveAgents' },
+      { title: 'لیست نفرات', navLink: '/listOfPeople' },
+      { title: 'عوامل اجرایی مجری', navLink: '/executiveAgents' },
       { title: 'حوزه آزمون', navLink: '/examScope' },
       { title: 'حوزه فرعی', navLink: '/examSecoundScope' },
       { title: 'ملزومات چاپی', navLink: '/printRequirement' },
@@ -74,6 +77,15 @@ export default [
         navLink: '/scopeManage'
       }
     ]
+  },
+
+  {
+    id: 'admin-home165',
+    title: 'مدیریت پاسخنامه',
+    icon: <MdOutlineViewList />,
+    children: [{ title: '  داده های پاسخنامه',   navLink:'answerSheet'    }]
+      //  { title: 'سازماندهی گزینش' },
+      //   { title: 'نتایج گزینش' }]
   },
   {
     id: 'admin-home8',
@@ -97,7 +109,7 @@ export default [
     children: [
       { title: 'تعیین مجری' },
       // "ارزیابی‌های جاری",
-      { title: 'لیست نفرات ارزیابی تکمیلی' },
+      { title: 'لیست نفرات ارزیابی تکمیلی', navLink:'/listOFSupplementaryAssessment' },
       { title: 'سازماندهی ارزیابی' },
       { title: 'مواد ارزیابی تکمیلی' },
       { title: 'مستندات ارزیابی تکمیلی' },

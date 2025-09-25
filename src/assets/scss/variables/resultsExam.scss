@@ -1,0 +1,102 @@
+// managementExam.scss
+
+.exam-panel {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 16px;
+    margin: 12px 0;
+    width: 100%;
+  max-width: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .exam-panel-grid {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      font-family: IRANSans, sans-serif;
+      font-size: 14px;
+    }
+
+    // keep status pill on a single line
+    .exam-card__pill {
+      white-space: nowrap;
+    }
+  
+    .exam-panel-cell {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+  
+      .exam-panel-label {
+        color: #000000;
+        font-weight: 500;
+      }
+  
+      .exam-panel-value {
+        color: #04364a;
+        font-weight: 600;
+      }
+    }
+  
+    .exam-panel-center {
+      text-align: center;
+      margin: 8px 0;
+  
+      .exam-panel-label {
+        display: block;
+        color: #444;
+        font-weight: 500;
+      }
+  
+      .exam-panel-value {
+        display: block;
+        color: #111;
+        font-weight: 600;
+      }
+    }
+  
+    .exam-panel-subvalue {
+      font-size: 13px;
+      color: #777;
+    }
+  
+    .exam-panel-divider {
+      height: 1px;
+      background: #eee;
+      margin: 10px 0;
+    }
+  }
+  .text-boldd {
+    font-size: 30px;
+    color: #04364a;
+    padding-bottom: 30px;
+    font-weight: bold;
+  }
+  .exam-panel-divider {
+    height: 3px;
+    background: #b4b4b4;
+    margin: 10px 0;
+    border-radius: 5px;
+    margin-top: -5px;
+  }
+  .exam-year-label{
+    font-size: 16px;
+    color: #04364a;
+    font-weight: bold;
+    background-color: white;
+  }
+  .exam-year-label-parent{
+    gap: 5px;
+    display: flex;
+  }
+  .text-bold{
+    font-size: 20px;
+    color: #04364a;
+    font-weight: bold;
+    text-align: start;
+  }
+  

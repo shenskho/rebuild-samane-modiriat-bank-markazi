@@ -138,3 +138,78 @@ cursor: pointer;
   float: left !important;
   clear: both !important;
 }
+
+// New exam card style similar to provided screenshot
+.exam-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  padding: 16px 18px;
+  width: 100%;
+}
+
+.exam-card__title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #04364a;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0 0 8px 0;
+}
+
+.exam-card__pill {
+  display: inline-block;
+  background: #e2f0eb;
+  color: #0b8068;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  margin: 6px auto 10px auto;
+}
+
+.exam-card__divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 10px 0;
+}
+
+.exam-card__date {
+  font-size: 13px;
+  font-weight: 800;
+  color: #04364a;
+  text-align: center;
+}
+
+.exam-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.exam-card__row .label {
+  color: #3f3f3f;
+  font-weight: 700;
+}
+
+.exam-card__row .value {
+  color: #3f3f3f;
+  font-weight: 500;
+}
+
+.exam-card__download {
+  text-align: center;
+  color: #4b5563;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.exam-card__download .icon {
+  display: inline-block;
+  margin-bottom: 4px;
+}

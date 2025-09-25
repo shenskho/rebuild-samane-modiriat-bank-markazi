@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button, Input, Label } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
-import { GetDutystatus } from '@store/slices/fixData'
+import { getOrganizations } from '@store/slices/fixData'
 import { useDispatch, useSelector } from 'react-redux'
+import { Getlicenses } from '@store/slices/license'
 import AddModal from './AddModal'
-import EditModal from './EditModal'
-import DeleteModal from './DeleteModal'
+
 import { Plus } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 import { FaFilter, FaSortAmountUpAlt } from 'react-icons/fa'
 
 export default function index() {
-  const store = useSelector((state) => state.FixData)
+  const store = useSelector((state) => state.License)
   console.log(store)
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  const [userItem, SetUserItem] = useState([])
+  // const [userItem, SetUserItem] = useState([])
   const [IsAddModal, SetIsAddModal] = useState(false)
-  const [IsEditModal, SetIsEditModal] = useState(false)
-  const [IsDeleteModal, SetIsDeleteModal] = useState(false)
+  // const [IsEditModal, SetIsEditModal] = useState(false)
+  // const [IsDeleteModal, SetIsDeleteModal] = useState(false)
 
   useEffect(() => {
-    dispatch(GetDutystatus())
+    dispatch(Getlicenses()).then(() => dispatch(getOrganizations()))
   }, [])
-
   return (
     <Row>
       <Col lg={12}>
@@ -79,33 +76,43 @@ export default function index() {
                         </div>
                       </Col>
                     </Row>
-                    <CardBody className='pt-0'>
+                    <CardBody>
                       <Row className='license-container'>
-                        <Col lg={4}>
-                          <Card className='license-card'>
-                            <CardHeader>
-                              <h4 className='w-100 text-center font-color pb-1 pt-05'>مجوز-۱۲۳۱</h4>
-                              <span className='license-card-line'></span>
-                            </CardHeader>
-                            <CardBody>
-                              <div className='d-flex justify-content-between '>
-                                <strong className='font-color'>دستگاه : </strong>{' '}
-                                <strong className='gray-color'>aklsjdlas l kasdlak s</strong>
-                              </div>
-                              <div className='d-flex justify-content-between mt-1'>
-                                <strong className='font-color'>دستگاه : </strong>{' '}
-                                <strong className='gray-color'>aklsjdlas l kasdlak s</strong>
-                              </div>
-                              <div className='d-flex justify-content-between mt-1'>
-                                <strong className='font-color'>دستگاه : </strong>{' '}
-                                <strong className='gray-color'>aklsjdlas l kasdlak s</strong>
-                              </div>
-                              <div className='d-flex justify-content-center mt-1'>
-                                <Button className='p-1 w-100 custom-download-btn'>دانلود فایل (PDF)</Button>
-                              </div>
-                            </CardBody>
-                          </Card>
-                        </Col>
+                        {store.licenses?.items?.map((item) => (
+                          <Col lg={4}>
+                            <Card className='license-card'>
+                              <CardHeader>
+                                <h4 className='w-100 text-center font-color pb-1 pt-05'>{item.licenseNumber}</h4>
+                                <span className='license-card-line'></span>
+                              </CardHeader>
+                              <CardBody>
+                                <div className='d-flex justify-content-between '>
+                                  <strong className='font-color'>دستگاه : </strong>{' '}
+                                  <strong className='gray-color'> {item.organizationName}</strong>
+                                </div>
+                                <div className='d-flex justify-content-between mt-1'>
+                                  <strong className='font-color'>تاریخ صدور : </strong>{' '}
+                                  <strong className='gray-color'> {item.issuanceDateShamsi.substring(0, 10)}</strong>
+                                </div>
+                                <div className='d-flex justify-content-between mt-1'>
+                                  <strong className='font-color'>تاریخ انقضاء : </strong>{' '}
+                                  <strong className='gray-color'> {item.expireDateShamsi.substring(0, 10)}</strong>
+                                </div>      <div className='d-flex justify-content-between mt-1'>
+                                  <strong className='font-color'>تعداد استخدام  : </strong>{' '}
+                                  <strong className='gray-color'> {item.employmentCount}</strong>
+                                </div>
+                                <div className='d-flex justify-content-center mt-1' >
+                                  <Button 
+                                    className='p-1 w-100 custom-download-btn' 
+                                    color="primary"
+                                  >
+                                    دانلود فایل 
+                                  </Button>
+                                </div>
+                              </CardBody>
+                            </Card>
+                          </Col>
+                        ))}
                       </Row>
                     </CardBody>
                   </Card>
@@ -115,8 +122,6 @@ export default function index() {
 
             <AddModal IsAddModal={IsAddModal} SetIsAddModal={SetIsAddModal} />
 
-            <EditModal IsEditModal={IsEditModal} SetIsEditModal={SetIsEditModal} item={userItem} />
-            <DeleteModal IsDeleteModal={IsDeleteModal} SetIsDeleteModal={SetIsDeleteModal} item={userItem} />
           </Card>
         </div>
       </Col>

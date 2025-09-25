@@ -29,23 +29,25 @@ const RequestLicense = lazy(() => import('@views/license/RequestLicense'))
 const ExamCenter = lazy(() => import('@views/ExeamOrganier/examCenter'))
 const ExamScope = lazy(() => import('@views/ExeamOrganier/examScope'))
 const ExamSecoundScope = lazy(() => import('@views/ExeamOrganier/examSecoundScope'))
-const PrintRequirement = lazy(() => import('@views/ExeamOrganier/PrintRequirement'))
+const PrintRequirement = lazy(() => import('@views/ExeamOrganier/printRequirement'))
 const ActivityScope = lazy(() => import('@views/baseData/fixData/ActivityScope'))
 const Veteran = lazy(() => import('@views/baseData/fixData/Veteran'))
 const IntroductionExams = lazy(() => import('@views/ExeamOrganier/IntroductionExams'))
 const PrintQuarantine = lazy(() => import('@views/ExeamOrganier/PrintQuarantine'))
-
 const ScopeManage = lazy(() => import('@views/ExeamOrganier/scopeManage'))
 const OperatorScopeManage = lazy(() => import('@views/operators/operatorRecords'))
 const QuestionDesigner = lazy(() => import('@views/ExeamOrganier/questionDesigner'))
 const ExecutiveAgents = lazy(() => import('@views/ExeamOrganier/executiveAgents'))
+const ListOfPeople = lazy(() => import('@views/ExeamOrganier/listOfPeople'))
 const ScopeUsers = lazy(() => import('@views/ScopeManage/scopeUsers'))
 const ScopeTicket = lazy(() => import('@views/ScopeManage/ScopeTicket'))
-
 const ScopeprintRequirement = lazy(() => import('@views/ScopeManage/scopeprintRequirement'))
 const OperatorTicket = lazy(() => import('@views/operators/operatorTicket'))
-
+const ManagementExam = lazy(() => import('@views/employmentExams/managementExam'))
+const ResultsExam = lazy(() => import('@views/employmentExams/resultsExam'))
 const ChartReport = lazy(() => import('@views/operators/chartReport'))
+const AnswerSheet = lazy(() => import('@views/AnswerSheetManagement'))
+const ListOFSupplementaryAssessment = lazy (() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
 const AdminRoutes = [
   {
     path: '/home',
@@ -80,6 +82,14 @@ const AdminRoutes = [
       resource: '/IntroductionExams'
     }
   },
+  {
+    path: '/ManagementExam',
+    element: <ManagementExam />,
+    meta: {
+      action: 'read',
+      resource: '/ManagementExam'
+    }
+  },
 
 
   {
@@ -96,6 +106,14 @@ const AdminRoutes = [
     meta: {
       action: 'read',
       resource: '/ExecutiveAgents'
+    }
+  },
+  {
+    path: '/ListOfPeople',
+    element: <ListOfPeople />,
+    meta: {
+      action: 'read',
+      resource: '/ListOfPeople'
     }
   },
   {
@@ -373,8 +391,39 @@ const AdminRoutes = [
       action: 'read',
       resource: '/chartReport'
     }
-  }
-
+  },
+  {
+    path: '/ResultsExam',
+    element: <ResultsExam />,
+    meta: {
+      action: 'read',
+      resource: '/ResultsExam'
+    }
+  },
+  {
+    path: 'answerSheet',
+    element: <AnswerSheet />,
+    meta: {
+      action: 'read',
+      resource: '/answerSheet'
+    }
+  },
+  {
+    path: '/ListOFSupplementaryAssessment',
+    element: <ListOFSupplementaryAssessment />,
+    meta: {
+      action: 'read',
+      resource: '/ListOFSupplementaryAssessment'
+    }
+  },
+  // {
+  //   path: 'answerSheet',
+  //   element: <AnswerSheet />,
+  //   meta: {
+  //     action: 'read',
+  //     resource: '/answerSheet'
+  //   }
+  // }
 ]
 
 export default AdminRoutes

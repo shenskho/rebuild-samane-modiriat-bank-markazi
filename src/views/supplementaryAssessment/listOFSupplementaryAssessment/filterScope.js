@@ -13,17 +13,22 @@ export default function filterScope() {
           <Input id='text-search' className='form-input text-search-form ' placeholder='جستجو در حوزه‌های آزمون...' />
         </Col>
         <Col lg={3}></Col>
-
         <Col lg={3}>
           <Label for='organization-filter' className='text-bold font-color sub-filter-title'>
-            استان محل سکونت
+            استان
           </Label>
           <Select id='organization-filter' placeholder='همه' options={[]} isClearable={true} />
         </Col>
 
-        <Col lg={2}>
+        <Col lg={1}>
           <Label for='organization-filter' className='text-bold font-color sub-filter-title'>
-            وضعیت طراح
+            وضعیت
+          </Label>
+          <Select id='organization-filter' placeholder='همه' options={[]} isClearable={true} />
+        </Col>
+        <Col lg={1}>
+          <Label for='organization-filter' className='text-bold font-color sub-filter-title'>
+            جنسیت
           </Label>
 
           <Select id='organization-filter' placeholder='همه' options={[]} isClearable={true} />
@@ -36,19 +41,28 @@ export default function filterScope() {
           </div>
         </Col>
       </Row>
-      <Col lg={7}></Col>
-      <Col lg={5}>
-        <Row className='mt-1 custom-row-height w-100 justify-content-end text-end'>
-          <Col lg={2} md={3} sm={2} className='text-center d-flex align-items-center'>
-            <Label className='sub-sort-filter'> جدید ترین </Label>
-          </Col>
+      <Col lg={6}></Col>
+      <Col lg={6}>
+        <Row className='mt-1 custom-row-height w-100'>
           <Col lg={2} md={2} sm={2} className='text-center d-flex align-items-center'>
-            <Label className='sub-sort-filter'> قدیمی ترین </Label>
+            <Label className='sub-sort-filter'>پیش‌فرض </Label>
           </Col>
-          <Col lg={1} md={1} sm={2} className='text-center d-flex justify-content-center '>
-
-            <FaSortAmountUp color='#04364a' size={20} className='mt-0o5 ' />
-
+          <Col lg={2} md={2}  sm={2} className='text-center d-flex align-items-center'>
+            <Label className='sub-sort-filter'>کمترین ظرفیت </Label>
+          </Col>
+          <Col lg={2} md={2}  sm={2} className='text-center d-flex align-items-center'>
+            <Label className='sub-sort-filter'> بیشترین ظرفیت </Label>
+          </Col>
+          <Col lg={3} md={3}  sm={2} className='text-center d-flex align-items-center'>
+            <Label className='sub-sort-filter'> نزدیک‌ترین تاریخ قرارداد </Label>
+          </Col>
+          <Col lg={2} md={2} sm={2}  className='text-center d-flex align-items-center'>
+            <Label className='sub-sort-filter'> دورترین تاریخ قرارداد </Label>
+          </Col>
+          <Col lg={1} md={1} sm={2}  className='text-center d-flex justify-content-center '>
+         
+              <FaSortAmountUp color='#04364a' size={20} className='mt-0o5 ' />
+         
           </Col>
         </Row>
       </Col>
