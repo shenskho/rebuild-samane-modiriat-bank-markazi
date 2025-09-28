@@ -212,6 +212,7 @@ export default {
   },
 
   Booklet: {
+     getAllBooklet: `${PREFIX}/Booklet/get-all-booklets-pagination?ExamId=1&PageSize=99999999`,
    uploadAnswerKeys: (examId) => `${PREFIX}/Booklet/${examId}/upload-answer-keys`,
     getAnswareKeyStatus: `${PREFIX}/Booklet/upload-answer-keys-status/`,
     processAnswerKeys: `${PREFIX}/Booklet/process-answer-keys?id=`,

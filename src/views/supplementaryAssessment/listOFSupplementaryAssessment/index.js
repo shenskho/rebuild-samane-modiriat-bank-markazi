@@ -4,9 +4,7 @@ import '@core/scss/react/pages/page-authentication.scss'
 import { GetExamScopeSecound, GetProvince, GetExamScope } from '@store/slices/examScope'
 import { useDispatch, useSelector } from 'react-redux'
 
-import AddModal from './AddModal'
-import EditModal from './EditModal'
-import DeleteModal from './DeleteModal'
+
 import { Plus } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
 import FilterScope from './filterScope'
@@ -18,22 +16,22 @@ export default function Index() {
   // const navigate = useNavigate()
   // const dispatch = useDispatch()
   // const [userItem, SetUserItem] = useState([])
-  const [IsAddModal, SetIsAddModal] = useState(false)
-  const [IsEditModal, SetIsEditModal] = useState(false)
-  const [IsDeleteModal, SetIsDeleteModal] = useState(false)
+  // const [IsAddModal, SetIsAddModal] = useState(false)
+  // const [IsEditModal, SetIsEditModal] = useState(false)
+  // const [IsDeleteModal, SetIsDeleteModal] = useState(false)
 
   // pagination states
   const [currentPage, setCurrentPage] = useState(1)
   const cardsPerPage = 12
-  const handeleEditRole = (data) => {
-    SetUserItem(data)
-    SetIsEditModal(!IsEditModal)
-  }
+  // const handeleEditRole = (data) => {
+  //   SetUserItem(data)
+  //   SetIsEditModal(!IsEditModal)
+  // }
 
-  const handeleDeleteRole = (data) => {
-    SetUserItem(data)
-    SetIsDeleteModal(!IsDeleteModal)
-  }
+  // const handeleDeleteRole = (data) => {
+  //   SetUserItem(data)
+  //   SetIsDeleteModal(!IsDeleteModal)
+  // }
   // useEffect(() => {
   //   dispatch(GetExamScopeSecound()).then(() => dispatch(GetProvince()).then(() => dispatch(GetExamScope())))
   // }, [dispatch])

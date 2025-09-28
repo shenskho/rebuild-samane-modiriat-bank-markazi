@@ -16,6 +16,11 @@ export async function processAnswerKeys(param) {
 export async function processAnswerKeysStatus(param) {
   return await axios.get(urls.Booklet.processAnswerKeysStatus + param)
 }
+export async function getAllBooklet() {
+  return await axios.get(urls.Booklet.getAllBooklet )
+}
+
+
 
 ////////////////////////BookletAnswerKey//////////////////
 export async function getallBookletKeys(param) {
