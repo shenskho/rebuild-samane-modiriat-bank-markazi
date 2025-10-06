@@ -48,6 +48,7 @@ const ResultsExam = lazy(() => import('@views/employmentExams/resultsExam'))
 const ChartReport = lazy(() => import('@views/operators/chartReport'))
 const AnswerSheet = lazy(() => import('@views/AnswerSheetManagement'))
 const ListOFSupplementaryAssessment = lazy (() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
+const Results = lazy (() => import('@views/supplementaryAssessment/results'))
 const AdminRoutes = [
   {
     path: '/home',
@@ -414,6 +415,14 @@ const AdminRoutes = [
     meta: {
       action: 'read',
       resource: '/ListOFSupplementaryAssessment'
+    }
+  },
+  {
+    path: '/Results',
+    element: <Results />,
+    meta: {
+      action: 'read',
+      resource: '/Results'
     }
   },
   // {
