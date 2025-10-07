@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, Input, Label, Progress } from 'reactstrap'
 import * as XLSX from 'xlsx'
 import {
-  UploadAnswerKeys,
-  GetAnswareKeyStatus,
-  ProcessAnswerKeys,
-  ProcessAnswerKeysStatus
-} from '@store/slices/Booklet'
+  UploadAnswerCandidate,
+  GetAnswareCandidateStatus,
+  ProcessAnswerCandidate,
+  ProcessAnswerCandidateStatus
+} from '@store/slices/candidate'
 import { useDispatch } from 'react-redux'
 import { FaInfo, FaInfoCircle } from 'react-icons/fa'
 import { CheckCircle } from 'react-feather'
@@ -97,7 +97,7 @@ const detailsEndRef = useRef(null)
     setUploadError(null)
 
     if (step === 1) {
-      dispatch(UploadAnswerKeys({ examId: 1, file: excelFile }))
+      dispatch(UploadAnswerCandidate({ examId: 1, file: excelFile }))
         .then((response) => {
           const tracking = response.payload?.trackingCode || null
           setTrackingCode(tracking)
@@ -118,7 +118,7 @@ const detailsEndRef = useRef(null)
 
     if (step === 2 && trackingCode && processingStatus.progress !== 100) {
       intervalId = setInterval(() => {
-        dispatch(GetAnswareKeyStatus(trackingCode))
+        dispatch(GetAnswareCandidateStatus(trackingCode))
           .then((response) => {
             const res = response.payload
 
@@ -137,7 +137,7 @@ const detailsEndRef = useRef(null)
               if (response.payload.hasError) {
                 setUploadError('خطا در پردازش فایل')
               } else {
-                // dispatch(ProcessAnswerKeys())
+                // dispatch(ProcessAnswerCandidate())
 
                 setUolpadId(res.id)
                 setStep(3) // مرحله موفقیت
@@ -161,7 +161,7 @@ const detailsEndRef = useRef(null)
     console.log('asdasd', step === 4 && ProcessTrackingCode && !finalProcessingStatus.isFinished)
     if (step === 4 && ProcessTrackingCode && !finalProcessingStatus.isFinished) {
       intervalId = setInterval(() => {
-        dispatch(ProcessAnswerKeysStatus(ProcessTrackingCode))
+        dispatch(ProcessAnswerCandidateStatus(ProcessTrackingCode))
           .then((response) => {
             console.log(response)
             const res = response.payload
@@ -333,7 +333,7 @@ useEffect(() => {
                 className='min-with-modal-button'
                 color='success'
                 onClick={() => {
-                  dispatch(ProcessAnswerKeys(uolpadId)).then((response) => {
+                  dispatch(ProcessAnswerCandidate(uolpadId)).then((response) => {
                     if (response.payload) {
                       setProcessTrackingCode(response.payload.trackingCode)
                       setStep(4)

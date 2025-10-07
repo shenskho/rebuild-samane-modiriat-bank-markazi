@@ -47,8 +47,13 @@ const ManagementExam = lazy(() => import('@views/employmentExams/managementExam'
 const ResultsExam = lazy(() => import('@views/employmentExams/resultsExam'))
 const ChartReport = lazy(() => import('@views/operators/chartReport'))
 const AnswerSheet = lazy(() => import('@views/AnswerSheetManagement'))
-const ListOFSupplementaryAssessment = lazy (() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
+// const ListOFSupplementaryAssessment = lazy (() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
 const Results = lazy (() => import('@views/supplementaryAssessment/results'))
+const AnswerResultSheet = lazy(() => import('@views/AnswerResultSheetManagement'))
+const ListOFSupplementaryAssessment = lazy(() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
+const EvaluationResults = lazy(() => import('@views/supplementaryAssessment/evaluationResults'))
+const ExamScoring = lazy(() => import('@views/examScoring'))
+const CorrectionExam = lazy(() => import('@views/CorrectionExam'))
 const AdminRoutes = [
   {
     path: '/home',
@@ -91,7 +96,6 @@ const AdminRoutes = [
       resource: '/ManagementExam'
     }
   },
-
 
   {
     path: '/QuestionDesigner',
@@ -409,6 +413,16 @@ const AdminRoutes = [
       resource: '/answerSheet'
     }
   },
+
+  {
+    path: 'answerResultSheet',
+    element: <AnswerResultSheet />,
+    meta: {
+      action: 'read',
+      resource: '/answerResultSheet'
+    }
+  },
+
   {
     path: '/ListOFSupplementaryAssessment',
     element: <ListOFSupplementaryAssessment />,
@@ -425,14 +439,50 @@ const AdminRoutes = [
       resource: '/Results'
     }
   },
-  // {
-  //   path: 'answerSheet',
-  //   element: <AnswerSheet />,
-  //   meta: {
-  //     action: 'read',
-  //     resource: '/answerSheet'
-  //   }
-  // }
+
+  {
+    path: '/examScoring',
+    element: <ExamScoring />,
+    meta: {
+      action: 'read',
+      resource: '/examScoring'
+    }
+  },
+  {
+    path: '/correctionExam',
+    element: <CorrectionExam />,
+    meta: {
+      action: 'read',
+      resource: '/correctionExam'
+    }
+  }
+,
+  {
+    path: 'answerSheet',
+    element: <AnswerSheet />,
+    meta: {
+      action: 'read',
+      resource: '/answerSheet'
+    }
+  }
+,
+  {
+    path: 'EvaluationResults',
+    element: <EvaluationResults />,
+    meta: {
+      action: 'read',
+      resource: '/EvaluationResults'
+    }
+  }
+,
+  {
+    path: 'EvaluationResults',
+    element: <EvaluationResults />,
+    meta: {
+      action: 'read',
+      resource: '/EvaluationResults'
+    }
+  }
 ]
 
 export default AdminRoutes

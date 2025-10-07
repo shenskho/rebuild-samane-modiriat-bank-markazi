@@ -101,8 +101,9 @@ export const getAllBookletQuestionsSection = createAsyncThunk('Booklet/getAllBoo
   return response.data.result
 })
 
-export const getAllBookletQuestionSectionPagination = createAsyncThunk('Booklet/getAllBookletQuestionSectionPagination', async (param) => {
+export const GetAllBookletQuestionSectionPagination = createAsyncThunk('Booklet/getAllBookletQuestionSectionPagination', async (param) => {
   const response = await apis.getAllBookletQuestionSectionPagination(param)
+  console.log(response)
   return response.data.result
 })
 
@@ -111,7 +112,7 @@ export const getAllBookletQuestionSectionId = createAsyncThunk('Booklet/getAllBo
   return response.data.result
 })
 
-export const createBookletQuestionSection = createAsyncThunk('Booklet/createBookletQuestionSection', async (param) => {
+export const CreateBookletQuestionSection = createAsyncThunk('Booklet/createBookletQuestionSection', async (param) => {
   const response = await apis.createBookletQuestionSection(param)
   return response.data.result
 })
@@ -141,7 +142,7 @@ export const Booklet = createSlice({
       state.BookletKeys = action.payload
     }).addCase(getAllBookletJobs.rejected, (state, action) => {
       state.BookletJobs = action.payload
-    }).addCase(getAllBookletQuestionsSection.rejected, (state, action) => {
+    }).addCase(GetAllBookletQuestionSectionPagination.fulfilled, (state, action) => {
       state.BookletQuestionsSection = action.payload
     }).addCase(GetAnswareKeyStatus.rejected, (state, action) => {
       state.AnswareKeyStatus = action.payload

@@ -212,11 +212,11 @@ export default {
   },
 
   Booklet: {
-     getAllBooklet: `${PREFIX}/Booklet/get-all-booklets-pagination?ExamId=1&PageSize=99999999`,
-   uploadAnswerKeys: (examId) => `${PREFIX}/Booklet/${examId}/upload-answer-keys`,
+    getAllBooklet: `${PREFIX}/Booklet/get-all-booklets-pagination?ExamId=1&PageSize=99999999`,
+    uploadAnswerKeys: (examId) => `${PREFIX}/Booklet/${examId}/upload-answer-keys`,
     getAnswareKeyStatus: `${PREFIX}/Booklet/upload-answer-keys-status/`,
     processAnswerKeys: `${PREFIX}/Booklet/process-answer-keys?id=`,
-    processAnswerKeysStatus: `${PREFIX}/   Booklet/process-answer-keys-status?trackingId=`
+    processAnswerKeysStatus: `${PREFIX}/Booklet/process-answer-keys-status?trackingId=`
   },
   BookletKeys: {
     getallBookletKeys: `${PREFIX}/BookletAnswerKey/get-all-booklet-answer-keys-pagination?ExamId=1&PageSize=999999`,
@@ -244,11 +244,40 @@ export default {
   },
   BookletQuestionSection: {
     getAllBookletQuestionsSection: `${PREFIX}/BookletQuestionSection/get-all-booklet-question-sections`,
-    getAllBookletQuestionSectionPagination: `${PREFIX}/BookletQuestionSection/get-all-booklet-question-sections-pagination?PageSize=9999999999`,
+    getAllBookletQuestionSectionPagination: `${PREFIX}/BookletQuestionSection/get-all-booklet-question-sections-pagination?ExamId=1&PageSize=9999999&BookletId=`,
     getAllBookletQuestionSectionId: `${PREFIX}/BookletQuestionSection/get-booklet-question-section?Id=`,
-    createBookletQuestionSection: `${PREFIX}/BookletQuestionSection/create-booklet-question-section`,
+    createBookletQuestionSection: `${PREFIX}/BookletQuestionSection/create-booklet-question-sections`,
     updateBookletQuestionSection: `${PREFIX}/BookletQuestionSection/update-booklet-question-section`,
     deleteBookletQuestionSection: `${PREFIX}/BookletQuestionSection/delete-booklet-question-section`
+  },
+  CandidateAnswer: {
+    getAllCandidate: `${PREFIX}/CandidateAnswer/get-all-candidate-answers-pagination?ExamId=1&`,
+    uploadAnswerCandidate: (examId) => `${PREFIX}/CandidateAnswer/${examId}/upload-candidate-answers`,
+    getAnswareCandidateStatus: `${PREFIX}/CandidateAnswer/upload-candidate-answers-sataus/`,
+    processAnswerCandidate: `${PREFIX}/CandidateAnswer/process-candidate-answers?id=`,
+    processAnswerCandidateStatus: `${PREFIX}/CandidateAnswer/process-candidate-answers-status?trackingId=`,
+    getUserExcel: `${PREFIX}/CandidateAnswerResult/initial-correction-excel?ExamId=1&NationalCode=`,
+    processFinalResultStart: `${PREFIX}/CandidateAnswerResult/all-initial-corrections-zip?examId=1`,
+    processFinalResultStartStatus: `${PREFIX}/CandidateAnswerResult/all-initial-corrections-zip-status?trackingId=`,
+    downloadCandidateAnsware: `${PREFIX}/CandidateAnswerResult/all-initial-corrections-zip-download?trackingId=`,
+    getAlExel: `${PREFIX}/CandidateAnswerResult/all-initial-corrections-excel?ExamId=1`
+  },
+  ExamScoringRule: {
+    getAllExamScroring: `${PREFIX}/ExamScoringRule/get-all-exam-scoring-rules-pagination?ExamId=1&PageSize=999999999`,
+    saveExamScroring: `${PREFIX}/ExamScoringRule/save-exam-scoring-rules`,
+    createExamScroring: `${PREFIX}/ExamScoringRule/create-exam-scoring-rule`,
+    removeExamScroring: `${PREFIX}/ExamScoringRule/delete-exam-scoring-rule`,
+    updateExamScroring: `${PREFIX}/ExamScoringRule/update-exam-scoring-rule`
+  },
+  ExamCorrelationSteps: {
+    processCandidateResultSteap1: `${PREFIX}/ExamCorrelationSteps/process-candidate-results?examId=1`,
+    calculateCandidateRawScoresSteap2: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-raw-scores?examId=1`,
+    calculateCandidateScores: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-scores?examId=1`,
+    calculateCandidateScoresStatus: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-scores-status?trackingId=`,
+    generateRanking: `${PREFIX}/ExamCorrelationSteps/generate-ranking?examId=1`,
+     generateRankingStatus: `${PREFIX}/ExamCorrelationSteps/generate-ranking-status?trackingId=`,
+      generateReportCards: `${PREFIX}/ExamCorrelationSteps/generate-report-cards?examId=1`,
+       generateReportCardsStatus: `${PREFIX}/ExamCorrelationSteps/generate-report-cards-status?trackingId=`
   },
   /*************************************************************smaple*******************************************************************/ report:
     {

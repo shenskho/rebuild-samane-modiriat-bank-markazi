@@ -41,9 +41,13 @@ export default function Index() {
     {
       id: 1,
       name: 'آزمون استخدامی کادر قوه قضاییه',
-      status: 'برگزار شده',
+      status: 'تایید نهایی',
       organization: 'قوه قضاییه',
-      capacity: '3 برابر '
+      history: ' 1404/02/23 ',
+      province:'تهران',
+      date:'1404/01/24',
+      job:'متصدی امور دفتری',
+      presenter:'سازمان سنجش و آموزش کشور',
     }
   ]
 
@@ -56,17 +60,17 @@ export default function Index() {
   const currentCards = listOFSupplementaryAssessment.slice(indexOfFirstCard, indexOfLastCard)
 
   const totalPages = Math.ceil(listOFSupplementaryAssessment.length / cardsPerPage)
-
+  const nav = useNavigate()
   return (
     <Row>
       <Col lg={12}>
         <Row className='mb-2'>
           <p className='route-base-color'>
-            <span className='first-route-selected' onClick={() => navigate('/')}>
+            <span className='first-route-selected' onClick={() => nav('/')}>
               خانه
             </span>{' '}
-            /<span className='route-caption'> سازماندهی آزمون </span> /{' '}
-            <span className='route-caption'> حوزه فرعی آزمون </span>
+            /<span className='route-caption'> ارزیابی تکمیلی </span> /{' '}
+            <span className='route-caption' onClick={()=>nav('/evaluationResults')}> نتایج ارزیابی </span>
           </p>
         </Row>
         <div>
@@ -77,10 +81,7 @@ export default function Index() {
                   <Card id='Home' className='card-back-none'>
                     <CardHeader>
                       <div className='d-flex justify-content-between w-100'>
-                        <h4 className='pt-1'> حوزه فرعی آزمون </h4>
-                        <Button className='btn-base-data-add' color='white' onClick={() => SetIsAddModal(!IsAddModal)}>
-                          افزودن <Plus size={20} color='white' />
-                        </Button>
+                        <h4 className='pt-1'> نتایج ارزیابی تکمیلی </h4>
                       </div>
                       <FilterScope />
                     </CardHeader>
@@ -94,31 +95,38 @@ export default function Index() {
                               <span className='exam-card__pill'>{item.status}</span>
                             </div>
                             <span className='scope-divider-line'></span>
-                            <p className='scope-title'>
+                            <p className='scope-title exam-card__row'>
+                              {' '}
+                              مجری : <span className='scope-value '>{item.presenter} </span>
+                            </p>
+                            <p className='scope-title exam-card__row'>
+                              {' '}
+                              شغل : <span className='scope-value'>{item.job} </span>
+                            </p>
+                            <p className='scope-title exam-card__row'>
                               {' '}
                               دستگاه : <span className='scope-value'>{item.organization} </span>
                             </p>
-                            <p className='scope-title'>
+                            <p className='scope-title exam-card__row'>
                               {' '}
-                              چند برابر ظرفیت : <span className='scope-value'>{item.capacity} </span>
+                              تاریخ برگزاری : <span className='scope-value'>{item.date} </span>
+                            </p>
+                            <p className='scope-title exam-card__row'>
+                              {' '}
+                              استان برگزاری ارزیابی تکمیلی : <span className='scope-value'>{item.province} </span>
+                            </p>
+                            <p className='scope-title exam-card__row'>
+                              {' '}
+                              تاریخ انتشار نتایج : <span className='scope-value'>{item.history} </span>
                             </p>
                             <span className='scope-divider-line'></span>
                             <button className='exam-panel btn-flat-primary border-primary'>
-                              دریافت لیست نفرات :{' '}
+                              فایل نتایج:{' '}
                               <span className='scope-value'>
                                 <FaDownload size={23} color='#04364a' />
                               </span>
                             </button>
-                            <div className='d-flex justify-content-end'>
-                              <Button color='primary' onClick={() => handeleEditRole(item)}>
-                                {' '}
-                                ویرایش
-                              </Button>
-                              <Button className='delete-button  ml-1' onClick={() => handeleDeleteRole(item)}>
-                                {' '}
-                                حذف
-                              </Button>
-                            </div>
+                          
                           </div>
                         </Col>
                       ))}

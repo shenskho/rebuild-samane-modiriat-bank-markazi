@@ -54,7 +54,11 @@ export default [
     id: 'admin-home6',
     title: 'آزمون‌های استخدامی',
     icon: <FaClipboardList />,
-    children: [{ title: 'مدیریت آزمون', navLink:'/managementExam' }, { title: 'تخصیص مجوز به آزمون' }, { title: 'نتایج آزمون', navLink:'/resultsExam' }]
+    children: [
+      { title: 'مدیریت آزمون', navLink: '/managementExam' },
+      { title: 'تخصیص مجوز به آزمون' },
+      { title: 'نتایج آزمون', navLink: '/resultsExam' }
+    ]
   },
   {
     id: 'admin-home7',
@@ -83,9 +87,16 @@ export default [
     id: 'admin-home165',
     title: 'مدیریت پاسخنامه',
     icon: <MdOutlineViewList />,
-    children: [{ title: '  داده های پاسخنامه',   navLink:'answerSheet'    }]
-      //  { title: 'سازماندهی گزینش' },
-      //   { title: 'نتایج گزینش' }]
+    children: [
+      { title: 'کلید پاسخنامه ها', navLink: '/answerSheet' },
+      { title: 'داده پاسخنامه ها', navLink: '/answerResultSheet' },
+      { title: 'امتیاز دهی آزمون', navLink: '/examScoring' },
+    { title: 'تصحیح پاسخنامه ها', navLink: '/correctionExam' }
+
+      
+    ]
+    //  { title: 'سازماندهی گزینش' },
+    //   { title: 'نتایج گزینش' }]
   },
   {
     id: 'admin-home8',
@@ -109,11 +120,11 @@ export default [
     children: [
       { title: 'تعیین مجری' },
       // "ارزیابی‌های جاری",
-      { title: 'لیست نفرات ارزیابی تکمیلی', navLink:'/listOFSupplementaryAssessment' },
+      { title: 'لیست نفرات ارزیابی تکمیلی', navLink: '/listOFSupplementaryAssessment' },
       { title: 'سازماندهی ارزیابی' },
       { title: 'مواد ارزیابی تکمیلی' },
       { title: 'مستندات ارزیابی تکمیلی' },
-      { title: 'نتایج ارزیابی تکمیلی',navLink:'/results' }
+      { title: 'نتایج ارزیابی تکمیلی',navLink:'/evaluationResults' }
     ]
   },
   {

@@ -21,7 +21,9 @@ export default function filterScope() {
 
           <Select id='organization-filter' placeholder='همه' options={[]} isClearable={true} />
         </Col>
+      
         <Col lg={1}>
+      
           <div>
             <Button color='primary' className='filter-button  '>
               <FaFilter color='#fff' size={20} className='filter-icon' /> اعمال
