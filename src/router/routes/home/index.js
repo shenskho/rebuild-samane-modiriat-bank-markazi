@@ -53,6 +53,7 @@ const AnswerResultSheet = lazy(() => import('@views/AnswerResultSheetManagement'
 const ListOFSupplementaryAssessment = lazy(() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
 const EvaluationResults = lazy(() => import('@views/supplementaryAssessment/evaluationResults'))
 const SelectPresenter = lazy(() => import('@views/supplementaryAssessment/selectPresenter'))
+const SupplementaryDocumentation = lazy(() => import('@views/supplementaryAssessment/SupplementaryDocumentation'))
 const ExamScoring = lazy(() => import('@views/examScoring'))
 const CorrectionExam = lazy(() => import('@views/CorrectionExam'))
 const ComplanteRequest = lazy(() => import('@views/operators/ComplanteRequest'))
