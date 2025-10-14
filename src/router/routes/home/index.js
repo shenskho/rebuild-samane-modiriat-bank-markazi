@@ -52,8 +52,10 @@ const Results = lazy (() => import('@views/supplementaryAssessment/results'))
 const AnswerResultSheet = lazy(() => import('@views/AnswerResultSheetManagement'))
 const ListOFSupplementaryAssessment = lazy(() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
 const EvaluationResults = lazy(() => import('@views/supplementaryAssessment/evaluationResults'))
+const SelectPresenter = lazy(() => import('@views/supplementaryAssessment/selectPresenter'))
 const ExamScoring = lazy(() => import('@views/examScoring'))
 const CorrectionExam = lazy(() => import('@views/CorrectionExam'))
+const ComplanteRequest = lazy(() => import('@views/operators/ComplanteRequest'))
 const AdminRoutes = [
   {
     path: '/home',
@@ -455,8 +457,17 @@ const AdminRoutes = [
       action: 'read',
       resource: '/correctionExam'
     }
+  },
+
+  {
+    path: '/complanteRequest',
+    element: <ComplanteRequest />,
+    meta: {
+      action: 'read',
+      resource: '/complanteRequest'
+    }
   }
-,
+  ,
   {
     path: 'answerSheet',
     element: <AnswerSheet />,
@@ -481,6 +492,15 @@ const AdminRoutes = [
     meta: {
       action: 'read',
       resource: '/EvaluationResults'
+    }
+  }
+,
+  {
+    path: 'SelectPresenter',
+    element: <SelectPresenter />,
+    meta: {
+      action: 'read',
+      resource: '/SelectPresenter'
     }
   }
 ]

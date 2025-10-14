@@ -270,6 +270,8 @@ export default {
     updateExamScroring: `${PREFIX}/ExamScoringRule/update-exam-scoring-rule`
   },
   ExamCorrelationSteps: {
+     getfinalExel: `${PREFIX}/Report/get-accepted-by-job-number?ExamId=1`,
+    
     processCandidateResultSteap1: `${PREFIX}/ExamCorrelationSteps/process-candidate-results?examId=1`,
     calculateCandidateRawScoresSteap2: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-raw-scores?examId=1`,
     calculateCandidateScores: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-scores?examId=1`,

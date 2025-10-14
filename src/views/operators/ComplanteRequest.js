@@ -105,7 +105,7 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader className=' w-100 rtl'>
-                    <h4 className='w-100'> تیکت های رفع نقض  </h4>
+                    <h4 className='w-100'> تیکت اعتراض کاربران </h4>
                     <Row className='w-100 mt-1'>
                       <Col lg={4} className='text-center'>
                         {' '}

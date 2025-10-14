@@ -118,7 +118,7 @@ export default [
     title: 'ارزیابی تکمیلی',
     icon: <FaChartBar />,
     children: [
-      { title: 'تعیین مجری' },
+      { title: 'تعیین مجری', navLink: '/selectPresenter' },
       // "ارزیابی‌های جاری",
       { title: 'لیست نفرات ارزیابی تکمیلی', navLink: '/listOFSupplementaryAssessment' },
       { title: 'سازماندهی ارزیابی' },

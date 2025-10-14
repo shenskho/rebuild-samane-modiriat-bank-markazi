@@ -8,7 +8,8 @@ import {
   GenerateRanking,
   GenerateRankingStatus,
   GenerateReportCards,
-  GenerateReportCardsStatus
+  GenerateReportCardsStatus,
+  GetfinalExel
 } from '@store/slices/correction'
 import { useDispatch } from 'react-redux'
 
@@ -132,23 +133,56 @@ export default function DoCorrection({ selectedOption }) {
         setProcessing((p) => ({ ...p, 5: false }))
         setProgress((p) => ({ ...p, 5: 100 }))
         console.log('✅ کارنامه داوطلبین تولید شد')
+        setStep(6) // ✅ فعال‌سازی دکمه دانلود ZIP بعد از اتمام مرحله ۵
       })
     } else {
       setProcessing((p) => ({ ...p, 5: false }))
+    }
+  }
+  // --- Step 6: دانلود فایل ZIP نهایی ---
+  const handleStep6 = async () => {
+    setProcessing((p) => ({ ...p, 6: true }))
+    setProgress((p) => ({ ...p, 6: 0 }))
+
+    try {
+      const response = await dispatch(GetfinalExel()) // فرض بر اینه payload = Blob یا ArrayBuffer باشه
+      if (response?.payload) {
+        // ساخت Blob از پاسخ
+        const blob = new Blob([response.payload], { type: 'application/zip' })
+
+        // ساخت لینک دانلود
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = 'FinalReports.zip'
+        document.body.appendChild(a)
+        a.click()
+        a.remove()
+        window.URL.revokeObjectURL(url)
+
+        console.log('✅ فایل ZIP با موفقیت دانلود شد')
+      } else {
+        console.error('⛔ پاسخ نامعتبر از GetfinalExel')
+      }
+    } catch (err) {
+      console.error('❌ خطا در دریافت فایل ZIP:', err)
+    } finally {
+      setProcessing((p) => ({ ...p, 6: false }))
+      setProgress((p) => ({ ...p, 6: 100 }))
     }
   }
 
   // --- تابع مشترک برای نمایش دکمه‌ها ---
   const renderButton = (label, stepNumber, onClick) => (
     <Button
-      className="w-100"
-      color="primary"
+      className='w-100'
+      color='primary'
       onClick={onClick}
       disabled={step < stepNumber || processing[stepNumber] || selectedOption}
     >
       {processing[stepNumber] ? (
         <>
-          <Spinner size="sm" /> در حال پردازش...{' '}
+          <Spinner size='sm' /> در حال پردازش...{' '}
           {progress[stepNumber] !== null && `(${progress[stepNumber].toFixed(1)}%)`}
         </>
       ) : (
@@ -158,12 +192,13 @@ export default function DoCorrection({ selectedOption }) {
   )
 
   return (
-    <Row className="gy-2">
+    <Row className='gy-2'>
       <Col>{renderButton('تصحیح اولیه', 1, handleStep1)}</Col>
       <Col>{renderButton('اعمال درس‌بندی‌ها', 2, handleStep2)}</Col>
       <Col>{renderButton('اعمال امتیازات آزمون', 3, handleStep3)}</Col>
       <Col>{renderButton('تفکیک سهمیه‌ها', 4, handleStep4)}</Col>
       <Col>{renderButton('کارنامه داوطلبین', 5, handleStep5)}</Col>
+      <Col>{renderButton('دانلود فایل نهایی ZIP', 6, handleStep6)}</Col>
     </Row>
   )
 }

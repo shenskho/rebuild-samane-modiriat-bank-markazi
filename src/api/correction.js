@@ -1,6 +1,6 @@
 import axios from '@configs/axios'
 import urls from './urls'
-
+import axiosfile from '@configs/axios/fileAxios'
 export async function processCandidateResultSteap1() {
   return await axios.post(urls.ExamCorrelationSteps.processCandidateResultSteap1)
 }
@@ -29,6 +29,21 @@ export async function generateReportCards() {
 export async function generateReportCardsStatus(parameter) {
   return await axios.get(urls.ExamCorrelationSteps.generateReportCardsStatus + parameter)
 }
+// export async function getfinalExel() {
+//   return await axiosfile.get(urls.ExamCorrelationSteps.getfinalExel)
+// }
+export async function getfinalExel() {
+    const token = localStorage.getItem('token')
+  return await axiosfile.get(urls.ExamCorrelationSteps.getfinalExel , {
+    headers: {
+      Authorization: token,
+      language: 1
+    },
+    responseType: 'blob' // مهم: دریافت باینری واقعی
+  })
+}
+
+
 
 //  processCandidateResultSteap1: `${PREFIX}/ExamCorrelationSteps/process-candidate-results?examId=1`,
 //   calculateCandidateRawScoresSteap2: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-raw-scores?examId=1`,

@@ -42,6 +42,14 @@ export const GenerateReportCardsStatus = createAsyncThunk('correction/generateRe
   return response.data.result
 })
 
+export const GetfinalExel = createAsyncThunk('correction/getfinalExel', async () => {
+  const response = await apis.getfinalExel()
+
+  return response.data
+})
+
+
+
 
 /////////////////////Booklet/////////////////////
 

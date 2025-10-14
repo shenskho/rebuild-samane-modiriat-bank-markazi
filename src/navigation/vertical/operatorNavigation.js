@@ -3,9 +3,15 @@ import { IoIosDownload, IoIosFingerPrint, IoIosInformation, IoIosList, IoIosMail
 export default [
   {
     id: 'admin-home',
-    title: 'لیست درخواست های کاربران',
+    title: ' تیکت های رفع نقص ',
     icon: <IoIosList />,
     navLink: '/'
+  },
+    {
+    id: 'admin-complante',
+    title: ' تیکت های اعتراض ',
+    icon: <IoIosList />,
+    navLink: '/complanteRequest'
   },
   {
     id: 'admin-home2',

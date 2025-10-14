@@ -1,0 +1,253 @@
+/* صفحه تعیین مجری مطابق اسکرین‌شات */
+
+.assign-exec-page {
+  direction: rtl;
+  text-align: right;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* دکمه بازگشت */
+.btn-back {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  direction: rtl;
+}
+
+.btn-back:hover {
+  background-color: #0056b3;
+}
+
+.btn-back::before {
+  content: "←";
+  font-size: 16px;
+}
+
+.page-title {
+  font-weight: 700;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+}
+
+.page-subtitle {
+  font-size: 16px;
+  color: #666;
+  font-weight: normal;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.assign-header {
+  border-bottom: none !important;
+  padding: 30px !important;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.assign-header h4 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+.assign-header h5 {
+  font-size: 16px;
+  color: #666;
+  font-weight: normal;
+  margin-bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* کارت لیست‌ها */
+.list-card {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e6eaee;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.list-card__header {
+  background: #f8fafb;
+  color: #1f2937;
+  font-weight: 600;
+  padding: 14px 16px;
+  border-bottom: 1px solid #eef2f6;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* آیتم‌ها */
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  direction: rtl;
+  gap: 10px;
+}
+
+.list-item:last-child {
+  border-bottom: 0;
+}
+
+.list-item__title {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  flex: 1;
+  margin-right: 15px;
+  text-align: right;
+  order: 0;
+}
+
+.list-item__meta {
+  margin-right: 15px;
+  order: 1;
+//   text-align: left;
+//   display: flex;
+
+}
+
+.list-item__date {
+  font-size: 14px;
+  color: #666;
+  background: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  padding: 4px 10px;
+  border-radius: 4px;
+//   text-align: right;
+
+}
+
+.list-item__actions {
+  display: flex;
+  gap: 10px;
+  order: 3;
+}
+
+/* دکمه‌ها */
+.btn-show {
+  background-color: #04364a !important;
+  border-color: #007bff !important;
+  color: white !important;
+  padding: 8px 20px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-show:hover {
+  background-color: #e78700 !important;
+  border-color: #004085 !important;
+}
+
+.btn-assign {
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+  color: white !important;
+  padding: 8px 20px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-assign:hover {
+  background-color: #218838 !important;
+  border-color: #1e7e34 !important;
+}
+
+/* breadcrumb های موجود پروژه */
+.route-base-color {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: right;
+  direction: rtl;
+}
+
+.first-route-selected {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.route-caption {
+  color: #666;
+  cursor: pointer;
+}
+
+.card-back-none {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* responsive design */
+@media (max-width: 768px) {
+  .list-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: right;
+  }
+  
+  .list-item__title {
+    order: 1;
+    align-self: flex-start;
+  }
+  
+  .list-item__meta {
+    order: 2;
+    align-self: flex-start;
+  }
+  
+  .list-item__actions {
+    width: 100%;
+    justify-content: flex-end;
+    order: 3;
+  }
+  
+  .assign-header {
+    padding: 20px !important;
+  }
+  
+  .assign-header h4 {
+    font-size: 24px;
+  }
+  
+  .assign-exec-page {
+    padding: 10px;
+  }
+}
