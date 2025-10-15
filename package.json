@@ -41,6 +41,7 @@
     "match-sorter": "^6.3.1",
     "nouislider": "^15.7.0",
     "nprogress": "^0.2.0",
+    "pdfmake": "^0.2.20",
     "postcss": "7.0.33",
     "postcss-custom-properties": "^12.1.11",
     "postcss-import": "12.0.0",
@@ -84,6 +85,7 @@
     "sweetalert2-react-content": "^5.0.7",
     "use-bn-idle": "^1.0.11",
     "use-react-router-breadcrumbs": "^4.0.1",
+    "xlsx": "^0.18.5",
     "yup": "^1.2.0"
   },
   "devDependencies": {
