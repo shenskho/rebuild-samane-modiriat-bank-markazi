@@ -28,12 +28,10 @@ export default function index() {
   const handleReopen = (data) => {
     dispatch(GetApplicantChanges(`?TicketRefCode=${data.refCode}`)).then((response) => {
       console.log(response.payload.item)
-      if(response.payload.item)
-      {
-    SetUserItem(data)
-      SetIsShowChanges(!IsShowChanges)
+      if (response.payload.item) {
+        SetUserItem(data)
+        SetIsShowChanges(!IsShowChanges)
       }
-  
     })
   }
 
@@ -52,7 +50,7 @@ export default function index() {
       { dataField: 'applicantDescription', caption: 'متن درخواست ' },
       { dataField: 'applicantNationalCode', caption: 'کدملی' },
       { dataField: 'refCode', caption: 'کد پیگیری' },
-        { dataField: 'createdAtShamsi', caption: 'تاریخ ثبت ' },
+      { dataField: 'createdAtShamsi', caption: 'تاریخ ثبت ' },
       {
         dataField: 'isClosed',
         caption: 'وضعیت درخواست',
@@ -110,7 +108,7 @@ export default function index() {
                     <Row className='w-100 mt-1'>
                       <Col lg={4} className='text-center'>
                         {' '}
-                        <h4 className='color-red'>
+                        <h4 className='color-red w-100'>
                           درخواست های پاسخ داده نشده :{' '}
                           <span> {store?.ticketsComplane?.items?.filter((item) => !item.isClosed)?.length}</span>{' '}
                         </h4>
@@ -118,7 +116,7 @@ export default function index() {
 
                       <Col lg={4} className='text-center'>
                         {' '}
-                        <h4 className='color-green'>
+                        <h4 className='color-green w-100'>
                           {' '}
                           درخواست های پاسخ داده شده :{' '}
                           <span> {store?.ticketsComplane?.items?.filter((item) => item.isClosed)?.length}</span>
@@ -127,7 +125,7 @@ export default function index() {
 
                       <Col lg={4} className='text-center'>
                         {' '}
-                        <h4 className='color-gray'>
+                        <h4 className='color-gray w-100'>
                           تعداد کل درخواست ها : <span> {store?.ticketsComplane?.items?.length}</span>
                         </h4>
                       </Col>
@@ -151,8 +149,7 @@ export default function index() {
 
           <EditModal IsEditModal={IsEditModal} SetIsEditModal={SetIsEditModal} item={userItem} />
 
-        <UserChangeDetailsModal IsShowChanges={IsShowChanges} SetIsShowChanges={SetIsShowChanges}  />
-
+          <UserChangeDetailsModal IsShowChanges={IsShowChanges} SetIsShowChanges={SetIsShowChanges} />
         </Card>
       </Col>
     </Row>

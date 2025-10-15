@@ -2,8 +2,15 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { operators as apis } from '@api'
 
+export const GetResultExam = createAsyncThunk('operator/getResultExam', async (param) => {
+  const response = await apis.getResultExam(param)
+  return response.data.result
+})
 
-
+export const GetResultExamImage = createAsyncThunk('operator/getResultExamImage', async (param) => {
+  const response = await apis.getResultExamImage(param)
+  return response.data.result
+})
 
 
 export const GetApplicantChanges = createAsyncThunk('operator/getApplicantChanges', async (param) => {
@@ -36,6 +43,11 @@ export const GetTickets = createAsyncThunk('operator/getTickets', async () => {
   const response = await apis.getTickets()
   return response.data.result
 })
+export const GetTicketsComplane = createAsyncThunk('operator/getTicketsComplane', async () => {
+  const response = await apis.getTicketsComplane()
+  return response.data.result
+})
+
 export const GetScopeTicket = createAsyncThunk('operator/getScopeTicket', async (param) => {
   const response = await apis.getScopeTicket(param)
   return response.data.result
@@ -85,17 +97,38 @@ export const addReport = createSlice({
   initialState: {
     licenses: [],
     tickets: [],
+        ticketsComplane: [],
     MeetingReports: [],
     Meetings: [],
     ScopeTicket: [],
-    UserChange:[]
+    UserChange: [],
+        resultExam: null, // 👈 مقدار اولیه اصلاح شد
+    loadingResultExam: false,
+    errorResultExam: null
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
+         .addCase(GetResultExam.pending, (state) => {
+        state.loadingResultExam = true
+        state.errorResultExam = null
+      })
+      .addCase(GetResultExam.fulfilled, (state, action) => {
+        state.loadingResultExam = false
+        state.resultExam = action.payload
+      })
+      .addCase(GetResultExam.rejected, (state, action) => {
+        state.loadingResultExam = false
+        state.errorResultExam = action.error.message
+      })
       .addCase(GetTickets.fulfilled, (state, action) => {
         state.tickets = action.payload
       })
+     .addCase(GetTicketsComplane.fulfilled, (state, action) => {
+        state.ticketsComplane = action.payload
+      })
+
+      
       .addCase(GetMeetingRecordReport.fulfilled, (state, action) => {
         state.MeetingReports = action.payload
       })
@@ -105,11 +138,9 @@ export const addReport = createSlice({
       .addCase(GetScopeTicket.fulfilled, (state, action) => {
         state.ScopeTicket = action.payload
       })
-  .addCase(GetApplicantChanges.fulfilled, (state, action) => {
+      .addCase(GetApplicantChanges.fulfilled, (state, action) => {
         state.UserChange = action.payload
       })
- 
-
   }
 })
 

@@ -3,9 +3,23 @@ import urls from './urls'
 import axiosfile from '@configs/axios/fileAxios'
 /////////////////////ScoreRatio/////////////////////
 
+export async function getResultExam(param) {
+  return await axios.get(urls.Ticket.getResultExam + param)
+}
+
+export async function getResultExamImage(param) {
+  return await axios.get(urls.Ticket.getResultExamImage + param)
+}
+
+
 export async function getTickets() {
   return await axios.get(urls.Ticket.getTickets)
 }
+
+export async function getTicketsComplane() {
+  return await axios.get(urls.Ticket.getTicketsComplane)
+}
+
 export async function answareTicket(param) {
   return await axios.post(urls.Ticket.answareTicket, param)
 }

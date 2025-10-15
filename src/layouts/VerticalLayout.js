@@ -9,6 +9,8 @@ import Layout from '@core/layouts/VerticalLayout'
 import navigation from '@src/navigation/vertical'
 import operatorNavigation from '@src/navigation/vertical/operatorNavigation'
 import scopeNavigation from '@src/navigation/vertical/ScopeNavigation'
+import organNavigation from '@src/navigation/vertical/organNavigation'
+import ticketNavigation from '@src/navigation/vertical/TicketNavigation'
 // ** Custom VerticalLayout Components
 // import CustomMenu from './vertical/menu'
 import CustomNavbar from './vertical/navbar'
@@ -23,7 +25,10 @@ const VerticalLayout = (props) => {
           ? navigation
           : localStorage.getItem('panelTypeTitle') === 'scope'
           ? scopeNavigation
-          : operatorNavigation
+          : localStorage.getItem('panelTypeTitle') === 'organ'
+          ? organNavigation
+          : localStorage.getItem('panelTypeTitle') === 'ticket'
+          ? ticketNavigation : operatorNavigation
       }
       // menu={(props) => <CustomMenu {...props} />}
       navbar={(props) => <CustomNavbar {...props} />}

@@ -6,6 +6,8 @@ import { recruitmentData } from './data'
 import { Col, Row } from 'reactstrap'
 import Operators from '../operators'
 import Scope from '../ScopeManage'
+import Organ from '../organ/ComplanteRequest'
+import Ticket from '../ticket/ComplanteRequest'
 export default function index() {
   // useAuth().panelTypeTitle
   // const navigate = useNavigate()
@@ -85,8 +87,6 @@ export default function index() {
             </Col>
           </Row>
         </>
-
-      
       </div>
     )
   } else if (localStorage.getItem('role') === 'operator') {
@@ -99,6 +99,18 @@ export default function index() {
     return (
       <div className='dashboard'>
         <Scope />
+      </div>
+    )
+  } else if (localStorage.getItem('role') === 'organ') {
+    return (
+      <div className='dashboard'>
+        <Organ />
+      </div>
+    )
+  } else if (localStorage.getItem('role') === 'ticket') {
+    return (
+      <div className='dashboard'>
+        <Ticket />
       </div>
     )
   }

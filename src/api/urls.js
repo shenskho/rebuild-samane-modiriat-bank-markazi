@@ -100,7 +100,12 @@ export default {
   },
 
   Ticket: {
+    getResultExam: `${PREFIX}/Report/get-report-card-html-data-by-national-code?`,
+    getResultExamImage: `${PREFIX}/Report/get-applicant-image-by-national-code?`,
+
+    ///////fix type catergory
     getTickets: `${PREFIX}/Ticket/get-all-tickets-pagination?PageSize=999999`,
+    getTicketsComplane: `${PREFIX}/Ticket/get-all-tickets-pagination?PageSize=999999&Type=1`,
     answareTicket: `${PREFIX}/Ticket/answer-ticket`,
     takeTicket: `${PREFIX}/Ticket/assign-ticket-operator`,
     getUser: `${PREFIX}/Applicant/get-total-applicant-info?ApplicantId=`,
@@ -270,16 +275,16 @@ export default {
     updateExamScroring: `${PREFIX}/ExamScoringRule/update-exam-scoring-rule`
   },
   ExamCorrelationSteps: {
-     getfinalExel: `${PREFIX}/Report/get-accepted-by-job-number?ExamId=1`,
-    
+    getfinalExel: `${PREFIX}/Report/get-accepted-by-job-number?ExamId=1`,
+
     processCandidateResultSteap1: `${PREFIX}/ExamCorrelationSteps/process-candidate-results?examId=1`,
     calculateCandidateRawScoresSteap2: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-raw-scores?examId=1`,
     calculateCandidateScores: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-scores?examId=1`,
     calculateCandidateScoresStatus: `${PREFIX}/ExamCorrelationSteps/calculate-candidate-scores-status?trackingId=`,
     generateRanking: `${PREFIX}/ExamCorrelationSteps/generate-ranking?examId=1`,
-     generateRankingStatus: `${PREFIX}/ExamCorrelationSteps/generate-ranking-status?trackingId=`,
-      generateReportCards: `${PREFIX}/ExamCorrelationSteps/generate-report-cards?examId=1`,
-       generateReportCardsStatus: `${PREFIX}/ExamCorrelationSteps/generate-report-cards-status?trackingId=`
+    generateRankingStatus: `${PREFIX}/ExamCorrelationSteps/generate-ranking-status?trackingId=`,
+    generateReportCards: `${PREFIX}/ExamCorrelationSteps/generate-report-cards?examId=1`,
+    generateReportCardsStatus: `${PREFIX}/ExamCorrelationSteps/generate-report-cards-status?trackingId=`
   },
   /*************************************************************smaple*******************************************************************/ report:
     {

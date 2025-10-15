@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Row, Col, CardHeader, Button } from 'reactstrap'
 import '@core/scss/react/pages/page-authentication.scss'
 import DxDataGrid from '@components/devextreme/DxDataGrid'
-import { GetTicketsComplane, GetApplicantChanges } from '@store/slices/operator'
+import { GetTickets, GetApplicantChanges } from '@store/slices/operator'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
 import UserChangeDetailsModal from './UserChangeDetailsModal'
@@ -28,16 +28,14 @@ export default function index() {
   const handleReopen = (data) => {
     dispatch(GetApplicantChanges(`?TicketRefCode=${data.refCode}`)).then((response) => {
       console.log(response.payload.item)
-      if(response.payload.item)
-      {
-    SetUserItem(data)
-      SetIsShowChanges(!IsShowChanges)
+      if (response.payload.item) {
+        SetUserItem(data)
+        SetIsShowChanges(!IsShowChanges)
       }
-  
     })
   }
 
-  const rowsWithIndex = store.ticketsComplane.items
+  const rowsWithIndex = store.tickets.items
     ?.slice() // make a shallow copy (so we don’t mutate the original)
     .reverse()
     .map((item, i) => ({
@@ -52,7 +50,6 @@ export default function index() {
       { dataField: 'applicantDescription', caption: 'متن درخواست ' },
       { dataField: 'applicantNationalCode', caption: 'کدملی' },
       { dataField: 'refCode', caption: 'کد پیگیری' },
-        { dataField: 'createdAtShamsi', caption: 'تاریخ ثبت ' },
       {
         dataField: 'isClosed',
         caption: 'وضعیت درخواست',
@@ -87,11 +84,11 @@ export default function index() {
 
   useEffect(() => {
     // اولین بار صدا زده بشه
-    dispatch(GetTicketsComplane())
+    dispatch(GetTickets())
 
     // هر 5 ثانیه یک بار رفرش
     const interval = setInterval(() => {
-      dispatch(GetTicketsComplane())
+      dispatch(GetTickets())
     }, 120000)
 
     // وقتی کامپوننت unmount شد تایمر رو پاک کن
@@ -106,13 +103,13 @@ export default function index() {
               <Col lg={12}>
                 <Card id='Home'>
                   <CardHeader className=' w-100 rtl'>
-                    <h4 className='w-100'> تیکت اعتراض کاربران </h4>
+                    <h4 className='w-100'> تیکت های رفع نقض </h4>
                     <Row className='w-100 mt-1'>
                       <Col lg={4} className='text-center'>
                         {' '}
                         <h4 className='color-red'>
                           درخواست های پاسخ داده نشده :{' '}
-                          <span> {store?.ticketsComplane?.items?.filter((item) => !item.isClosed)?.length}</span>{' '}
+                          <span> {store?.tickets?.items?.filter((item) => !item.isClosed)?.length}</span>{' '}
                         </h4>
                       </Col>
 
@@ -121,14 +118,14 @@ export default function index() {
                         <h4 className='color-green'>
                           {' '}
                           درخواست های پاسخ داده شده :{' '}
-                          <span> {store?.ticketsComplane?.items?.filter((item) => item.isClosed)?.length}</span>
+                          <span> {store?.tickets?.items?.filter((item) => item.isClosed)?.length}</span>
                         </h4>
                       </Col>
 
                       <Col lg={4} className='text-center'>
                         {' '}
                         <h4 className='color-gray'>
-                          تعداد کل درخواست ها : <span> {store?.ticketsComplane?.items?.length}</span>
+                          تعداد کل درخواست ها : <span> {store?.tickets?.items?.length}</span>
                         </h4>
                       </Col>
                     </Row>
@@ -151,8 +148,7 @@ export default function index() {
 
           <EditModal IsEditModal={IsEditModal} SetIsEditModal={SetIsEditModal} item={userItem} />
 
-        <UserChangeDetailsModal IsShowChanges={IsShowChanges} SetIsShowChanges={SetIsShowChanges}  />
-
+          <UserChangeDetailsModal IsShowChanges={IsShowChanges} SetIsShowChanges={SetIsShowChanges} />
         </Card>
       </Col>
     </Row>

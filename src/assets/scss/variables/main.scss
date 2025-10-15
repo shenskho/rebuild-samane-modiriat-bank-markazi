@@ -1,3 +1,4 @@
+
 .first-route-selected {
   color: #e55604cf;
   cursor: pointer;
@@ -204,13 +205,11 @@ text-align: center;
   justify-content: center;
   gap: 5px;
 }
-
 .progress-steps .step {
   flex: 1;
   text-align: center;
   padding: 2px;
   display: flex;
-
   align-items: center;
   justify-content: center;
   font-size: 13px;
@@ -220,13 +219,11 @@ text-align: center;
   color: #3f3f3f;
   transition: 0.3s;
 }
-
 .progress-steps .step.done {
   background: #4caf50;
   color: #fff;
   font-weight: bold;
 }
-
 // Compact layout for executive agents sort row to fit in one line without scroll
 .executive-sort-row {
   .sub-sort-filter {
@@ -248,3 +245,21 @@ text-align: center;
 .progress{
   height: 20px !important;
 }
+/* برای اصلاح جهت متن فارسی هنگام چاپ PDF */
+.pdf-print-style {
+  direction: rtl !important;
+  unicode-bidi: bidi-override !important;
+  text-align: right !important;
+  font-family: inherit !important; /* از فونت خود پروژه استفاده می‌کند */
+}
+.pdf-print-style table {
+  direction: rtl !important;
+  unicode-bidi: bidi-override !important;
+}
+.pdf-print-style th,
+.pdf-print-style td {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+

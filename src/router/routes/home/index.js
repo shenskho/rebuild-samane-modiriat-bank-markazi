@@ -48,15 +48,26 @@ const ResultsExam = lazy(() => import('@views/employmentExams/resultsExam'))
 const ChartReport = lazy(() => import('@views/operators/chartReport'))
 const AnswerSheet = lazy(() => import('@views/AnswerSheetManagement'))
 // const ListOFSupplementaryAssessment = lazy (() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
-const Results = lazy (() => import('@views/supplementaryAssessment/results'))
+const Results = lazy(() => import('@views/supplementaryAssessment/evaluationResults'))
 const AnswerResultSheet = lazy(() => import('@views/AnswerResultSheetManagement'))
 const ListOFSupplementaryAssessment = lazy(() => import('@views/supplementaryAssessment/listOFSupplementaryAssessment'))
 const EvaluationResults = lazy(() => import('@views/supplementaryAssessment/evaluationResults'))
 const SelectPresenter = lazy(() => import('@views/supplementaryAssessment/selectPresenter'))
-const SupplementaryDocumentation = lazy(() => import('@views/supplementaryAssessment/SupplementaryDocumentation'))
+
 const ExamScoring = lazy(() => import('@views/examScoring'))
 const CorrectionExam = lazy(() => import('@views/CorrectionExam'))
 const ComplanteRequest = lazy(() => import('@views/operators/ComplanteRequest'))
+
+const ComplanteRequestOrgan = lazy(() => import('@views/organ/ComplanteRequest'))
+const OperatorScopeManageOrgan = lazy(() => import('@views/organ/operatorRecords'))
+const OperatorTicketOrgan = lazy(() => import('@views/organ/operatorTicket'))
+const ChartReportOrgan = lazy(() => import('@views/organ/chartReport'))
+
+const ComplanteRequestTicket = lazy(() => import('@views/ticket/ComplanteRequest'))
+const OperatorScopeManageTicket = lazy(() => import('@views/ticket/operatorRecords'))
+const OperatorTicketTicket = lazy(() => import('@views/ticket/operatorTicket'))
+const ChartReportTicket = lazy(() => import('@views/ticket/chartReport'))
+const ExamResult = lazy(() => import('@views/ticket/ExamResult'))
 const AdminRoutes = [
   {
     path: '/home',
@@ -469,6 +480,7 @@ const AdminRoutes = [
     }
   }
   ,
+
   {
     path: 'answerSheet',
     element: <AnswerSheet />,
@@ -476,8 +488,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/answerSheet'
     }
-  }
-,
+  },
   {
     path: 'EvaluationResults',
     element: <EvaluationResults />,
@@ -485,8 +496,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/EvaluationResults'
     }
-  }
-,
+  },
   {
     path: 'EvaluationResults',
     element: <EvaluationResults />,
@@ -494,8 +504,7 @@ const AdminRoutes = [
       action: 'read',
       resource: '/EvaluationResults'
     }
-  }
-,
+  },
   {
     path: 'SelectPresenter',
     element: <SelectPresenter />,
@@ -503,7 +512,80 @@ const AdminRoutes = [
       action: 'read',
       resource: '/SelectPresenter'
     }
+  },
+  {
+    path: 'complanteRequestOrgan',
+    element: <ComplanteRequestOrgan />,
+    meta: {
+      action: 'read',
+      resource: '/complanteRequestOrgan'
+    }
+  },
+  {
+    path: 'operatorScopeManageOrgan',
+    element: <OperatorScopeManageOrgan />,
+    meta: {
+      action: 'read',
+      resource: '/operatorScopeManageOrgan'
+    }
+  },
+  {
+    path: 'operatorTicketOrgan',
+    element: <OperatorTicketOrgan />,
+    meta: {
+      action: 'read',
+      resource: '/operatorTicketOrgan'
+    }
+  },
+  {
+    path: 'chartReportOrgan',
+    element: <ChartReportOrgan />,
+    meta: {
+      action: 'read',
+      resource: '/chartReportOrgan'
+    }
+  },
+  {
+    path: 'complanteRequestTicket',
+    element: <ComplanteRequestTicket />,
+    meta: {
+      action: 'read',
+      resource: '/complanteRequestTicket'
+    }
+  },
+  {
+    path: 'operatorScopeManageTicket',
+    element: <OperatorScopeManageTicket />,
+    meta: {
+      action: 'read',
+      resource: '/operatorScopeManageOrgan'
+    }
+  },
+  {
+    path: 'operatorTicketTicket',
+    element: <OperatorTicketTicket />,
+    meta: {
+      action: 'read',
+      resource: '/operatorTicketTicket'
+    }
+  },
+  {
+    path: 'chartReportTicket',
+    element: <ChartReportTicket />,
+    meta: {
+      action: 'read',
+      resource: '/chartReportTicket'
+    }
   }
-]
+,
+  {
+    path: 'examResult',
+    element: <ExamResult />,
+    meta: {
+      action: 'read',
+      resource: '/examResult'
+    }
+  }
 
+]
 export default AdminRoutes

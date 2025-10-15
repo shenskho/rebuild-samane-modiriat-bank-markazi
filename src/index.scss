@@ -1,2 +1,9 @@
 @import '../node_modules/prismjs/themes/prism-tomorrow';
 @import './assets/scss/app.scss';
+
+
+#exam-result-content {
+  font-family: 'Vazirmatn-RD-UI-FD', sans-serif;
+  direction: rtl;
+  text-align: right;
+}

@@ -52,7 +52,8 @@ export default function index() {
       { dataField: 'applicantDescription', caption: 'متن درخواست ' },
       { dataField: 'applicantNationalCode', caption: 'کدملی' },
       { dataField: 'refCode', caption: 'کد پیگیری' },
-        { dataField: 'createdAtShamsi', caption: 'تاریخ ثبت ' },
+           { dataField: 'createdAtShamsi', caption: 'تاریخ ثبت ' },
+      
       {
         dataField: 'isClosed',
         caption: 'وضعیت درخواست',
